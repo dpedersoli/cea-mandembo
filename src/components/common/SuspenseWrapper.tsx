@@ -6,10 +6,11 @@ interface SuspenseWrapperProps {
   fallbackMessage?: string;
 }
 
-export default function SuspenseWrapper({ children, fallbackMessage }: SuspenseWrapperProps) {
+export default function SuspenseWrapper({
+  children,
+  fallbackMessage = 'Carregando...',
+}: SuspenseWrapperProps) {
   return (
-    <Suspense fallback={<Loading message={fallbackMessage || 'Carregando'} size="large" />}>
-      {children}
-    </Suspense>
+    <Suspense fallback={<Loading message={fallbackMessage} size="large" />}>{children}</Suspense>
   );
 }

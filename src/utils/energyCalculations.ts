@@ -1,83 +1,91 @@
-import { ENERGY_CONSTANTS } from './constants';
-import type { ConsumptionBreakdown } from '@/types/pex-v.types';
+/**
+ * Funções de cálculo energético
+ */
 
 /**
- * Calcula consumo diário em kWh
+ * Converte Watts para kWh
  */
-export const calculateDailyConsumption = (wattage: number, hoursPerDay: number): number => {
-  return (wattage * hoursPerDay) / 1000; // Converte Wh para kWh
+export const wattsToKwh = (watts: number, hours: number): number => {
+  return (watts * hours) / 1000;
 };
 
 /**
- * Calcula consumo mensal em kWh
+ * Calcula consumo mensal baseado no diário
  */
-export const calculateMonthlyConsumption = (wattage: number, hoursPerDay: number): number => {
-  const dailyConsumption = calculateDailyConsumption(wattage, hoursPerDay);
-  return dailyConsumption * ENERGY_CONSTANTS.DAYS_PER_MONTH;
+export const dailyToMonthly = (dailyKwh: number, days: number = 30): number => {
+  return dailyKwh * days;
 };
 
 /**
- * Calcula consumo anual em kWh
+ * Calcula consumo anual baseado no diário
  */
-export const calculateYearlyConsumption = (wattage: number, hoursPerDay: number): number => {
-  const monthlyConsumption = calculateMonthlyConsumption(wattage, hoursPerDay);
-  return monthlyConsumption * ENERGY_CONSTANTS.MONTHS_PER_YEAR;
+export const dailyToYearly = (dailyKwh: number, days: number = 365): number => {
+  return dailyKwh * days;
 };
 
 /**
- * Calcula breakdown completo de consumo
+ * Calcula eficiência de conversão AC/DC
  */
-export const calculateConsumptionBreakdown = (
-  wattage: number,
-  hoursPerDay: number
-): ConsumptionBreakdown => {
-  return {
-    daily: calculateDailyConsumption(wattage, hoursPerDay),
-    monthly: calculateMonthlyConsumption(wattage, hoursPerDay),
-    yearly: calculateYearlyConsumption(wattage, hoursPerDay),
-  };
+export const calculateACDCEfficiency = (inputWatts: number, outputWatts: number): number => {
+  if (inputWatts === 0) return 0;
+  return (outputWatts / inputWatts) * 100;
 };
 
 /**
- * Calcula custo mensal em R$
+ * Calcula perdas de conversão
  */
-export const calculateMonthlyCost = (consumptionKWh: number): number => {
-  return consumptionKWh * ENERGY_CONSTANTS.ELECTRICITY_COST_PER_KWH;
+export const calculateConversionLoss = (inputWatts: number, efficiency: number): number => {
+  return inputWatts * (1 - efficiency / 100);
 };
 
 /**
- * Calcula emissões de CO2 anuais em kg
+ * Estima economia mensal em reais
  */
-export const calculateYearlyCO2Emissions = (consumptionKWh: number): number => {
-  return consumptionKWh * ENERGY_CONSTANTS.CO2_PER_KWH * ENERGY_CONSTANTS.MONTHS_PER_YEAR;
+export const calculateMonthlySavings = (
+  consumption110V: number,
+  consumption12V: number,
+  energyRate: number
+): number => {
+  const difference = consumption110V - consumption12V;
+  return difference * energyRate;
+};
+
+/**
+ * Calcula emissão de CO2 baseado no consumo
+ */
+export const calculateCO2Emission = (
+  kwhConsumed: number,
+  emissionFactor: number = 0.0817
+): number => {
+  return kwhConsumed * emissionFactor; // kg CO2 por kWh
+};
+
+/**
+ * Converte kg de CO2 para número equivalente de árvores
+ */
+export const co2ToTrees = (co2Kg: number, absorptionPerTree: number = 22): number => {
+  return Math.round(co2Kg / absorptionPerTree);
 };
 
 /**
  * Calcula percentual de economia
  */
-export const calculateSavingsPercentage = (value110V: number, value12V: number): number => {
-  if (value110V === 0) return 0;
-  return ((value110V - value12V) / value110V) * 100;
+export const calculateSavingsPercentage = (original: number, saved: number): number => {
+  if (original === 0) return 0;
+  return (saved / original) * 100;
 };
 
 /**
- * Aplica perdas de conversão para sistemas convencionais
+ * Formata valor de energia para exibição
  */
-export const applyConversionLosses = (wattage: number): number => {
-  return wattage * (1 + ENERGY_CONSTANTS.CONVERSION_LOSS_AC);
+export const formatEnergy = (kwh: number, decimals: number = 2): string => {
+  return `${kwh.toFixed(decimals)} kWh`;
 };
 
 /**
- * Calcula eficiência do sistema multivolts
+ * Formata valor monetário para exibição
  */
-export const calculateMultivoltsEfficiency = (wattage: number): number => {
-  return wattage * ENERGY_CONSTANTS.MULTIVOLTS_EFFICIENCY;
-};
-
-/**
- * Formata valores monetários para exibição
- */
-export const formatCurrency = (value: number): string => {
+export const formatMoney = (value: number): string => {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -85,27 +93,8 @@ export const formatCurrency = (value: number): string => {
 };
 
 /**
- * Formata valores de energia para exibição
+ * Formata percentual para exibição
  */
-export const formatEnergy = (value: number, unit: 'W' | 'kWh' = 'kWh'): string => {
-  return `${value.toFixed(2)} ${unit}`;
-};
-
-/**
- * Formata valores de CO2 para exibição
- */
-export const formatCO2 = (value: number): string => {
-  if (value >= 1000) {
-    return `${(value / 1000).toFixed(2)} toneladas`;
-  }
-  return `${value.toFixed(2)} kg`;
-};
-
-/**
- * Calcula equivalência em árvores plantadas
- */
-export const calculateTreeEquivalent = (co2Kg: number): number => {
-  // Uma árvore absorve aproximadamente 22kg de CO2 por ano
-  const CO2_PER_TREE_YEAR = 22;
-  return co2Kg / CO2_PER_TREE_YEAR;
+export const formatPercent = (value: number, decimals: number = 1): string => {
+  return `${value.toFixed(decimals)}%`;
 };

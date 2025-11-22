@@ -1,9 +1,9 @@
 .not-found {
-  min-height: 60vh;
+  min-height: calc(100vh - 300px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 3rem 0;
 }
 
 .not-found__content {
@@ -11,52 +11,98 @@
   max-width: 600px;
 }
 
-.not-found__title {
+.not-found__icon {
   font-size: 6rem;
+  margin-bottom: 1rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.not-found__title {
+  font-size: 8rem;
   font-weight: 900;
-  color: #0066cc;
-  margin-bottom: 0.5rem;
+  color: #2d8b3c;
   line-height: 1;
+  margin-bottom: 0.5rem;
+  text-shadow: 4px 4px 0 rgba(45, 139, 60, 0.1);
 }
 
 .not-found__subtitle {
   font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
   margin-bottom: 1rem;
-  color: #333;
 }
 
 .not-found__description {
   font-size: 1.125rem;
+  line-height: 1.6;
   color: #667;
   margin-bottom: 2rem;
 }
 
-.not-found__button {
-  display: inline-block;
-  padding: 0.75rem 2rem;
-  background-color: #0066cc;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
+.not-found__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.not-found__button:hover {
-  background-color: #004c99;
+/* Responsive */
+@media (max-width: 768px) {
+  .not-found__icon {
+    font-size: 4rem;
+  }
+
+  .not-found__title {
+    font-size: 5rem;
+  }
+
+  .not-found__subtitle {
+    font-size: 1.5rem;
+  }
+
+  .not-found__actions {
+    flex-direction: column;
+  }
+
+  .not-found__actions a {
+    width: 100%;
+  }
+
+  .not-found__actions button {
+    width: 100%;
+  }
 }
 
-.not-found__button:focus-visible {
-  outline: 3px solid #0066cc;
-  outline-offset: 4px;
-}
-
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
+  .not-found__title {
+    color: #5cb85c;
+    text-shadow: 4px 4px 0 rgba(92, 184, 92, 0.1);
+  }
+
   .not-found__subtitle {
     color: #f0f0f0;
   }
 
   .not-found__description {
     color: #ccc;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .not-found__icon {
+    animation: none;
   }
 }

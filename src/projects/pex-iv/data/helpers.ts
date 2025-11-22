@@ -1,61 +1,127 @@
-import type { EnergySource, SustainabilityMetric } from '@/types/pex-iv.types';
+import type { EnergySource, SystemComponent, ComparisonData } from '@/types/pex-iv.types';
 
 /**
- * Calcula porcentagem de uso de capacidade
+ * Filtra componentes por categoria
  */
-export const calculateCapacityUsage = (source: EnergySource): number => {
-  return (source.currentGeneration / source.capacity) * 100;
+export const filterComponentsByCategory = (
+  components: SystemComponent[],
+  category: string
+): SystemComponent[] => {
+  if (category === 'all') return components;
+  return components.filter((c) => c.category === category);
 };
 
 /**
- * Retorna status da fonte baseado na geração
+ * Busca componentes por texto
  */
-export const getSourceStatus = (
-  source: EnergySource
-): 'excellent' | 'good' | 'low' | 'critical' => {
-  const usage = calculateCapacityUsage(source);
+export const searchComponents = (
+  components: SystemComponent[],
+  query: string
+): SystemComponent[] => {
+  const lowerQuery = query.toLowerCase().trim();
+  if (!lowerQuery) return components;
 
-  if (usage >= 80) return 'excellent';
-  if (usage >= 50) return 'good';
-  if (usage >= 20) return 'low';
-  return 'critical';
+  return components.filter(
+    (c) =>
+      c.name.toLowerCase().includes(lowerQuery) ||
+      c.description.toLowerCase().includes(lowerQuery) ||
+      c.voltage.toLowerCase().includes(lowerQuery)
+  );
 };
 
 /**
- * Filtra métricas por ODS
+ * Calcula total de geração de todas as fontes
  */
-export const filterMetricsByODS = (
-  metrics: SustainabilityMetric[],
-  odsNumber: number
-): SustainabilityMetric[] => {
-  return metrics.filter((metric) => metric.odsAlignment?.includes(odsNumber));
+export const calculateTotalGeneration = (sources: EnergySource[]): number => {
+  return sources.reduce((total, source) => total + source.currentGeneration, 0);
 };
 
 /**
- * Calcula total de geração por tipo
+ * Calcula capacidade total de todas as fontes
  */
-export const getTotalByType = (
-  sources: EnergySource[],
-  type: 'solar' | 'eolica' | 'bicicleta'
-): number => {
-  return sources.filter((s) => s.type === type).reduce((acc, s) => acc + s.currentGeneration, 0);
+export const calculateTotalCapacity = (sources: EnergySource[]): number => {
+  return sources.reduce((total, source) => total + source.capacity, 0);
 };
 
 /**
- * Formata última atualização
+ * Calcula eficiência média ponderada
  */
-export const formatLastUpdate = (date: Date): string => {
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffMins = Math.floor(diffMs / 60000);
+export const calculateAverageEfficiency = (sources: EnergySource[]): number => {
+  if (sources.length === 0) return 0;
 
-  if (diffMins < 1) return 'Agora mesmo';
-  if (diffMins === 1) return 'Há 1 minuto';
-  if (diffMins < 60) return `Há ${diffMins} minutos`;
+  const totalCapacity = calculateTotalCapacity(sources);
+  if (totalCapacity === 0) return 0;
 
-  const diffHours = Math.floor(diffMins / 60);
-  if (diffHours === 1) return 'Há 1 hora';
-  if (diffHours < 24) return `Há ${diffHours} horas`;
+  const weightedSum = sources.reduce((sum, source) => sum + source.efficiency * source.capacity, 0);
 
-  return date.toLocaleDateString('pt-BR');
+  return weightedSum / totalCapacity;
+};
+
+/**
+ * Ordena componentes por nome
+ */
+export const sortComponentsByName = (components: SystemComponent[]): SystemComponent[] => {
+  return [...components].sort((a, b) => a.name.localeCompare(b.name));
+};
+
+/**
+ * Agrupa componentes por categoria
+ */
+export const groupComponentsByCategory = (
+  components: SystemComponent[]
+): Record<string, SystemComponent[]> => {
+  return components.reduce(
+    (groups, component) => {
+      const category = component.category;
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+      groups[category].push(component);
+      return groups;
+    },
+    {} as Record<string, SystemComponent[]>
+  );
+};
+
+/**
+ * Calcula diferença percentual entre dois valores
+ */
+export const calculatePercentageDifference = (value1: number, value2: number): number => {
+  if (value2 === 0) return 0;
+  return ((value1 - value2) / value2) * 100;
+};
+
+/**
+ * Formata voltagem para exibição
+ */
+export const formatVoltage = (voltage: string): string => {
+  return voltage.replace('CC', 'CC').replace('CA', 'CA');
+};
+
+/**
+ * Extrai valor numérico de string de comparação
+ */
+export const extractNumericValue = (value: string): number => {
+  const match = value.match(/[\d.]+/);
+  return match ? parseFloat(match[0]) : 0;
+};
+
+/**
+ * Gera descrição de comparação
+ */
+export const generateComparisonDescription = (data: ComparisonData): string => {
+  const value12V = extractNumericValue(data.casa12V);
+  const valueConv = extractNumericValue(data.convencional);
+
+  if (value12V < valueConv) {
+    const diff = valueConv - value12V;
+    const percent = ((diff / valueConv) * 100).toFixed(0);
+    return `${percent}% melhor`;
+  } else if (value12V > valueConv) {
+    const diff = value12V - valueConv;
+    const percent = ((diff / value12V) * 100).toFixed(0);
+    return `${percent}% pior`;
+  }
+
+  return 'Similar';
 };

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from '@/components/common/Button';
-import { ROUTES, ODS_INFO } from '@/utils/constants';
+import { ROUTES, ODS_INFO, CEA_INFO } from '@/utils/constants';
 import './Home.css';
 
 export default function Home() {
@@ -16,9 +16,14 @@ export default function Home() {
             </h1>
             <p className="hero__description">
               Explore a inovação da <strong>Casa12Volts®</strong>, primeira residência multivolts
-              do Brasil operando 100% em corrente contínua. Descubra como a tecnologia pode
-              transformar o acesso à energia limpa e sustentável.
+              do Brasil operando 100% em corrente contínua (1,5V, 3V, 5V, 12V, 19V e 24V). Descubra
+              como a tecnologia pode transformar o acesso à energia limpa e sustentável.
             </p>
+            <div className="hero__badges">
+              <span className="hero-badge">100% Off-Grid</span>
+              <span className="hero-badge">92% Eficiência</span>
+              <span className="hero-badge">Energia Limpa</span>
+            </div>
             <div className="hero__buttons">
               <Link to={ROUTES.DASHBOARD}>
                 <Button variant="primary" size="large">
@@ -38,7 +43,7 @@ export default function Home() {
               <span className="placeholder-icon" aria-hidden="true">
                 🏡⚡
               </span>
-              <span className="placeholder-text">Casa 12 Volts</span>
+              <span className="placeholder-text">Casa12Volts®</span>
             </div>
           </div>
         </div>
@@ -53,8 +58,9 @@ export default function Home() {
               <div className="feature-card__icon">📊</div>
               <h3 className="feature-card__title">Dashboard Educativo</h3>
               <p className="feature-card__description">
-                Visualize em tempo real o funcionamento da Casa 12 Volts: geração de energia solar,
-                eólica e por esforço físico, além de métricas de sustentabilidade.
+                Visualize em tempo real o funcionamento da Casa12Volts®: geração de energia solar,
+                eólica e por esforço físico (Pedal Sustentável), além de métricas de
+                sustentabilidade.
               </p>
               <Link to={ROUTES.DASHBOARD} className="feature-card__link">
                 Acessar Dashboard →
@@ -66,7 +72,7 @@ export default function Home() {
               <h3 className="feature-card__title">Comparador Interativo</h3>
               <p className="feature-card__description">
                 Compare sistemas de 12V CC com 110V/220V CA. Descubra quanto você economizaria em
-                energia, custos e redução de CO₂.
+                energia, custos (CEMIG) e redução de CO₂.
               </p>
               <Link to={ROUTES.COMPARATOR} className="feature-card__link">
                 Fazer Comparação →
@@ -140,6 +146,27 @@ export default function Home() {
               <span className="stat-box__value">2012</span>
               <span className="stat-box__label">Ano de Criação</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CEA Info */}
+      <section className="cea-info">
+        <div className="container">
+          <h2 className="section-title">Sobre o CEA Mandembo</h2>
+          <div className="cea-info__content">
+            <p className="cea-info__text">
+              O <strong>{CEA_INFO.name}</strong>, localizado em {CEA_INFO.location}, possui uma área
+              de <strong>{CEA_INFO.area}</strong>. Apenas cerca de{' '}
+              <strong>{CEA_INFO.usedArea}</strong> são dedicados às atividades socioambientais,
+              enquanto <strong>{CEA_INFO.preservedArea}</strong> abrigam uma nascente e são
+              destinados à preservação ambiental.
+            </p>
+            <p className="cea-info__text">
+              Desde {CEA_INFO.foundedYear}, o centro se dedica à educação ambiental, agroecologia e
+              desenvolvimento de tecnologias sustentáveis, recebendo escolas, universidades e
+              interessados em soluções de energia limpa.
+            </p>
           </div>
         </div>
       </section>

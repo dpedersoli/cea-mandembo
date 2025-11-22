@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from '@/components/common/Button';
-import { ROUTES, ODS_INFO } from '@/utils/constants';
+import { ROUTES, ODS_INFO, CEA_INFO } from '@/utils/constants';
 import './About.css';
 
 export default function About() {
@@ -22,10 +22,16 @@ export default function About() {
           <div className="intro-content">
             <h2 className="section-title">Centro de Educação Ambiental Mandembo</h2>
             <p>
-              O Centro de Educação Ambiental Mandembo, localizado em Rio Manso/MG, é gerido pela
+              O <strong>{CEA_INFO.name}</strong>, localizado em {CEA_INFO.location}, é gerido pela
               <strong> CEA Mandembo</strong> e se dedica à educação ambiental, agroecologia e
-              desenvolvimento de tecnologias sustentáveis. Desde 2012, o centro abriga a
-              <strong> Casa12Volts®</strong>, primeira residência multivolts do Brasil.
+              desenvolvimento de tecnologias sustentáveis. Desde {CEA_INFO.foundedYear}, o centro
+              abriga a<strong> Casa12Volts®</strong>, primeira residência multivolts do Brasil.
+            </p>
+            <p>
+              Com uma área total de <strong>{CEA_INFO.area}</strong>, apenas cerca de{' '}
+              <strong>{CEA_INFO.usedArea}</strong> são utilizados para atividades socioambientais.{' '}
+              <strong>{CEA_INFO.preservedArea}</strong> abrigam uma nascente e são dedicados à
+              preservação ambiental, demonstrando o compromisso do centro com a conservação.
             </p>
             <p>
               O CEA Mandembo recebe escolas, universidades, pesquisadores e interessados em soluções
@@ -45,8 +51,8 @@ export default function About() {
               <h3 className="content-card__title">Primeira no Brasil</h3>
               <p className="content-card__text">
                 Inaugurada em 2012, é a primeira residência do país a operar integralmente com
-                sistema multivolts em corrente contínua (1,5V, 5V, 12V, 19V e 24V), sem conversão
-                para 110V/220V.
+                sistema multivolts em corrente contínua (1,5V, 3V, 5V, 12V, 19V e 24V), sem
+                conversão para 110V/220V.
               </p>
             </div>
 
@@ -54,8 +60,8 @@ export default function About() {
               <div className="content-card__icon">⚡</div>
               <h3 className="content-card__title">100% Off-Grid</h3>
               <p className="content-card__text">
-                Totalmente independente da rede elétrica convencional, gerando sua própria energia
-                através de fontes renováveis: solar, eólica e esforço físico humano.
+                Totalmente independente da rede elétrica convencional (CEMIG), gerando sua própria
+                energia através de fontes renováveis: solar, eólica e esforço físico humano.
               </p>
             </div>
 
@@ -93,12 +99,13 @@ export default function About() {
                   eletricidade em corrente contínua (CC).
                 </p>
                 <p className="step__text">
-                  <strong>Turbina Eólica:</strong> Aproveita o vento da região para gerar energia
-                  complementar.
+                  <strong>Turbina Eólica de Eixo Vertical:</strong> Aproveita o vento da região para
+                  gerar energia complementar de forma eficiente mesmo com ventos variáveis.
                 </p>
                 <p className="step__text">
-                  <strong>Bicicleta Geradora:</strong> Converte esforço físico humano em energia
-                  elétrica, demonstrando a relação direta entre trabalho e energia.
+                  <strong>Pedal Sustentável:</strong> Bicicleta geradora instalada em espaço
+                  dedicado converte esforço físico humano em energia elétrica, demonstrando a
+                  relação direta entre trabalho e energia.
                 </p>
               </div>
             </article>
@@ -108,8 +115,10 @@ export default function About() {
               <div className="step__content">
                 <h3 className="step__title">Armazenamento</h3>
                 <p className="step__text">
-                  A energia gerada é armazenada em <strong>baterias estacionárias de 12V</strong>,
-                  garantindo autonomia energética mesmo durante a noite ou em dias nublados.
+                  A energia gerada é armazenada em{' '}
+                  <strong>quatro baterias estacionárias de 12V (220 Ah cada)</strong>, que podem
+                  operar em série ou paralelo (12V/24V), garantindo autonomia energética mesmo
+                  durante a noite ou em dias nublados.
                 </p>
               </div>
             </article>
@@ -119,9 +128,9 @@ export default function About() {
               <div className="step__content">
                 <h3 className="step__title">Distribuição Multivolts</h3>
                 <p className="step__text">
-                  Sistema de tomadas com múltiplas saídas (1,5V, 5V, 12V, 19V, 24V) permite que
-                  diferentes aparelhos funcionem diretamente em CC, sem conversores ou
-                  transformadores.
+                  Sistema de tomadas com múltiplas saídas (1,5V, 3V, 5V, 12V, 19V, 24V) e{' '}
+                  <strong>tomadas USB</strong> permite que diferentes aparelhos funcionem
+                  diretamente em CC, sem conversores ou transformadores.
                 </p>
               </div>
             </article>
@@ -129,13 +138,88 @@ export default function About() {
             <article className="step">
               <div className="step__number">4</div>
               <div className="step__content">
-                <h3 className="step__title">Consumo Eficiente</h3>
+                <h3 className="step__title">Monitoramento e Controle</h3>
                 <p className="step__text">
-                  Lâmpadas LED, geladeira, eletrônicos e outros aparelhos operam com máxima
-                  eficiência, eliminando as perdas de 20-25% típicas de sistemas convencionais.
+                  <strong>Três controladores de carga solar e um eólico</strong> gerenciam a
+                  captação de energia, enquanto <strong>painéis de medição digital</strong>{' '}
+                  monitoram corrente, tensão e potência nas bases de 12V e 24V em tempo real.
                 </p>
               </div>
             </article>
+
+            <article className="step">
+              <div className="step__number">5</div>
+              <div className="step__content">
+                <h3 className="step__title">Consumo Eficiente</h3>
+                <p className="step__text">
+                  Lâmpadas LED, geladeira bivolt (12V/24V) da <strong>Elber</strong>, liquidificador
+                  12V importado dos EUA, TV, computador all-in-one 19V, e diversos aparelhos
+                  adaptados operam com máxima eficiência, eliminando as perdas de 20-25% típicas de
+                  sistemas convencionais.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        {/* Inovações e Adaptações */}
+        <section className="innovations">
+          <h2 className="section-title">Inovações e Adaptações Tecnológicas</h2>
+
+          <div className="innovations-grid">
+            <div className="innovation-item">
+              <span className="innovation-icon">📡</span>
+              <h3 className="innovation-title">Internet via Satélite</h3>
+              <p className="innovation-text">
+                Estação de recepção alimentada por placas solares que leva internet por cabo de
+                fibra óptica até a Casa12Volts®, operando modem e amplificador em 12V.
+              </p>
+            </div>
+
+            <div className="innovation-item">
+              <span className="innovation-icon">🌡️</span>
+              <h3 className="innovation-title">Mini Estação Meteorológica 5V</h3>
+              <p className="innovation-text">
+                Monitora temperatura, umidade e previsão do tempo com energia renovável,
+                demonstrando aplicações práticas de baixa voltagem.
+              </p>
+            </div>
+
+            <div className="innovation-item">
+              <span className="innovation-icon">⚖️</span>
+              <h3 className="innovation-title">Aparelhos Adaptados</h3>
+              <p className="innovation-text">
+                Balança digital (3V), rádio (5V) e relógio de parede (1,5V) foram adaptados de
+                pilhas para energia renovável, eliminando descarte de baterias.
+              </p>
+            </div>
+
+            <div className="innovation-item">
+              <span className="innovation-icon">🚿</span>
+              <h3 className="innovation-title">Aquecedor Solar à Vácuo</h3>
+              <p className="innovation-text">
+                Desenvolvido em parceria com o <strong>CEFET-BH</strong>, aquece água a ~110°C,
+                produzindo água esterilizada sem consumo elétrico.
+              </p>
+            </div>
+
+            <div className="innovation-item">
+              <span className="innovation-icon">🌧️</span>
+              <h3 className="innovation-title">Pluviômetro Próprio</h3>
+              <p className="innovation-text">
+                Instrumento de medição de chuvas que auxilia no monitoramento climático e
+                planejamento de atividades agroecológicas.
+              </p>
+            </div>
+
+            <div className="innovation-item">
+              <span className="innovation-icon">♻️</span>
+              <h3 className="innovation-title">Gestão de Resíduos</h3>
+              <p className="innovation-text">
+                Compostagem de orgânicos, biodigestor para tratamento de resíduos sanitários e
+                lixeiras para coleta seletiva no espaço Pedal Sustentável.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -168,6 +252,43 @@ export default function About() {
               <span className="differential-icon">✓</span>
               <p>Replicável em comunidades isoladas</p>
             </div>
+            <div className="differential-item">
+              <span className="differential-icon">✓</span>
+              <p>Voltagens múltiplas: 1,5V, 3V, 5V, 12V, 19V e 24V</p>
+            </div>
+            <div className="differential-item">
+              <span className="differential-icon">✓</span>
+              <p>Autonomia total sem dependência da CEMIG</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Reconhecimento */}
+        <section className="recognition">
+          <h2 className="section-title">Reconhecimento e Visitas Técnicas</h2>
+          <div className="recognition-content">
+            <p>
+              A Casa12Volts® já recebeu visitas técnicas de importantes empresas e personalidades:
+            </p>
+            <ul className="recognition-list">
+              <li>
+                <strong>Omexon</strong> - Empresa especializada em energias renováveis
+              </li>
+              <li>
+                <strong>Vince</strong> - Empresa francesa de energias renováveis e seus(suas)
+                engenheiros(as)
+              </li>
+              <li>
+                <strong>Miss Terra 2024</strong> - Reconhecimento internacional
+              </li>
+              <li>
+                <strong>CEFET-BH</strong> - Parceiro no desenvolvimento do aquecedor solar à vácuo
+              </li>
+            </ul>
+            <p>
+              Estas visitas comprovam a relevância técnica e o potencial replicável do projeto,
+              servindo de referência para soluções de autonomia energética.
+            </p>
           </div>
         </section>
 
@@ -190,7 +311,7 @@ export default function About() {
                 <p className="ods-text">
                   Demonstra viabilidade técnica e econômica de sistemas de energia limpa e
                   acessível, especialmente para comunidades rurais e isoladas sem acesso à rede
-                  elétrica.
+                  elétrica convencional.
                 </p>
               </div>
             </div>
@@ -265,7 +386,7 @@ export default function About() {
               className="link-card"
             >
               <span className="link-icon">⚡</span>
-              <span className="link-text">Casa12Volts</span>
+              <span className="link-text">Casa12Volts®</span>
               <span className="link-arrow">→</span>
             </a>
 

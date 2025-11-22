@@ -1,165 +1,107 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import EnergyFlowPanel from '../components/EnergyFlowPanel';
 import SustainabilityHighlights from '../components/SustainabilityHighlights';
 import ComparisonTable from '../components/ComparisonTable';
-import Loading from '@/components/common/Loading';
 import Button from '@/components/common/Button';
-import { dashboardData, comparisonData, energyHistoryWeek } from '../data/mockData';
-import { formatLastUpdate } from '../data/helpers';
+import { dashboardData } from '../data/mockData';
 import { ROUTES } from '@/utils/constants';
 import './DashboardHome.css';
 
 export default function DashboardHome() {
-  const [data, setData] = useState<typeof dashboardData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simular carregamento de dados
-    const timer = setTimeout(() => {
-      setData(dashboardData);
-      setLoading(false);
-    }, 800);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return <Loading message="Carregando dashboard" size="large" />;
-  }
-
-  if (!data) {
-    return (
-      <div className="error-state">
-        <p>Erro ao carregar dados do dashboard.</p>
-      </div>
-    );
-  }
+  const { sources, totalGeneration, totalConsumption, metrics, lastUpdate } = dashboardData;
 
   return (
     <div className="dashboard-home">
       {/* Hero Section */}
       <section className="dashboard-hero">
         <div className="container">
-          <div className="dashboard-hero__content">
-            <h1 className="dashboard-hero__title">
-              Dashboard Educativo
-              <span className="dashboard-hero__subtitle">Casa12Volts®®</span>
-            </h1>
-            <p className="dashboard-hero__description">
-              Primeira residência multivolts do Brasil operando em corrente contínua (CC). Explore o
-              funcionamento, componentes e benefícios deste sistema inovador de energia limpa e
-              sustentável.
-            </p>
-            <div className="dashboard-hero__badges">
-              <span className="hero-badge hero-badge--ods7">ODS 7</span>
-              <span className="hero-badge hero-badge--ods13">ODS 13</span>
-              <span className="hero-badge hero-badge--offgrid">100% Off-Grid</span>
-            </div>
-          </div>
-
-          <div className="dashboard-hero__stats">
-            <div className="stat-card">
-              <span className="stat-card__value">{data.totalGeneration.toFixed(2)} kWh</span>
-              <span className="stat-card__label">Geração Atual</span>
-            </div>
-            <div className="stat-card">
-              <span className="stat-card__value">R$ {data.savings}</span>
-              <span className="stat-card__label">Economia/mês</span>
-            </div>
-            <div className="stat-card">
-              <span className="stat-card__value">{data.co2Avoided} kg</span>
-              <span className="stat-card__label">CO₂ Evitado/ano</span>
-            </div>
-          </div>
-
+          <h1 className="dashboard-hero__title">
+            Dashboard Casa12Volts®
+            <span className="dashboard-hero__subtitle">Monitoramento em Tempo Real</span>
+          </h1>
+          <p className="dashboard-hero__description">
+            Acompanhe a geração de energia renovável (solar, eólica e por esforço físico), consumo e
+            métricas de sustentabilidade do sistema multivolts em corrente contínua.
+          </p>
           <p className="dashboard-hero__update">
-            Última atualização: {formatLastUpdate(data.lastUpdate)}
+            Última atualização: {lastUpdate.toLocaleString('pt-BR')}
           </p>
         </div>
       </section>
 
-      {/* Main Content */}
       <div className="container">
-        {/* Energy Flow */}
-        <EnergyFlowPanel
-          sources={data.sources}
-          totalGeneration={data.totalGeneration}
-          totalConsumption={data.totalConsumption}
-        />
+        {/* Energy Flow Panel */}
+        <section className="dashboard-section">
+          <h2 className="section-title">Fluxo de Energia</h2>
+          <EnergyFlowPanel
+            sources={sources}
+            totalGeneration={totalGeneration}
+            totalConsumption={totalConsumption}
+          />
+        </section>
 
-        {/* Sustainability Metrics */}
-        <SustainabilityHighlights metrics={data.metrics} />
+        {/* Sustainability Highlights */}
+        <section className="dashboard-section">
+          <h2 className="section-title">Métricas de Sustentabilidade</h2>
+          <SustainabilityHighlights metrics={metrics} />
+        </section>
 
         {/* Comparison Table */}
-        <ComparisonTable data={comparisonData} />
+        <section className="dashboard-section">
+          <h2 className="section-title">
+            Comparação: Casa12Volts® vs Sistema Convencional (CEMIG)
+          </h2>
+          <ComparisonTable data={dashboardData.comparisonData || []} />
+        </section>
 
-        {/* Energy History Preview */}
-        <section className="energy-history-preview">
-          <h2 className="section-title">Geração dos Últimos 7 Dias</h2>
-          <div className="history-cards">
-            {energyHistoryWeek.slice(-3).map((day, index) => (
-              <div key={index} className="history-card">
-                <span className="history-card__date">{day.date}</span>
-                <span className="history-card__value">{day.total.toFixed(2)} kWh</span>
-                <div className="history-card__breakdown">
-                  <span className="breakdown-item">☀️ {day.solar.toFixed(1)}</span>
-                  <span className="breakdown-item">💨 {day.eolica.toFixed(1)}</span>
-                  <span className="breakdown-item">🚴 {day.bicicleta.toFixed(2)}</span>
-                </div>
-              </div>
-            ))}
+        {/* CTA to Components */}
+        <section className="dashboard-cta">
+          <div className="cta-card">
+            <div className="cta-card__icon">🔧</div>
+            <div className="cta-card__content">
+              <h3 className="cta-card__title">Explore os Componentes</h3>
+              <p className="cta-card__description">
+                Conheça em detalhes cada componente do sistema Casa12Volts®: painéis solares,
+                turbina eólica, bicicleta geradora, baterias e muito mais.
+              </p>
+              <Link to={ROUTES.DASHBOARD_COMPONENTS}>
+                <Button variant="primary" size="large">
+                  Ver Todos os Componentes
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="cta-section">
-          <div className="cta-card">
-            <h2 className="cta-card__title">Explore os Componentes</h2>
-            <p className="cta-card__description">
-              Conheça em detalhes cada componente do sistema Casa12Volts®, suas especificações
-              técnicas e funcionamento.
-            </p>
-            <Link to={ROUTES.DASHBOARD_COMPONENTS}>
-              <Button variant="primary" size="large">
-                Ver Componentes Detalhados
-              </Button>
-            </Link>
-          </div>
+        {/* Info Cards */}
+        <section className="dashboard-info">
+          <div className="info-cards">
+            <div className="info-card info-card--green">
+              <div className="info-card__icon">⚡</div>
+              <h3 className="info-card__title">92% de Eficiência</h3>
+              <p className="info-card__text">
+                Sistemas multivolts em CC eliminam perdas de conversão AC/DC, alcançando 92% de
+                eficiência contra 75-80% dos sistemas convencionais.
+              </p>
+            </div>
 
-          <div className="cta-card">
-            <h2 className="cta-card__title">Faça uma Comparação</h2>
-            <p className="cta-card__description">
-              Use nosso comparador interativo e descubra quanto você economizaria com um sistema
-              multivolts.
-            </p>
-            <Link to={ROUTES.COMPARATOR}>
-              <Button variant="secondary" size="large">
-                Ir para o Comparador
-              </Button>
-            </Link>
-          </div>
-        </section>
+            <div className="info-card info-card--orange">
+              <div className="info-card__icon">🔋</div>
+              <h3 className="info-card__title">100% Off-Grid</h3>
+              <p className="info-card__text">
+                Totalmente independente da rede elétrica (CEMIG), gerando energia através de fontes
+                renováveis: solar, eólica e esforço físico humano.
+              </p>
+            </div>
 
-        {/* About Section */}
-        <section className="about-section">
-          <h2 className="section-title">Sobre a Casa12Volts®</h2>
-          <div className="about-content">
-            <p>
-              A Casa12Volts® é um projeto pioneiro desenvolvido pela CEA Mandembo no Centro de
-              Educação Ambiental Mandembo, em Rio Manso/MG. Inaugurado em 2012, representa a
-              primeira residência no Brasil a operar integralmente com sistema multivolts em
-              corrente contínua (1,5V, 5V, 12V, 19V e 24V).
-            </p>
-            <p>
-              O diferencial está na eliminação de conversores AC/DC, reduzindo perdas energéticas de
-              20-25% (sistemas convencionais) para apenas 8%. Isso significa maior eficiência, menor
-              custo e maior durabilidade dos equipamentos.
-            </p>
-            <p>
-              Além de demonstrar viabilidade técnica, a Casa12Volts® serve como espaço educativo,
-              recebendo escolas, universidades e interessados em soluções sustentáveis de energia.
-            </p>
+            <div className="info-card info-card--yellow">
+              <div className="info-card__icon">🌱</div>
+              <h3 className="info-card__title">156kg CO₂ Evitados/Ano</h3>
+              <p className="info-card__text">
+                Ao não depender de combustíveis fósseis, o sistema evita a emissão de 156kg de CO₂
+                por ano, equivalente a plantar aproximadamente 7 árvores.
+              </p>
+            </div>
           </div>
         </section>
       </div>

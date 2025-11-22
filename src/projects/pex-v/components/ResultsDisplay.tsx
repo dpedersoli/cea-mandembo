@@ -1,198 +1,148 @@
-import type { CalculationResult } from '@/types/pex-v.types';
-import { formatCurrency, formatEnergy, formatCO2 } from '@/utils/energyCalculations';
-import { calculateTreeEquivalent } from '@/utils/energyCalculations';
-import BarChart from '@/components/charts/BarChart';
-import type { ChartData } from '@/types';
+import type { ResultsDisplayProps } from '@/types/pex-v.types';
+import {
+  formatCurrency,
+  formatConsumption,
+  formatPercentage,
+  generateRecommendations,
+} from '../data/helpers';
 import './ResultsDisplay.css';
 
-interface ResultsDisplayProps {
-  result: CalculationResult;
-}
-
 export default function ResultsDisplay({ result }: ResultsDisplayProps) {
-  const treeEquivalent = calculateTreeEquivalent(result.yearlyCO2Avoided);
-
-  // Dados para o gráfico de comparação
-  const comparisonChartData: ChartData[] = [
-    {
-      label: '110V/220V',
-      value: parseFloat(result.monthlyCost110V.toFixed(2)),
-      color: '#dc3545',
-    },
-    {
-      label: '12V CC',
-      value: parseFloat(result.monthlyCost12V.toFixed(2)),
-      color: '#28a745',
-    },
-  ];
-
-  // Dados para o gráfico de consumo
-  const consumptionChartData: ChartData[] = [
-    {
-      label: '110V/220V',
-      value: parseFloat(result.consumption110V.monthly.toFixed(2)),
-      color: '#dc3545',
-    },
-    {
-      label: '12V CC',
-      value: parseFloat(result.consumption12V.monthly.toFixed(2)),
-      color: '#28a745',
-    },
-  ];
+  const recommendations = generateRecommendations(result);
 
   return (
-    <section className="results-display" aria-labelledby="results-title">
-      <h2 id="results-title" className="results-display__title">
-        Resultados da Comparação
-      </h2>
+    <div className="results-display">
+      <h2 className="results-title">Resultados da Comparação</h2>
 
-      {/* Destaques */}
-      <div className="results-highlights">
-        <div className="highlight-card highlight-card--savings">
-          <span className="highlight-card__icon" aria-hidden="true">
-            💰
-          </span>
-          <div className="highlight-card__content">
-            <span className="highlight-card__label">Economia Mensal</span>
-            <span className="highlight-card__value">{formatCurrency(result.monthlySavings)}</span>
-            <span className="highlight-card__detail">
-              {result.savingsPercentage.toFixed(1)}% de economia
+      {/* Summary Cards */}
+      <div className="results-summary">
+        <div className="summary-card summary-card--savings">
+          <div className="summary-icon">💰</div>
+          <div className="summary-content">
+            <span className="summary-label">Economia Mensal</span>
+            <span className="summary-value">{formatCurrency(result.monthlySavings)}</span>
+            <span className="summary-detail">
+              {formatPercentage(result.savingsPercentage)} mais barato
             </span>
           </div>
         </div>
 
-        <div className="highlight-card highlight-card--energy">
-          <span className="highlight-card__icon" aria-hidden="true">
-            ⚡
-          </span>
-          <div className="highlight-card__content">
-            <span className="highlight-card__label">Redução de Consumo</span>
-            <span className="highlight-card__value">
-              {formatEnergy(result.consumption110V.monthly - result.consumption12V.monthly)}
+        <div className="summary-card summary-card--co2">
+          <div className="summary-icon">🌱</div>
+          <div className="summary-content">
+            <span className="summary-label">CO₂ Evitado/Ano</span>
+            <span className="summary-value">{result.yearlyCO2Avoided.toFixed(0)} kg</span>
+            <span className="summary-detail">
+              ≈ {Math.round(result.yearlyCO2Avoided / 22)} árvores
             </span>
-            <span className="highlight-card__detail">por mês</span>
           </div>
         </div>
 
-        <div className="highlight-card highlight-card--co2">
-          <span className="highlight-card__icon" aria-hidden="true">
-            🌱
-          </span>
-          <div className="highlight-card__content">
-            <span className="highlight-card__label">CO₂ Evitado por Ano</span>
-            <span className="highlight-card__value">{formatCO2(result.yearlyCO2Avoided)}</span>
-            <span className="highlight-card__detail">
-              ≈ {treeEquivalent.toFixed(1)} árvores plantadas
+        <div className="summary-card summary-card--consumption">
+          <div className="summary-icon">⚡</div>
+          <div className="summary-content">
+            <span className="summary-label">Consumo Diário (12V)</span>
+            <span className="summary-value">{formatConsumption(result.consumption12V.daily)}</span>
+            <span className="summary-detail">
+              vs {formatConsumption(result.consumption110V.daily)} (110V)
             </span>
           </div>
         </div>
       </div>
 
-      {/* Gráficos */}
-      <div className="results-charts">
-        <BarChart
-          data={comparisonChartData}
-          title="Comparação de Custo Mensal (R$)"
-          height={250}
-          ariaLabel="Gráfico comparando custo mensal entre 110V e 12V"
-        />
+      {/* Detailed Comparison */}
+      <div className="results-comparison">
+        <h3 className="comparison-title">Comparação Detalhada</h3>
 
-        <BarChart
-          data={consumptionChartData}
-          title="Comparação de Consumo Mensal (kWh)"
-          height={250}
-          ariaLabel="Gráfico comparando consumo mensal entre 110V e 12V"
-        />
-      </div>
-
-      {/* Tabela Detalhada */}
-      <div className="results-table-wrapper">
-        <h3 className="results-subtitle">Detalhamento Completo</h3>
-        <table className="results-table" aria-label="Detalhamento completo dos resultados">
-          <thead>
-            <tr>
-              <th scope="col">Métrica</th>
-              <th scope="col">Sistema 110V/220V</th>
-              <th scope="col">Sistema 12V CC</th>
-              <th scope="col">Diferença</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Consumo Diário</th>
-              <td>{formatEnergy(result.consumption110V.daily)}</td>
-              <td className="value-positive">{formatEnergy(result.consumption12V.daily)}</td>
-              <td>-{formatEnergy(result.consumption110V.daily - result.consumption12V.daily)}</td>
-            </tr>
-            <tr>
-              <th scope="row">Consumo Mensal</th>
-              <td>{formatEnergy(result.consumption110V.monthly)}</td>
-              <td className="value-positive">{formatEnergy(result.consumption12V.monthly)}</td>
-              <td>
-                -{formatEnergy(result.consumption110V.monthly - result.consumption12V.monthly)}
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Consumo Anual</th>
-              <td>{formatEnergy(result.consumption110V.yearly)}</td>
-              <td className="value-positive">{formatEnergy(result.consumption12V.yearly)}</td>
-              <td>-{formatEnergy(result.consumption110V.yearly - result.consumption12V.yearly)}</td>
-            </tr>
-            <tr className="table-divider">
-              <th scope="row">Custo Mensal</th>
-              <td>{formatCurrency(result.monthlyCost110V)}</td>
-              <td className="value-positive">{formatCurrency(result.monthlyCost12V)}</td>
-              <td className="value-savings">{formatCurrency(result.monthlySavings)}</td>
-            </tr>
-            <tr>
-              <th scope="row">Custo Anual</th>
-              <td>{formatCurrency(result.monthlyCost110V * 12)}</td>
-              <td className="value-positive">{formatCurrency(result.monthlyCost12V * 12)}</td>
-              <td className="value-savings">{formatCurrency(result.monthlySavings * 12)}</td>
-            </tr>
-            <tr className="table-divider">
-              <th scope="row">CO₂ Anual</th>
-              <td>{result.yearlyCO2Avoided.toFixed(2)} kg</td>
-              <td className="value-positive">0 kg (energia limpa)</td>
-              <td className="value-savings">-{result.yearlyCO2Avoided.toFixed(2)} kg</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      {/* Impacto a Longo Prazo */}
-      <div className="long-term-impact">
-        <h3 className="results-subtitle">Impacto em 10 Anos</h3>
-        <div className="impact-cards">
-          <div className="impact-card">
-            <span className="impact-card__icon" aria-hidden="true">
-              💵
-            </span>
-            <span className="impact-card__label">Economia Total</span>
-            <span className="impact-card__value">
-              {formatCurrency(result.monthlySavings * 12 * 10)}
-            </span>
-          </div>
-
-          <div className="impact-card">
-            <span className="impact-card__icon" aria-hidden="true">
-              ⚡
-            </span>
-            <span className="impact-card__label">Energia Economizada</span>
-            <span className="impact-card__value">
-              {formatEnergy((result.consumption110V.yearly - result.consumption12V.yearly) * 10)}
-            </span>
-          </div>
-
-          <div className="impact-card">
-            <span className="impact-card__icon" aria-hidden="true">
-              🌳
-            </span>
-            <span className="impact-card__label">Árvores Equivalentes</span>
-            <span className="impact-card__value">{(treeEquivalent * 10).toFixed(0)} árvores</span>
-          </div>
+        <div className="comparison-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Período</th>
+                <th>Sistema 12V CC</th>
+                <th>Sistema 110V/220V CA</th>
+                <th>Diferença</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Consumo Diário</td>
+                <td className="value-12v">{formatConsumption(result.consumption12V.daily)}</td>
+                <td className="value-110v">{formatConsumption(result.consumption110V.daily)}</td>
+                <td className="value-diff">
+                  {formatConsumption(result.consumption110V.daily - result.consumption12V.daily)}{' '}
+                  menos
+                </td>
+              </tr>
+              <tr>
+                <td>Consumo Mensal</td>
+                <td className="value-12v">{formatConsumption(result.consumption12V.monthly)}</td>
+                <td className="value-110v">{formatConsumption(result.consumption110V.monthly)}</td>
+                <td className="value-diff">
+                  {formatConsumption(
+                    result.consumption110V.monthly - result.consumption12V.monthly
+                  )}{' '}
+                  menos
+                </td>
+              </tr>
+              <tr>
+                <td>Consumo Anual</td>
+                <td className="value-12v">{formatConsumption(result.consumption12V.yearly)}</td>
+                <td className="value-110v">{formatConsumption(result.consumption110V.yearly)}</td>
+                <td className="value-diff">
+                  {formatConsumption(result.consumption110V.yearly - result.consumption12V.yearly)}{' '}
+                  menos
+                </td>
+              </tr>
+              <tr>
+                <td>Custo Mensal (CEMIG)</td>
+                <td className="value-12v">{formatCurrency(result.monthlyCost12V)}</td>
+                <td className="value-110v">{formatCurrency(result.monthlyCost110V)}</td>
+                <td className="value-diff">{formatCurrency(result.monthlySavings)} economia</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </section>
+
+      {/* Selected Appliances */}
+      <div className="results-appliances">
+        <h3 className="appliances-title">Aparelhos Selecionados ({result.appliances.length})</h3>
+        <div className="appliances-grid">
+          {result.appliances.map((appliance) => (
+            <div key={appliance.id} className="appliance-badge">
+              <span className="badge-icon">{appliance.icon}</span>
+              <span className="badge-text">
+                {appliance.name}
+                {appliance.quantity > 1 && ` (×${appliance.quantity})`}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Recommendations */}
+      {recommendations.length > 0 && (
+        <div className="results-recommendations">
+          <h3 className="recommendations-title">💡 Recomendações</h3>
+          <ul className="recommendations-list">
+            {recommendations.map((rec, index) => (
+              <li key={index} className="recommendation-item">
+                {rec}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Info Box */}
+      <div className="results-info">
+        <p className="info-text">
+          <strong>💡 Como interpretar:</strong> O sistema 12V CC elimina perdas de conversão AC/DC,
+          resultando em maior eficiência energética (92% vs 75-80%). Os valores consideram tarifa
+          média CEMIG e emissões de CO₂ típicas da matriz energética brasileira.
+        </p>
+      </div>
+    </div>
   );
 }

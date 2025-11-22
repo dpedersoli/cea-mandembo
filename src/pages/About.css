@@ -4,7 +4,7 @@
 
 /* Hero */
 .about-hero {
-  background: linear-gradient(135deg, #3f7e44 0%, #5cb85c 100%);
+  background: linear-gradient(135deg, #2d8b3c 0%, #1a5e28 100%);
   color: #fff;
   padding: 4rem 0;
   text-align: center;
@@ -32,7 +32,7 @@
 
 .section-description {
   text-align: center;
-  color: #666;
+  color: #667;
   max-width: 700px;
   margin: 0 auto 2rem;
   font-size: 1.125rem;
@@ -56,10 +56,10 @@
   margin-bottom: 1.5rem;
 }
 
-/* Casa 12V Section */
+/* Casa12Volts® Section */
 .casa12v-section {
   padding: 4rem 0;
-  background: #f9f9f9;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e5 100%);
 }
 
 .content-grid {
@@ -73,12 +73,15 @@
   border-radius: 12px;
   padding: 2rem;
   text-align: center;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease;
+  box-shadow: 0 2px 12px rgba(45, 139, 60, 0.1);
+  border: 2px solid #f0f0f0;
+  transition: all 0.3s ease;
 }
 
 .content-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(45, 139, 60, 0.2);
+  border-color: #2d8b3c;
 }
 
 .content-card__icon {
@@ -96,7 +99,7 @@
 .content-card__text {
   font-size: 1rem;
   line-height: 1.6;
-  color: #666;
+  color: #667;
   margin: 0;
 }
 
@@ -122,7 +125,7 @@
 .step__number {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+  background: linear-gradient(135deg, #2d8b3c 0%, #1a5e28 100%);
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -147,7 +150,7 @@
 .step__text {
   font-size: 1rem;
   line-height: 1.6;
-  color: #666;
+  color: #667;
   margin-bottom: 0.75rem;
 }
 
@@ -155,10 +158,56 @@
   margin-bottom: 0;
 }
 
+/* Innovations */
+.innovations {
+  padding: 4rem 0;
+  background: #fff;
+}
+
+.innovations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.innovation-item {
+  background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+  border-radius: 12px;
+  padding: 2rem;
+  border-left: 4px solid #2d8b3c;
+  transition: transform 0.3s ease;
+}
+
+.innovation-item:hover {
+  transform: translateX(8px);
+}
+
+.innovation-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.innovation-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #1a1a1a;
+}
+
+.innovation-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #667;
+  margin: 0;
+}
+
 /* Differentials */
 .differentials {
   padding: 4rem 0;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e5 100%);
 }
 
 .differentials-grid {
@@ -176,13 +225,14 @@
   background: #fff;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(45, 139, 60, 0.08);
+  border-left: 3px solid #2d8b3c;
 }
 
 .differential-icon {
   width: 32px;
   height: 32px;
-  background: #28a745;
+  background: #2d8b3c;
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -198,9 +248,44 @@
   margin: 0;
 }
 
+/* Recognition */
+.recognition {
+  padding: 4rem 0;
+  background: #fff;
+}
+
+.recognition-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.recognition-content p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.recognition-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.recognition-list li {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+  border-left: 4px solid #2d8b3c;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+}
+
 /* ODS Alignment */
 .ods-alignment {
   padding: 4rem 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e5 100%);
 }
 
 .ods-detailed {
@@ -256,14 +341,14 @@
 .ods-text {
   font-size: 1rem;
   line-height: 1.6;
-  color: #666;
+  color: #667;
   margin: 0;
 }
 
 /* Academic Project */
 .academic-project {
   padding: 4rem 0;
-  background: #f9f9f9;
+  background: #fff;
 }
 
 .academic-card {
@@ -272,7 +357,8 @@
   background: #fff;
   border-radius: 16px;
   padding: 3rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(45, 139, 60, 0.1);
+  border: 2px solid #e8f0e5;
 }
 
 .academic-title {
@@ -296,17 +382,17 @@
   gap: 1rem;
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 2px solid #e0e0e0;
+  border-top: 2px solid #e8f0e5;
 }
 
 .info-item {
   font-size: 0.875rem;
-  color: #666;
+  color: #667;
 }
 
 .info-item strong {
   display: block;
-  color: #0066cc;
+  color: #2d8b3c;
   margin-bottom: 0.25rem;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -316,6 +402,7 @@
 /* Useful Links */
 .useful-links {
   padding: 4rem 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e5 100%);
 }
 
 .links-grid {
@@ -332,17 +419,17 @@
   gap: 1rem;
   padding: 1.5rem;
   background: #fff;
-  border: 2px solid #e0e0e0;
+  border: 2px solid #e8f0e5;
   border-radius: 12px;
   text-decoration: none;
   color: #333;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .link-card:hover {
-  border-color: #0066cc;
+  border-color: #2d8b3c;
   transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
+  box-shadow: 0 4px 12px rgba(45, 139, 60, 0.15);
 }
 
 .link-icon {
@@ -357,16 +444,17 @@
 
 .link-arrow {
   font-size: 1.5rem;
-  color: #0066cc;
+  color: #2d8b3c;
 }
 
 /* CTA */
 .about-cta {
   padding: 4rem 0;
+  background: #fff;
 }
 
 .cta-box {
-  background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+  background: linear-gradient(135deg, #2d8b3c 0%, #1a5e28 100%);
   color: #fff;
   border-radius: 16px;
   padding: 3rem;
@@ -447,6 +535,9 @@
   .intro-content p,
   .step__text,
   .differential-item p,
+  .innovation-text,
+  .recognition-content p,
+  .recognition-list li,
   .ods-text,
   .academic-text {
     color: #ccc;
@@ -454,32 +545,43 @@
 
   .casa12v-section,
   .differentials,
-  .academic-project {
+  .ods-alignment,
+  .useful-links {
     background: #1a1a1a;
   }
 
+  .innovations,
+  .recognition,
+  .academic-project,
+  .about-cta {
+    background: #0f0f0f;
+  }
+
   .content-card,
+  .innovation-item,
   .differential-item,
+  .recognition-list li,
   .ods-item,
   .academic-card,
   .link-card {
     background: #2a2a2a;
+    border-color: #3a3a3a;
   }
 
   .content-card__title,
   .step__title,
+  .innovation-title,
   .ods-title,
   .academic-title {
     color: #f0f0f0;
   }
 
   .link-card {
-    border-color: #3a3a3a;
     color: #f0f0f0;
   }
 
   .link-card:hover {
-    border-color: #0066cc;
+    border-color: #2d8b3c;
   }
 
   .academic-info {
@@ -490,6 +592,7 @@
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .content-card,
+  .innovation-item,
   .link-card {
     transition: none;
   }
