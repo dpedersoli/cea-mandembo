@@ -1,0 +1,154 @@
+.comparison-section {
+  padding: 3rem 0;
+}
+
+.comparison-section__title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.comparison-section__description {
+  text-align: center;
+  color: #667;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.comparison-table thead {
+  background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+  color: #fff;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.comparison-table thead th {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+}
+
+.comparison-table tbody th {
+  font-weight: 600;
+  color: #333;
+}
+
+.comparison-table tbody tr:last-child td,
+.comparison-table tbody tr:last-child th {
+  border-bottom: none;
+}
+
+.comparison-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.comparison-table__cell--casa12v {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.comparison-table__cell--convencional {
+  color: #667;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge--primary {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.comparison-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #667;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-dot--positive {
+  background-color: #28a745;
+}
+
+@media (max-width: 768px) {
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .comparison-section__title {
+    color: #f0f0f0;
+  }
+
+  .comparison-section__description {
+    color: #ccc;
+  }
+
+  .comparison-table {
+    background: #2a2a2a;
+  }
+
+  .comparison-table tbody th {
+    color: #f0f0f0;
+  }
+
+  .comparison-table tbody tr:hover {
+    background-color: #333;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    border-bottom-color: #3a3a3a;
+  }
+
+  .legend-item {
+    color: #ccc;
+  }
+}

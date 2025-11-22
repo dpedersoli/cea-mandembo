@@ -1,0 +1,126 @@
+.sustainability-highlights {
+  padding: 3rem 0;
+}
+
+.sustainability-highlights__title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.metric-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.metric-card__icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.metric-card__content {
+  flex: 1;
+}
+
+.metric-card__label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.metric-card__value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0066cc;
+  margin: 0 0 0.75rem 0;
+  line-height: 1;
+}
+
+.metric-card__unit {
+  font-size: 1.25rem;
+  color: #667;
+}
+
+.metric-card__description {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #667;
+  margin: 0 0 1rem 0;
+}
+
+.metric-card__ods {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.metric-card__ods-label {
+  font-size: 0.75rem;
+  color: #999;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ods-badges-small {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ods-badge-small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .sustainability-highlights__title {
+    color: #f0f0f0;
+  }
+
+  .metric-card {
+    background: #2a2a2a;
+  }
+
+  .metric-card__label {
+    color: #f0f0f0;
+  }
+
+  .metric-card__description {
+    color: #ccc;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .metric-card {
+    transition: none;
+  }
+}
