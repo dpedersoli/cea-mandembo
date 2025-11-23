@@ -41,7 +41,7 @@ export default function Home() {
           <div className="hero__image">
             <div className="hero__image-placeholder">
               <img
-                src="src/assets/casa12volts_home.jpg"
+                src="/assets/images/casa12volts-hero.jpg"
                 alt="Casa12Volts® - Primeira residência multivolts do Brasil no CEA Mandembo"
                 className="hero__image-real"
                 loading="lazy"
