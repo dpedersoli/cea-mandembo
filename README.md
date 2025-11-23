@@ -19,21 +19,6 @@ Centro de Educação Ambiental Mandembo | Curso de Análise e Desenvolvimento de
 
 ---
 
-## 📋 Sumário
-
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [PEX IV - Dashboard Educativo](#-pex-iv---dashboard-educativo-casa12volts)
-- [PEX V - Comparador Energético](#-pex-v---comparador-energético-interativo)
-- [Funcionalidades](#-funcionalidades)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Como Executar](#-como-executar-o-projeto)
-- [ODS - Objetivos de Desenvolvimento Sustentável](#-objetivos-de-desenvolvimento-sustentável)
-- [Autor](#-autor)
-- [Licença](#-licença)
-
----
-
 ## 🌍 Sobre o Projeto
 
 Esta plataforma web educativa foi desenvolvida como parte dos **Projetos de Extensão IV (PEX IV)** e **Projeto de Extensão V (PEX V)** do curso de **Análise e Desenvolvimento de Sistemas**, em parceria com o **Centro de Educação Ambiental Mandembo**.
