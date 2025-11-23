@@ -136,7 +136,6 @@ export interface DashboardData {
   energyHistory?: EnergyHistory[]; // Histórico de energia (opcional)
   consumptionByCategory?: ConsumptionCategory[]; // Consumo por categoria (opcional)
   faqs?: FAQ[]; // FAQs (opcional)
-  lastUpdate: Date;
 }
 
 /**

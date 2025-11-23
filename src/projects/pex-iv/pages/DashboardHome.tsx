@@ -8,7 +8,7 @@ import { ROUTES } from '@/utils/constants';
 import './DashboardHome.css';
 
 export default function DashboardHome() {
-  const { sources, totalGeneration, totalConsumption, metrics, lastUpdate } = dashboardData;
+  const { sources, totalGeneration, totalConsumption, metrics } = dashboardData;
 
   return (
     <div className="dashboard-home">

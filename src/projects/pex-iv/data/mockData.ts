@@ -734,5 +734,4 @@ export const dashboardData: DashboardData = {
   energyHistory: energyHistoryWeek, // ✅ CORRIGIDO - Adicionado
   consumptionByCategory: consumptionByCategory, // ✅ CORRIGIDO - Adicionado
   faqs: faqs, // ✅ CORRIGIDO - Adicionado
-  lastUpdate: new Date(),
 };
