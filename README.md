@@ -86,7 +86,7 @@ Desenvolver um **dashboard web interativo** que permita visualizar, em tempo rea
 }
 
 ### 📂 Estrutura (PEX IV)
-
+```
 src/projects/pex-iv/
 ├── pages/
 │ ├── DashboardHome.tsx # Página principal do dashboard
@@ -97,7 +97,7 @@ src/projects/pex-iv/
 │ └── EfficiencyGauge.tsx # Medidor de eficiência
 └── data/
 └── mockData.ts # Dados simulados
-
+```
 ### 🎓 Aprendizado Proporcionado (PEX IV)
 
 - 📈 **Visualização de Dados**: Gráficos interativos
@@ -150,6 +150,7 @@ Criar uma **ferramenta interativa** que permita ao usuário comparar o consumo e
 }
 
 ### 📂 Estrutura (PEX V)
+```
 src/projects/pex-v/
 ├── pages/
 │ └── ComparatorHome.tsx # Página principal do comparador
@@ -163,6 +164,7 @@ src/projects/pex-v/
 │ └── helpers.ts # Funções de cálculo
 └── types/
 └── pex-v.types.ts # Tipos TypeScript
+```
 
 ### 🎓 Aprendizado Proporcionado (PEX V)
 
@@ -234,7 +236,7 @@ src/projects/pex-v/
 ---
 
 ## 📁 Estrutura do Projeto
-
+```
 cea-mandembo/
 ├── public/
 │ ├── assets/
@@ -268,7 +270,7 @@ cea-mandembo/
 ├── vite.config.ts
 ├── vercel.json
 └── README.md
-
+```
 ---
 
 ## 🚀 Como Executar o Projeto
