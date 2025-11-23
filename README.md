@@ -284,11 +284,11 @@ cea-mandembo/
 
 ### Build para Produção
 
-# Gerar build otimizada
+### Gerar build otimizada
 
 npm run build
 
-# Testar build localmente
+### Testar build localmente
 
 npm run preview
 
