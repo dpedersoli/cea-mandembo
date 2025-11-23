@@ -150,7 +150,6 @@ Criar uma **ferramenta interativa** que permita ao usuário comparar o consumo e
 }
 
 ### 📂 Estrutura (PEX V)
-
 src/projects/pex-v/
 ├── pages/
 │ └── ComparatorHome.tsx # Página principal do comparador
