@@ -64,7 +64,7 @@ export default function DashboardHome() {
                 Conheça em detalhes cada componente do sistema Casa12Volts®: painéis solares,
                 turbina eólica, bicicleta geradora, baterias e muito mais.
               </p>
-              <Link to={ROUTES.DASHBOARD_COMPONENTS}>
+              <Link to={ROUTES.DASHBOARD_COMPONENTS} style={{ textDecoration: 'none' }}>
                 <Button variant="primary" size="large">
                   Ver Todos os Componentes
                 </Button>

@@ -163,6 +163,13 @@
   padding: 5rem 0;
 }
 
+/* Melhor contraste para o título da seção ODS */
+.ods-section .section-title {
+  color: #0f3d18; /* Verde escuro para melhor contraste */
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8); /* Sombra suave para legibilidade */
+  font-weight: 800;
+}
+
 .ods-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -215,7 +222,7 @@
 .ods-card__description {
   font-size: 1rem;
   line-height: 1.6;
-  color: #667;
+  color: #444; /* Corrigido de #667 para #444 - melhor contraste */
   margin: 0;
 }
 
@@ -334,6 +341,12 @@
     color: #f0f0f0;
   }
 
+  /* Título da seção ODS em Dark Mode */
+  .ods-section .section-title {
+    color: #7ac77a; /* Verde claro para dark mode */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
   .feature-card {
     background: #2a2a2a;
     border-color: #3a3a3a;
@@ -351,6 +364,10 @@
     color: #ccc;
   }
 
+  .ods-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0f1f0f 100%);
+  }
+
   .ods-card {
     background: #2a2a2a;
   }
@@ -360,7 +377,7 @@
   }
 
   .ods-card__description {
-    color: #ccc;
+    color: #ccc; /* Melhor contraste no dark mode */
   }
 
   .cea-info {

@@ -279,7 +279,7 @@ export default function About() {
                 engenheiros(as)
               </li>
               <li>
-                <strong>Miss Terra 2024</strong> - Reconhecimento internacional
+                <strong>Miss Terra 2024</strong> - Reconhecimento Nacional
               </li>
               <li>
                 <strong>CEFET-BH</strong> - Parceiro no desenvolvimento do aquecedor solar à vácuo
@@ -373,6 +373,7 @@ export default function About() {
               target="_blank"
               rel="noopener noreferrer"
               className="link-card"
+              style={{ textDecoration: 'none' }}
             >
               <span className="link-icon">🌿</span>
               <span className="link-text">CEA Mandembo</span>
@@ -384,6 +385,7 @@ export default function About() {
               target="_blank"
               rel="noopener noreferrer"
               className="link-card"
+              style={{ textDecoration: 'none' }}
             >
               <span className="link-icon">⚡</span>
               <span className="link-text">Casa12Volts®</span>
@@ -395,6 +397,7 @@ export default function About() {
               target="_blank"
               rel="noopener noreferrer"
               className="link-card"
+              style={{ textDecoration: 'none' }}
             >
               <span className="link-icon">🏡</span>
               <span className="link-text">CEA Mandembo</span>
@@ -412,12 +415,12 @@ export default function About() {
               funciona e quanto você pode economizar.
             </p>
             <div className="cta-buttons">
-              <Link to={ROUTES.DASHBOARD}>
+              <Link to={ROUTES.DASHBOARD} style={{ textDecoration: 'none' }}>
                 <Button variant="primary" size="large">
                   Dashboard Casa12Volts®
                 </Button>
               </Link>
-              <Link to={ROUTES.COMPARATOR}>
+              <Link to={ROUTES.COMPARATOR} style={{ textDecoration: 'none' }}>
                 <Button variant="secondary" size="large">
                   Comparador Interativo
                 </Button>

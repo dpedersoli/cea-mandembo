@@ -15,12 +15,12 @@ export default function NotFound() {
             Desculpe, a página que você está procurando não existe ou foi movida.
           </p>
           <div className="not-found__actions">
-            <Link to={ROUTES.HOME}>
+            <Link to={ROUTES.HOME} style={{ textDecoration: 'none' }}>
               <Button variant="primary" size="large">
                 Voltar para Início
               </Button>
             </Link>
-            <Link to={ROUTES.DASHBOARD}>
+            <Link to={ROUTES.DASHBOARD} style={{ textDecoration: 'none' }}>
               <Button variant="secondary" size="large">
                 Ir para Dashboard
               </Button>

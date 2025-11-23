@@ -33,19 +33,31 @@ export default function Footer() {
           <div className="footer__section">
             <h3 className="footer__title">Links Rápidos</h3>
             <nav className="footer__links" aria-label="Links do rodapé">
-              <Link to={ROUTES.HOME} className="footer__link">
+              <Link to={ROUTES.HOME} className="footer__link" style={{ textDecoration: 'none' }}>
                 Início
               </Link>
-              <Link to={ROUTES.DASHBOARD} className="footer__link">
+              <Link
+                to={ROUTES.DASHBOARD}
+                className="footer__link"
+                style={{ textDecoration: 'none' }}
+              >
                 Dashboard
               </Link>
-              <Link to={ROUTES.COMPARATOR} className="footer__link">
+              <Link
+                to={ROUTES.COMPARATOR}
+                className="footer__link"
+                style={{ textDecoration: 'none' }}
+              >
                 Comparador
               </Link>
-              <Link to={ROUTES.ABOUT} className="footer__link">
+              <Link to={ROUTES.ABOUT} className="footer__link" style={{ textDecoration: 'none' }}>
                 Sobre o Projeto
               </Link>
-              <Link to={ROUTES.DASHBOARD_COMPONENTS} className="footer__link">
+              <Link
+                to={ROUTES.DASHBOARD_COMPONENTS}
+                className="footer__link"
+                style={{ textDecoration: 'none' }}
+              >
                 Componentes
               </Link>
             </nav>
@@ -63,6 +75,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer__link"
+                  style={{ textDecoration: 'none' }}
                 >
                   {CEA_INFO.website.replace('https://www.', '')}
                 </a>
@@ -74,6 +87,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer__link"
+                  style={{ textDecoration: 'none' }}
                 >
                   Casa12Volts®
                 </a>

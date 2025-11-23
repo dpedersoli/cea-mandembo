@@ -63,6 +63,7 @@
   background: rgba(45, 139, 60, 0.25);
   border-color: #5cb85c;
   transform: translateY(-2px);
+  text-decoration: none;
 }
 
 /* Footer Links */
@@ -196,6 +197,7 @@
 
   .social-link:hover {
     background: rgba(45, 139, 60, 0.2);
+    text-decoration: none;
   }
 
   .footer__bottom {

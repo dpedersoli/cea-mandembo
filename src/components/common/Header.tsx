@@ -14,7 +14,7 @@ export default function Header() {
       <div className="container">
         <div className="header__content">
           {/* Logo e Nome */}
-          <Link to={ROUTES.HOME} className="header__logo">
+          <Link to={ROUTES.HOME} className="header__logo" style={{ textDecoration: 'none' }}>
             <div className="logo-icon">🏡⚡</div>
             <div className="logo-text">
               <span className="logo-title">CEA Mandembo</span>
@@ -27,24 +27,28 @@ export default function Header() {
             <Link
               to={ROUTES.HOME}
               className={`nav-link ${isActive(ROUTES.HOME) ? 'nav-link--active' : ''}`}
+              style={{ textDecoration: 'none' }}
             >
               Início
             </Link>
             <Link
               to={ROUTES.DASHBOARD}
               className={`nav-link ${isActive(ROUTES.DASHBOARD) ? 'nav-link--active' : ''}`}
+              style={{ textDecoration: 'none' }}
             >
               Dashboard
             </Link>
             <Link
               to={ROUTES.COMPARATOR}
               className={`nav-link ${isActive(ROUTES.COMPARATOR) ? 'nav-link--active' : ''}`}
+              style={{ textDecoration: 'none' }}
             >
               Comparador
             </Link>
             <Link
               to={ROUTES.ABOUT}
               className={`nav-link ${isActive(ROUTES.ABOUT) ? 'nav-link--active' : ''}`}
+              style={{ textDecoration: 'none' }}
             >
               Sobre
             </Link>

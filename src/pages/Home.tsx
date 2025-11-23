@@ -25,12 +25,12 @@ export default function Home() {
               <span className="hero-badge">Energia Limpa</span>
             </div>
             <div className="hero__buttons">
-              <Link to={ROUTES.DASHBOARD}>
+              <Link to={ROUTES.DASHBOARD} style={{ textDecoration: 'none' }}>
                 <Button variant="primary" size="large">
                   Explorar Dashboard
                 </Button>
               </Link>
-              <Link to={ROUTES.COMPARATOR}>
+              <Link to={ROUTES.COMPARATOR} style={{ textDecoration: 'none' }}>
                 <Button variant="secondary" size="large">
                   Fazer Comparação
                 </Button>
@@ -62,7 +62,11 @@ export default function Home() {
                 eólica e por esforço físico (Pedal Sustentável), além de métricas de
                 sustentabilidade.
               </p>
-              <Link to={ROUTES.DASHBOARD} className="feature-card__link">
+              <Link
+                to={ROUTES.DASHBOARD}
+                className="feature-card__link"
+                style={{ textDecoration: 'none' }}
+              >
                 Acessar Dashboard →
               </Link>
             </article>
@@ -74,7 +78,11 @@ export default function Home() {
                 Compare sistemas de 12V CC com 110V/220V CA. Descubra quanto você economizaria em
                 energia, custos (CEMIG) e redução de CO₂.
               </p>
-              <Link to={ROUTES.COMPARATOR} className="feature-card__link">
+              <Link
+                to={ROUTES.COMPARATOR}
+                className="feature-card__link"
+                style={{ textDecoration: 'none' }}
+              >
                 Fazer Comparação →
               </Link>
             </article>
@@ -86,7 +94,11 @@ export default function Home() {
                 Aprenda sobre energias renováveis, eficiência energética e como a tecnologia pode
                 contribuir para um futuro sustentável.
               </p>
-              <Link to={ROUTES.ABOUT} className="feature-card__link">
+              <Link
+                to={ROUTES.ABOUT}
+                className="feature-card__link"
+                style={{ textDecoration: 'none' }}
+              >
                 Saiba Mais →
               </Link>
             </article>
