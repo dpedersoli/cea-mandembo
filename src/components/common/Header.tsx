@@ -16,11 +16,7 @@ export default function Header() {
           {/* Logo e Nome */}
           <Link to={ROUTES.HOME} className="header__logo" style={{ textDecoration: 'none' }}>
             {/* <div className="logo-icon">🏡⚡</div> */}
-            <img
-              src="src/assets/logo_tab_mandembo.svg"
-              alt="Logo CEA Mandembo"
-              className="logo-icon"
-            />
+            <img src="/logo_tab_mandembo.svg" alt="Logo CEA Mandembo" className="logo-icon" />
 
             <div className="logo-text">
               <span className="logo-title">CEA Mandembo</span>
