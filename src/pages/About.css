@@ -58,8 +58,9 @@
 
 /* Casa12Volts® Section */
 .casa12v-section {
-  padding: 4rem 0;
+  padding: 4rem 1rem;
   background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e5 100%);
+  border-radius: 16px;
 }
 
 .content-grid {
@@ -79,7 +80,6 @@
 }
 
 .content-card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 4px 20px rgba(45, 139, 60, 0.2);
   border-color: #2d8b3c;
 }
@@ -181,7 +181,6 @@
 }
 
 .innovation-item:hover {
-  transform: translateX(8px);
 }
 
 .innovation-icon {
@@ -206,7 +205,8 @@
 
 /* Differentials */
 .differentials {
-  padding: 4rem 0;
+  padding: 4rem 1rem;
+  border-radius: 16px;
   background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e5 100%);
 }
 
@@ -284,7 +284,8 @@
 
 /* ODS Alignment */
 .ods-alignment {
-  padding: 4rem 0;
+  padding: 4rem 1rem;
+  border-radius: 16px;
   background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e5 100%);
 }
 
@@ -307,9 +308,9 @@
 }
 
 .ods-badge {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: 50px;
+  height: 90px;
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -401,7 +402,9 @@
 
 /* Useful Links */
 .useful-links {
-  padding: 4rem 0;
+  margin-top: 4rem;
+  padding: 4rem 1rem;
+  border-radius: 16px;
   background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e5 100%);
 }
 
@@ -428,7 +431,6 @@
 
 .link-card:hover {
   border-color: #2d8b3c;
-  transform: translateX(4px);
   box-shadow: 0 4px 12px rgba(45, 139, 60, 0.15);
 }
 

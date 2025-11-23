@@ -21,7 +21,6 @@
 }
 
 .source-card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 4px 20px rgba(45, 139, 60, 0.15);
   border-color: #2d8b3c;
 }

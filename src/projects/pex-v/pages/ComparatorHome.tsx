@@ -22,6 +22,7 @@ export default function ComparatorHome() {
         item.id === appliance.id ? { ...item, isSelected: !item.isSelected } : item
       )
     );
+    setShowResults(false); // ✅ Reseta resultados ao mudar seleção
   }, []);
 
   // Atualizar quantidade
@@ -29,6 +30,7 @@ export default function ComparatorHome() {
     setSelectedAppliances((prev) =>
       prev.map((item) => (item.id === applianceId ? { ...item, quantity } : item))
     );
+    setShowResults(false); // ✅ Reseta resultados ao mudar quantidade
   }, []);
 
   // Atualizar horas de uso
@@ -36,6 +38,7 @@ export default function ComparatorHome() {
     setSelectedAppliances((prev) =>
       prev.map((item) => (item.id === applianceId ? { ...item, hoursPerDay: hours } : item))
     );
+    setShowResults(false); // ✅ Reseta resultados ao mudar horas
   }, []);
 
   // Carregar perfil pré-definido
@@ -135,7 +138,7 @@ export default function ComparatorHome() {
         {/* Calculate Button */}
         <section className="comparator-actions">
           <button className="calculate-btn" onClick={handleCalculate} disabled={!hasSelection}>
-            {showResults ? 'Recalcular' : 'Calcular Comparação'}
+            Calcular Comparação
           </button>
           {!hasSelection && (
             <p className="action-hint">Selecione ao menos um aparelho para começar</p>

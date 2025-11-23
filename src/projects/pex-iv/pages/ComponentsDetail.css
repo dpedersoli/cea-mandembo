@@ -125,7 +125,6 @@
 .category-btn:hover {
   border-color: #2d8b3c;
   color: #2d8b3c;
-  transform: translateY(-2px);
 }
 
 .category-btn--active {
@@ -164,7 +163,6 @@
 }
 
 .component-card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 6px 24px rgba(45, 139, 60, 0.15);
   border-color: #2d8b3c;
 }
@@ -316,7 +314,6 @@
 }
 
 .empty-btn:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(45, 139, 60, 0.3);
 }
 

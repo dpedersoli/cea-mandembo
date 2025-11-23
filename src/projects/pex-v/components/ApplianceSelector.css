@@ -81,6 +81,7 @@
   gap: 1rem;
 }
 
+/* ✅ Card clicável - melhora visual */
 .appliance-item {
   display: flex;
   gap: 1rem;
@@ -89,11 +90,13 @@
   border: 2px solid #e0e0e0;
   border-radius: 12px;
   transition: all 0.3s ease;
+  cursor: pointer; /* ✅ Indica que é clicável */
 }
 
 .appliance-item:hover {
   border-color: #2d8b3c;
   box-shadow: 0 4px 16px rgba(45, 139, 60, 0.1);
+  transform: translateY(-2px); /* ✅ Efeito de elevação suave */
 }
 
 .appliance-item--selected {
@@ -199,6 +202,7 @@
   border-top: 1px solid #e0e0e0;
   margin-top: 1rem;
   flex-wrap: wrap;
+  cursor: default;
 }
 
 .control-group {
@@ -241,6 +245,7 @@
   color: #fff;
 }
 
+/* ✅ Input readonly - SEM efeitos de interação */
 .number-value {
   width: 60px;
   padding: 0.5rem;
@@ -249,11 +254,30 @@
   border-radius: 6px;
   font-size: 1rem;
   font-weight: 600;
+  background: #fff; /* ✅ Mantém fundo branco padrão */
+  cursor: default;
+  user-select: none;
+  pointer-events: none; /* ✅ Remove TODOS os eventos de mouse/teclado */
 }
 
-.number-value:focus {
-  outline: none;
-  border-color: #2d8b3c;
+/* Remove spinners do input type="number" em todos os navegadores */
+.number-value::-webkit-outer-spin-button,
+.number-value::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.number-value[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ✅ Remove TODOS os efeitos de focus/hover/active */
+.number-value:focus,
+.number-value:hover,
+.number-value:active {
+  outline: none !important;
+  border-color: #e0e0e0 !important;
+  box-shadow: none !important;
 }
 
 /* Empty State */
@@ -380,8 +404,10 @@
     color: #f0f0f0;
   }
 
-  .number-value:focus {
-    border-color: #5cb85c;
+  .number-value:focus,
+  .number-value:hover,
+  .number-value:active {
+    border-color: #3a3a3a !important;
   }
 
   .selector-empty {

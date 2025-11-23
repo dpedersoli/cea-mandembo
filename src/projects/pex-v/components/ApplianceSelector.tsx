@@ -82,9 +82,11 @@ export default function ApplianceSelector({
             <div
               key={appliance.id}
               className={`appliance-item ${isSelected ? 'appliance-item--selected' : ''}`}
+              onClick={() => onToggleAppliance(appliance)} // ✅ Card inteiro clicável
+              style={{ cursor: 'pointer' }} // ✅ Indica que é clicável
             >
               {/* Checkbox */}
-              <label className="appliance-checkbox">
+              <label className="appliance-checkbox" onClick={(e) => e.stopPropagation()}>
                 <input
                   type="checkbox"
                   checked={isSelected}
@@ -114,7 +116,10 @@ export default function ApplianceSelector({
 
               {/* Controls */}
               {isSelected && selected && (
-                <div className="appliance-controls">
+                <div
+                  className="appliance-controls"
+                  onClick={(e) => e.stopPropagation()} // ✅ Impede que cliques nos controles selecionem o card
+                >
                   <div className="control-group">
                     <label className="control-label">Quantidade:</label>
                     <div className="number-input">
@@ -123,27 +128,23 @@ export default function ApplianceSelector({
                         onClick={() =>
                           onUpdateQuantity(appliance.id, Math.max(1, selected.quantity - 1))
                         }
+                        aria-label="Diminuir quantidade"
                       >
                         −
                       </button>
                       <input
-                        type="number"
-                        min="1"
-                        max="99"
+                        type="text"
                         value={selected.quantity}
-                        onChange={(e) =>
-                          onUpdateQuantity(
-                            appliance.id,
-                            Math.max(1, Math.min(99, parseInt(e.target.value) || 1))
-                          )
-                        }
+                        readOnly
                         className="number-value"
+                        aria-label="Quantidade atual"
                       />
                       <button
                         className="number-btn"
                         onClick={() =>
                           onUpdateQuantity(appliance.id, Math.min(99, selected.quantity + 1))
                         }
+                        aria-label="Aumentar quantidade"
                       >
                         +
                       </button>
@@ -158,28 +159,23 @@ export default function ApplianceSelector({
                         onClick={() =>
                           onUpdateHours(appliance.id, Math.max(0.25, selected.hoursPerDay - 0.25))
                         }
+                        aria-label="Diminuir horas por dia"
                       >
                         −
                       </button>
                       <input
-                        type="number"
-                        min="0.25"
-                        max="24"
-                        step="0.25"
+                        type="text"
                         value={selected.hoursPerDay}
-                        onChange={(e) =>
-                          onUpdateHours(
-                            appliance.id,
-                            Math.max(0.25, Math.min(24, parseFloat(e.target.value) || 0.25))
-                          )
-                        }
+                        readOnly
                         className="number-value"
+                        aria-label="Horas por dia atual"
                       />
                       <button
                         className="number-btn"
                         onClick={() =>
                           onUpdateHours(appliance.id, Math.min(24, selected.hoursPerDay + 0.25))
                         }
+                        aria-label="Aumentar horas por dia"
                       >
                         +
                       </button>

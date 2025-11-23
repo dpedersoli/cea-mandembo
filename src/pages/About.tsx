@@ -334,7 +334,7 @@ export default function About() {
         </section>
 
         {/* Projeto Acadêmico */}
-        <section className="academic-project">
+        {/* <section className="academic-project">
           <div className="academic-card">
             <h2 className="academic-title">Projeto de Extensão Universitária</h2>
             <p className="academic-text">
@@ -362,7 +362,7 @@ export default function About() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Links Úteis */}
         <section className="useful-links">
@@ -389,18 +389,6 @@ export default function About() {
             >
               <span className="link-icon">⚡</span>
               <span className="link-text">Casa12Volts®</span>
-              <span className="link-arrow">→</span>
-            </a>
-
-            <a
-              href="https://www.mandembo.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-card"
-              style={{ textDecoration: 'none' }}
-            >
-              <span className="link-icon">🏡</span>
-              <span className="link-text">CEA Mandembo</span>
               <span className="link-arrow">→</span>
             </a>
           </div>

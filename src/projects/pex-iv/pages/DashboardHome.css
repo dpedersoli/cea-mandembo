@@ -22,7 +22,6 @@
   display: block;
   font-size: 1.5rem;
   font-weight: 400;
-  color: #ffc107;
   margin-top: 0.5rem;
 }
 
@@ -113,7 +112,6 @@
 }
 
 .info-card:hover {
-  transform: translateY(-4px);
 }
 
 .info-card--green {

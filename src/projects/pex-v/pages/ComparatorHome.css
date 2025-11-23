@@ -67,7 +67,6 @@
 }
 
 .preset-card:hover {
-  transform: translateY(-4px);
   border-color: #2d8b3c;
   box-shadow: 0 6px 24px rgba(45, 139, 60, 0.15);
 }
@@ -142,7 +141,6 @@
 }
 
 .calculate-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(45, 139, 60, 0.4);
 }
 
