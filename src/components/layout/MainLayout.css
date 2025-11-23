@@ -1,0 +1,40 @@
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Garantir que o conteúdo principal ocupe todo o espaço disponível */
+.main-content > * {
+  min-height: 100%;
+}
+
+/* Container padrão para páginas */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Container largo para páginas específicas */
+.container--wide {
+  max-width: 1400px;
+}
+
+/* Container estreito para conteúdo focado */
+.container--narrow {
+  max-width: 900px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}

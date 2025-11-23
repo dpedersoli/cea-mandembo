@@ -1,0 +1,247 @@
+.comparator-home {
+  min-height: 100vh;
+}
+
+/* Hero */
+.comparator-hero {
+  background: linear-gradient(135deg, #ffc107 0%, #f57f17 100%);
+  color: #1a1a1a;
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+}
+
+.comparator-hero__title {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.comparator-hero__subtitle {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-top: 0.5rem;
+}
+
+.comparator-hero__description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* Profile Presets */
+.profile-presets {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.presets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.preset-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.preset-card:hover {
+  border-color: #2d8b3c;
+  box-shadow: 0 6px 24px rgba(45, 139, 60, 0.15);
+}
+
+.preset-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.preset-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.preset-description {
+  font-size: 0.95rem;
+  color: #667;
+  margin: 0;
+}
+
+/* Section */
+.comparator-section {
+  margin-bottom: 3rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.clear-btn {
+  padding: 0.625rem 1.5rem;
+  background: #fff;
+  border: 2px solid #d85a28;
+  border-radius: 8px;
+  color: #d85a28;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-btn:hover {
+  background: #d85a28;
+  color: #fff;
+}
+
+/* Actions */
+.comparator-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+.calculate-btn {
+  padding: 1rem 3rem;
+  background: linear-gradient(135deg, #2d8b3c 0%, #1a5e28 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(45, 139, 60, 0.3);
+}
+
+.calculate-btn:hover:not(:disabled) {
+  box-shadow: 0 6px 24px rgba(45, 139, 60, 0.4);
+}
+
+.calculate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.action-hint {
+  font-size: 0.95rem;
+  color: #667;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Results */
+.comparator-results {
+  margin-top: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comparator-hero__title {
+    font-size: 2rem;
+  }
+
+  .comparator-hero__subtitle {
+    font-size: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .clear-btn {
+    width: 100%;
+  }
+
+  .calculate-btn {
+    width: 100%;
+  }
+
+  .presets-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .comparator-hero {
+    background: linear-gradient(135deg, #f57f17 0%, #e65100 100%);
+    color: #1a1a1a;
+  }
+
+  .section-title,
+  .preset-title {
+    color: #f0f0f0;
+  }
+
+  .preset-card {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+  }
+
+  .preset-card:hover {
+    border-color: #5cb85c;
+  }
+
+  .preset-description,
+  .action-hint {
+    color: #ccc;
+  }
+
+  .clear-btn {
+    background: #2a2a2a;
+    border-color: #ff8a50;
+    color: #ff8a50;
+  }
+
+  .clear-btn:hover {
+    background: #ff8a50;
+    color: #1a1a1a;
+  }
+
+  .calculate-btn {
+    background: linear-gradient(135deg, #5cb85c 0%, #3d9e3d 100%);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .preset-card,
+  .clear-btn,
+  .calculate-btn {
+    transition: none;
+  }
+}

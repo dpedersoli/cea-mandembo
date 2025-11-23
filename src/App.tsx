@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from 'react';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router';
+import { getAccessibilityPreferences } from '@/utils/helpers';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    // Detectar preferências de acessibilidade do sistema
+    const preferences = getAccessibilityPreferences();
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    // Aplicar classe no documento para acessibilidade
+    if (preferences.reducedMotion) {
+      document.documentElement.classList.add('reduce-motion');
+    }
+
+    if (preferences.highContrast) {
+      document.documentElement.classList.add('high-contrast');
+    }
+
+    if (preferences.darkMode) {
+      document.documentElement.classList.add('dark-mode');
+    }
+
+    // Listener para mudanças de preferências
+    const mediaQueries = {
+      motion: window.matchMedia('(prefers-reduced-motion: reduce)'),
+      contrast: window.matchMedia('(prefers-contrast: high)'),
+      theme: window.matchMedia('(prefers-color-scheme: dark)'),
+    };
+
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      document.documentElement.classList.toggle('reduce-motion', e.matches);
+    };
+
+    const handleContrastChange = (e: MediaQueryListEvent) => {
+      document.documentElement.classList.toggle('high-contrast', e.matches);
+    };
+
+    const handleThemeChange = (e: MediaQueryListEvent) => {
+      document.documentElement.classList.toggle('dark-mode', e.matches);
+    };
+
+    mediaQueries.motion.addEventListener('change', handleMotionChange);
+    mediaQueries.contrast.addEventListener('change', handleContrastChange);
+    mediaQueries.theme.addEventListener('change', handleThemeChange);
+
+    // Cleanup
+    return () => {
+      mediaQueries.motion.removeEventListener('change', handleMotionChange);
+      mediaQueries.contrast.removeEventListener('change', handleContrastChange);
+      mediaQueries.theme.removeEventListener('change', handleThemeChange);
+    };
+  }, []);
+
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
