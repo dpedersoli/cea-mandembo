@@ -284,11 +284,11 @@ cea-mandembo/
 
 ### Build para Produção
 
-### Gerar build otimizada
+#### Gerar build otimizada
 
 npm run build
 
-### Testar build localmente
+#### Testar build localmente
 
 npm run preview
 
@@ -332,9 +332,9 @@ Desenvolvedor Fullstack | Análise e Desenvolvimento de Sistemas
 
 **Contato**:
 
-- 🔗 LinkedIn: [https://www.linkedin.com/in/danielpedersoli-frontend-developer/]
-- 💼 GitHub: [https://github.com/dpedersoli]
-- 📧 Email: [dpmsengineer@gmail.com]
+- 🔗 [LinkedIn](https://www.linkedin.com/in/danielpedersoli-frontend-developer/)
+- 💼 [GitHub](https://github.com/dpedersoli)
+- 📧 [Email](dpmsengineer@gmail.com)
 
 ---
 
