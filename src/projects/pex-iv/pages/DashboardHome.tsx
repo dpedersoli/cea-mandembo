@@ -23,9 +23,6 @@ export default function DashboardHome() {
             Acompanhe a geração de energia renovável (solar, eólica e por esforço físico), consumo e
             métricas de sustentabilidade do sistema multivolts em corrente contínua.
           </p>
-          <p className="dashboard-hero__update">
-            Última atualização: {lastUpdate.toLocaleString('pt-BR')}
-          </p>
         </div>
       </section>
 
