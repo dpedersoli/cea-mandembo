@@ -64,20 +64,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 
 .hero__image-real {
   width: 100%;
-  max-width: 600px;
+  max-width: 350px;
   height: auto;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(45, 139, 60, 0.3);
-  object-fit: cover;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .hero__image-real:hover {
+  transform: scale(1.02);
   box-shadow: 0 12px 48px rgba(142, 239, 158, 0.4);
 }
 
@@ -102,6 +100,33 @@
 .placeholder-text {
   font-size: 1.5rem;
   font-weight: 700;
+}
+
+/* Badge sobre a imagem */
+.hero__image-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(45, 139, 60, 0.3);
+}
+
+.badge-icon {
+  font-size: 1.5rem;
+}
+
+.badge-text {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #2d8b3c;
 }
 
 /* Section Title */
@@ -179,8 +204,8 @@
 
 /* Melhor contraste para o título da seção ODS */
 .ods-section .section-title {
-  color: #0f3d18; /* Verde escuro para melhor contraste */
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8); /* Sombra suave para legibilidade */
+  color: #0f3d18;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
   font-weight: 800;
 }
 
@@ -199,9 +224,6 @@
   gap: 1.5rem;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease;
-}
-
-.ods-card:hover {
 }
 
 .ods-card__icon {
@@ -235,7 +257,7 @@
 .ods-card__description {
   font-size: 1rem;
   line-height: 1.6;
-  color: #444; /* Corrigido de #667 para #444 - melhor contraste */
+  color: #444;
   margin: 0;
 }
 
@@ -294,7 +316,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* Responsive */
+/* Responsive - Tablet/Desktop */
 @media (max-width: 1024px) {
   .hero .container {
     grid-template-columns: 1fr;
@@ -304,33 +326,54 @@
     order: -1;
   }
 
-  .hero__image-placeholder {
-    width: 300px;
-    height: 300px;
+  .hero__image-real {
+    max-width: 450px;
+  }
+
+  .hero__content {
+    text-align: center;
+  }
+
+  .hero__badges {
+    justify-content: center;
+  }
+
+  .hero__buttons {
+    justify-content: center;
+  }
+
+  .ods-cards {
+    grid-template-columns: 1fr;
   }
 }
 
+/* Responsive - Mobile */
 @media (max-width: 768px) {
   .hero {
     padding: 3rem 0;
   }
 
+  .hero__image-real {
+    max-width: 100%;
+  }
+
   .hero__title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 
   .hero__subtitle {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+  }
+
+  .hero__description {
+    font-size: 1rem;
   }
 
   .hero__buttons {
     flex-direction: column;
   }
 
-  .hero__buttons a {
-    width: 100%;
-  }
-
+  .hero__buttons a,
   .hero__buttons button {
     width: 100%;
   }
@@ -339,8 +382,46 @@
     font-size: 2rem;
   }
 
-  .ods-cards {
+  .features-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive - Mobile Pequeno */
+@media (max-width: 480px) {
+  .hero {
+    padding: 2rem 0;
+  }
+
+  .hero__title {
+    font-size: 1.85rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.25rem;
+  }
+
+  .hero__description {
+    font-size: 0.95rem;
+  }
+
+  .hero-badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.65rem;
+  }
+
+  .feature-card {
+    padding: 1.75rem;
+  }
+
+  .ods-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 }
 
@@ -354,9 +435,8 @@
     color: #f0f0f0;
   }
 
-  /* Título da seção ODS em Dark Mode */
   .ods-section .section-title {
-    color: #7ac77a; /* Verde claro para dark mode */
+    color: #7ac77a;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   }
 
@@ -390,7 +470,7 @@
   }
 
   .ods-card__description {
-    color: #ccc; /* Melhor contraste no dark mode */
+    color: #ccc;
   }
 
   .cea-info {
@@ -400,12 +480,22 @@
   .cea-info__text {
     color: #e0e0e0;
   }
+
+  .hero__image-badge {
+    background: rgba(26, 26, 26, 0.95);
+  }
+
+  .badge-text {
+    color: #5cb85c;
+  }
 }
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .feature-card,
-  .ods-card {
+  .ods-card,
+  .hero__image-real {
     transition: none;
   }
 }
+

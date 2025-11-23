@@ -39,20 +39,16 @@ export default function Home() {
           </div>
 
           <div className="hero__image">
-            <div className="hero__image-placeholder">
-              <img
-                src="/assets/images/casa12volts-hero.jpg"
-                alt="Casa12Volts® - Primeira residência multivolts do Brasil no CEA Mandembo"
-                className="hero__image-real"
-                loading="lazy"
-                width="600"
-                height="600"
-              />
-              {/* <span className="placeholder-icon" aria-hidden="true">
+            <img
+              src="/assets/images/casa12volts-hero.jpg"
+              alt="Casa12Volts® - Primeira residência multivolts do Brasil no CEA Mandembo"
+              className="hero__image-real"
+              loading="lazy"
+            />
+            {/* <span className="placeholder-icon" aria-hidden="true">
                 🏡⚡
               </span>
               <span className="placeholder-text">Casa12Volts®</span> */}
-            </div>
           </div>
         </div>
       </section>
