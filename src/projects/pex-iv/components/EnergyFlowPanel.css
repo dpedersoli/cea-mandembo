@@ -1,272 +1,279 @@
 .energy-flow-panel {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  border-radius: 16px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-}
-
-.energy-flow-panel__title {
-  font-size: 1.75rem;
-  margin-bottom: 1.5rem;
-  color: #1a1a1a;
-}
-
-.energy-flow-panel__content {
-  display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
-  gap: 2rem;
-  align-items: center;
-}
-
-@media (max-width: 1024px) {
-  .energy-flow-panel__content {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Energy Sources */
-.energy-sources__title,
-.energy-consumption__title {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.energy-sources__list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 
-.energy-source {
+/* Sources Grid */
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.source-card {
   background: #fff;
   border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 2px solid #f0f0f0;
+  transition: all 0.3s ease;
 }
 
-.energy-source:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.source-card:hover {
+  box-shadow: 0 4px 20px rgba(45, 139, 60, 0.15);
+  border-color: #2d8b3c;
 }
 
-.energy-source__header {
+.source-card__header {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1rem;
 }
 
-.energy-source__icon {
-  font-size: 2rem;
+.source-card__icon {
+  font-size: 2.5rem;
 }
 
-.energy-source__name {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333;
+.source-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
   margin: 0;
 }
 
-.energy-source__stats {
+.source-card__metrics {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
-.stat {
+.metric {
   display: flex;
   flex-direction: column;
 }
 
-.stat__label {
+.metric__label {
   font-size: 0.75rem;
   color: #667;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
 }
 
-.stat__value {
+.metric__value {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #0066cc;
+  color: #2d8b3c;
 }
 
 /* Progress Bar */
 .progress-bar {
-  height: 8px;
-  background-color: #e0e0e0;
-  border-radius: 4px;
+  width: 100%;
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: 6px;
   overflow: hidden;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .progress-bar__fill {
   height: 100%;
-  background: linear-gradient(90deg, #28a745 0%, #5cb85c 100%);
-  transition: width 0.5s ease;
+  border-radius: 6px;
+  transition: width 0.3s ease;
 }
 
-.energy-source--excellent .progress-bar__fill {
-  background: linear-gradient(90deg, #28a745 0%, #5cb85c 100%);
-}
-
-.energy-source--good .progress-bar__fill {
-  background: linear-gradient(90deg, #ffc107 0%, #ffdb4d 100%);
-}
-
-.energy-source--low .progress-bar__fill {
-  background: linear-gradient(90deg, #ff9800 0%, #ffb347 100%);
-}
-
-.energy-source--critical .progress-bar__fill {
-  background: linear-gradient(90deg, #dc3545 0%, #e57373 100%);
-}
-
-.energy-source__efficiency {
+.progress-label {
   font-size: 0.875rem;
+  color: #667;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.source-card__description {
+  font-size: 0.95rem;
+  line-height: 1.5;
   color: #667;
   margin: 0;
 }
 
-/* Energy Flow */
-.energy-flow {
+/* Summary Panel */
+.energy-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.summary-card {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 5px solid;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
-.flow-arrow {
-  color: #0066cc;
+.summary-card--generation {
+  background: linear-gradient(135deg, #fffbf0 0%, #fff8e1 100%);
+  border-left-color: #ffc107;
 }
 
-.energy-balance {
-  text-align: center;
+.summary-card--consumption {
+  background: linear-gradient(135deg, #f0f8ff 0%, #e1f0ff 100%);
+  border-left-color: #0066cc;
 }
 
-.balance {
+.summary-card--positive {
+  background: linear-gradient(135deg, #f0f9f1 0%, #e8f5e9 100%);
+  border-left-color: #2d8b3c;
+}
+
+.summary-card--negative {
+  background: linear-gradient(135deg, #fff8f0 0%, #ffe8d6 100%);
+  border-left-color: #d85a28;
+}
+
+.summary-card__icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.summary-card__content {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.5rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.balance__label {
+.summary-card__label {
   font-size: 0.875rem;
   color: #667;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
 }
 
-.balance__value {
-  font-size: 2rem;
-  font-weight: 700;
+.summary-card__value {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  line-height: 1;
 }
 
-.balance--positive .balance__value {
-  color: #28a745;
-}
-
-.balance--negative .balance__value {
-  color: #dc3545;
-}
-
-.balance__status {
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.balance--positive .balance__status {
-  color: #28a745;
-}
-
-.balance--negative .balance__status {
-  color: #dc3545;
-}
-
-/* Consumption */
-.consumption-card {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: #fff;
-  border-radius: 12px;
-  padding: 1.25rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-}
-
-.consumption-card:hover {
-  transform: translateX(4px);
-}
-
-.consumption-card__icon {
-  font-size: 2.5rem;
-}
-
-.consumption-card__content {
-  flex: 1;
-}
-
-.consumption-card__label {
-  font-size: 0.875rem;
+.summary-card__percentage {
+  font-size: 0.95rem;
   color: #667;
-  margin: 0 0 0.25rem 0;
+  margin-top: 0.25rem;
 }
 
-.consumption-card__value {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #0066cc;
+/* Status Message */
+.energy-status {
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.status-message {
+  font-size: 1rem;
+  font-weight: 600;
   margin: 0;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
-.consumption-card__detail {
-  font-size: 0.75rem;
-  color: #999;
-  margin: 0.25rem 0 0 0;
+.status-message--success {
+  background: #e8f5e9;
+  color: #1a5e28;
+  border: 2px solid #2d8b3c;
+}
+
+.status-message--warning {
+  background: #ffe8d6;
+  color: #983810;
+  border: 2px solid #d85a28;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sources-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .source-card__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .energy-summary {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
-  .energy-flow-panel {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-  }
-
-  .energy-flow-panel__title,
-  .energy-sources__title,
-  .energy-consumption__title {
-    color: #f0f0f0;
-  }
-
-  .energy-source,
-  .balance,
-  .consumption-card {
+  .source-card {
     background: #2a2a2a;
+    border-color: #3a3a3a;
+  }
+
+  .source-card:hover {
+    border-color: #5cb85c;
+  }
+
+  .source-card__title,
+  .summary-card__value {
     color: #f0f0f0;
   }
 
-  .energy-source__name {
-    color: #f0f0f0;
+  .metric__label,
+  .metric__value,
+  .source-card__description,
+  .progress-label,
+  .summary-card__label,
+  .summary-card__percentage {
+    color: #ccc;
+  }
+
+  .metric__value {
+    color: #5cb85c;
   }
 
   .progress-bar {
-    background-color: #3a3a3a;
+    background: #3a3a3a;
+  }
+
+  .summary-card--generation {
+    background: linear-gradient(135deg, #2a2410 0%, #1f1a08 100%);
+  }
+
+  .summary-card--consumption {
+    background: linear-gradient(135deg, #0a1a2a 0%, #051220 100%);
+  }
+
+  .summary-card--positive {
+    background: linear-gradient(135deg, #1a2a1a 0%, #0f1f0f 100%);
+  }
+
+  .summary-card--negative {
+    background: linear-gradient(135deg, #2a1a0f 0%, #1f150a 100%);
+  }
+
+  .status-message--success {
+    background: #1a2a1a;
+    color: #7ac77a;
+    border-color: #5cb85c;
+  }
+
+  .status-message--warning {
+    background: #2a1a0f;
+    color: #ff8a50;
+    border-color: #ff8a50;
   }
 }
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  .energy-source,
-  .consumption-card,
+  .source-card,
   .progress-bar__fill {
     transition: none;
   }

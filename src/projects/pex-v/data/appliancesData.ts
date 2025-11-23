@@ -1,290 +1,315 @@
-import type { Appliance, EducationalTip } from '@/types/pex-v.types';
+import type { Appliance, ApplianceCategoryInfo, UsageProfile } from '@/types/pex-v.types';
 import { generateId } from '@/utils/helpers';
 
 /**
+ * Categorias de aparelhos para filtro
+ */
+export const applianceCategories: ApplianceCategoryInfo[] = [
+  { value: 'iluminacao', label: 'Iluminação', icon: '💡' },
+  { value: 'refrigeracao', label: 'Refrigeração', icon: '🧊' },
+  { value: 'cozinha', label: 'Cozinha', icon: '🍳' },
+  { value: 'eletronicos', label: 'Eletrônicos', icon: '📱' },
+  { value: 'climatizacao', label: 'Climatização', icon: '❄️' },
+  { value: 'outros', label: 'Outros', icon: '🔌' },
+];
+
+/**
  * Base de dados de aparelhos eletroeletrônicos
- * Valores baseados em especificações reais e perdas de conversão
  */
 export const appliancesDatabase: Appliance[] = [
   // ILUMINAÇÃO
   {
     id: generateId(),
-    name: 'Lâmpada LED 9W',
+    name: 'Lâmpada LED 9W (equivalente 60W)',
+    description: 'Lâmpada LED de alta eficiência, comum em residências',
     category: 'iluminacao',
-    consumption110V: 12, // Watts (9W + perdas de conversão ~33%)
-    consumption12V: 9, // Watts (direto em CC)
-    defaultHoursPerDay: 6,
+    consumption110V: 9,
+    consumption12V: 5,
     icon: '💡',
-    description: 'Lâmpada LED de alta eficiência. Em 12V funciona diretamente sem conversores.',
-    conversionLoss: 0.33,
+    averageHoursPerDay: 5,
   },
   {
     id: generateId(),
-    name: 'Lâmpada LED 5W',
+    name: 'Lâmpada LED 15W (equivalente 100W)',
+    description: 'Lâmpada LED mais potente para ambientes maiores',
     category: 'iluminacao',
-    consumption110V: 7, // Watts
-    consumption12V: 5, // Watts
-    defaultHoursPerDay: 8,
+    consumption110V: 15,
+    consumption12V: 9,
     icon: '💡',
-    description: 'Lâmpada LED para ambientes menores.',
-    conversionLoss: 0.4,
+    averageHoursPerDay: 4,
   },
   {
     id: generateId(),
-    name: 'Fita LED 5m',
+    name: 'Lâmpada Fluorescente Compacta 20W',
+    description: 'Lâmpada fluorescente tradicional',
     category: 'iluminacao',
-    consumption110V: 20, // Watts
-    consumption12V: 15, // Watts
-    defaultHoursPerDay: 4,
-    icon: '✨',
-    description: 'Fita LED decorativa. Naturalmente opera em 12V CC.',
-    conversionLoss: 0.33,
+    consumption110V: 20,
+    consumption12V: 12,
+    icon: '💡',
+    averageHoursPerDay: 5,
   },
 
   // REFRIGERAÇÃO
   {
     id: generateId(),
-    name: 'Geladeira Compacta 70L',
+    name: 'Geladeira 1 Porta (250L)',
+    description: 'Geladeira convencional de 1 porta, uso residencial',
     category: 'refrigeracao',
-    consumption110V: 80, // Watts
-    consumption12V: 60, // Watts
-    defaultHoursPerDay: 24,
+    consumption110V: 130,
+    consumption12V: 60,
     icon: '🧊',
-    description: 'Geladeira compacta. Modelos 12V CC são até 25% mais eficientes.',
-    conversionLoss: 0.33,
+    averageHoursPerDay: 24,
   },
   {
     id: generateId(),
-    name: 'Freezer 100L',
+    name: 'Geladeira 2 Portas (400L)',
+    description: 'Geladeira duplex frost-free',
     category: 'refrigeracao',
-    consumption110V: 120, // Watts
-    consumption12V: 90, // Watts
-    defaultHoursPerDay: 24,
-    icon: '❄️',
-    description: 'Freezer horizontal. Versão CC elimina perdas do inversor.',
-    conversionLoss: 0.33,
+    consumption110V: 180,
+    consumption12V: 85,
+    icon: '🧊',
+    averageHoursPerDay: 24,
+  },
+  {
+    id: generateId(),
+    name: 'Freezer Horizontal (300L)',
+    description: 'Freezer horizontal para congelamento',
+    category: 'refrigeracao',
+    consumption110V: 150,
+    consumption12V: 70,
+    icon: '🧊',
+    averageHoursPerDay: 24,
   },
 
-  // ELETROPORTÁTEIS
-  {
-    id: generateId(),
-    name: 'Ventilador de Mesa',
-    category: 'eletroportateis',
-    consumption110V: 65, // Watts
-    consumption12V: 50, // Watts
-    defaultHoursPerDay: 8,
-    icon: '🌀',
-    description: 'Ventilador de 30cm. Motores CC são mais silenciosos e eficientes.',
-    conversionLoss: 0.3,
-  },
+  // COZINHA
   {
     id: generateId(),
     name: 'Liquidificador',
-    category: 'eletroportateis',
-    consumption110V: 400, // Watts
-    consumption12V: 300, // Watts (alta potência, necessita adaptação)
-    defaultHoursPerDay: 0.5,
+    description: 'Liquidificador comum de 600W',
+    category: 'cozinha',
+    consumption110V: 600,
+    consumption12V: 300,
     icon: '🍹',
-    description: 'Uso intermitente. Modelos CC de alta potência estão em desenvolvimento.',
-    conversionLoss: 0.33,
+    averageHoursPerDay: 0.25,
   },
   {
     id: generateId(),
-    name: "Bomba d'Água 1/4 CV",
-    category: 'eletroportateis',
-    consumption110V: 250, // Watts
-    consumption12V: 200, // Watts
-    defaultHoursPerDay: 2,
-    icon: '💧',
-    description: "Bomba para caixa d'água. Bombas CC são ideais para sistemas solares.",
-    conversionLoss: 0.25,
+    name: 'Micro-ondas',
+    description: 'Forno micro-ondas 1200W',
+    category: 'cozinha',
+    consumption110V: 1200,
+    consumption12V: 800,
+    icon: '📦',
+    averageHoursPerDay: 0.5,
+  },
+  {
+    id: generateId(),
+    name: 'Cafeteira Elétrica',
+    description: 'Cafeteira elétrica padrão',
+    category: 'cozinha',
+    consumption110V: 800,
+    consumption12V: 450,
+    icon: '☕',
+    averageHoursPerDay: 0.5,
+  },
+  {
+    id: generateId(),
+    name: 'Torradeira',
+    description: 'Torradeira elétrica 2 fatias',
+    category: 'cozinha',
+    consumption110V: 850,
+    consumption12V: 500,
+    icon: '🍞',
+    averageHoursPerDay: 0.25,
+  },
+  {
+    id: generateId(),
+    name: 'Batedeira',
+    description: 'Batedeira planetária',
+    category: 'cozinha',
+    consumption110V: 400,
+    consumption12V: 200,
+    icon: '🍰',
+    averageHoursPerDay: 0.5,
   },
 
   // ELETRÔNICOS
   {
     id: generateId(),
-    name: 'Notebook',
+    name: 'TV LED 32"',
+    description: 'Televisor LED 32 polegadas',
     category: 'eletronicos',
-    consumption110V: 80, // Watts (inclui perdas do carregador)
-    consumption12V: 65, // Watts (direto via USB-C PD ou adaptador)
-    defaultHoursPerDay: 6,
-    icon: '💻',
-    description:
-      'Notebooks já operam internamente em CC. Eliminar o carregador AC economiza energia.',
-    conversionLoss: 0.23,
+    consumption110V: 65,
+    consumption12V: 55,
+    icon: '📺',
+    averageHoursPerDay: 5,
   },
   {
     id: generateId(),
-    name: 'TV LED 32"',
+    name: 'TV LED 50"',
+    description: 'Televisor LED 50 polegadas',
     category: 'eletronicos',
-    consumption110V: 70, // Watts
-    consumption12V: 55, // Watts
-    defaultHoursPerDay: 5,
+    consumption110V: 100,
+    consumption12V: 80,
     icon: '📺',
-    description: 'TV LED. Modelos CC evitam fonte interna, reduzindo calor e consumo.',
-    conversionLoss: 0.27,
+    averageHoursPerDay: 4,
+  },
+  {
+    id: generateId(),
+    name: 'Computador Desktop',
+    description: 'PC desktop uso doméstico',
+    category: 'eletronicos',
+    consumption110V: 250,
+    consumption12V: 150,
+    icon: '🖥️',
+    averageHoursPerDay: 6,
+  },
+  {
+    id: generateId(),
+    name: 'Notebook',
+    description: 'Notebook padrão',
+    category: 'eletronicos',
+    consumption110V: 65,
+    consumption12V: 45,
+    icon: '💻',
+    averageHoursPerDay: 5,
   },
   {
     id: generateId(),
     name: 'Roteador Wi-Fi',
+    description: 'Roteador wireless sempre ligado',
     category: 'eletronicos',
-    consumption110V: 15, // Watts
-    consumption12V: 12, // Watts
-    defaultHoursPerDay: 24,
+    consumption110V: 10,
+    consumption12V: 5,
     icon: '📡',
-    description: 'Roteadores operam nativamente em CC (geralmente 12V).',
-    conversionLoss: 0.25,
+    averageHoursPerDay: 24,
   },
   {
     id: generateId(),
-    name: 'Carregador USB (5V)',
+    name: 'Carregador de Celular',
+    description: 'Carregador USB comum (em uso)',
     category: 'eletronicos',
-    consumption110V: 12, // Watts (inclui perdas)
-    consumption12V: 10, // Watts (conversão direta 12V para 5V)
-    defaultHoursPerDay: 4,
-    icon: '🔌',
-    description: 'Carregadores USB. Conversão 12V→5V é mais eficiente que 110V→5V.',
-    conversionLoss: 0.2,
+    consumption110V: 10,
+    consumption12V: 5,
+    icon: '📱',
+    averageHoursPerDay: 3,
   },
   {
     id: generateId(),
-    name: 'Câmera de Segurança',
+    name: 'Videogame Console',
+    description: 'Console de videogame moderno',
     category: 'eletronicos',
-    consumption110V: 8, // Watts
-    consumption12V: 6, // Watts
-    defaultHoursPerDay: 24,
-    icon: '📹',
-    description: 'Câmeras IP geralmente operam em 12V CC ou PoE.',
-    conversionLoss: 0.33,
+    consumption110V: 150,
+    consumption12V: 100,
+    icon: '🎮',
+    averageHoursPerDay: 3,
   },
 
   // CLIMATIZAÇÃO
   {
     id: generateId(),
-    name: 'Ventilador de Teto',
+    name: 'Ventilador de Mesa',
+    description: 'Ventilador de mesa 40cm',
     category: 'climatizacao',
-    consumption110V: 80, // Watts
-    consumption12V: 65, // Watts
-    defaultHoursPerDay: 10,
-    icon: '🌊',
-    description: 'Ventilador de teto. Motores CC são mais silenciosos e duráveis.',
-    conversionLoss: 0.23,
+    consumption110V: 65,
+    consumption12V: 35,
+    icon: '🌀',
+    averageHoursPerDay: 8,
   },
   {
     id: generateId(),
-    name: 'Ar Condicionado Portátil 7000 BTU',
+    name: 'Ventilador de Teto',
+    description: 'Ventilador de teto residencial',
     category: 'climatizacao',
-    consumption110V: 900, // Watts
-    consumption12V: 750, // Watts (alta potência, requer inversor robusto em CC)
-    defaultHoursPerDay: 4,
+    consumption110V: 80,
+    consumption12V: 45,
+    icon: '🌀',
+    averageHoursPerDay: 10,
+  },
+  {
+    id: generateId(),
+    name: 'Ar Condicionado 9000 BTU',
+    description: 'Ar condicionado split 9000 BTUs',
+    category: 'climatizacao',
+    consumption110V: 900,
+    consumption12V: 650,
     icon: '❄️',
-    description: 'Alta potência. Sistemas CC ainda são raros e caros para esta aplicação.',
-    conversionLoss: 0.2,
+    averageHoursPerDay: 8,
   },
 
   // OUTROS
   {
     id: generateId(),
-    name: 'Ferro de Passar (baixa potência)',
+    name: 'Ferro de Passar',
+    description: 'Ferro de passar roupa elétrico',
     category: 'outros',
-    consumption110V: 1000, // Watts
-    consumption12V: 850, // Watts (adaptação necessária)
-    defaultHoursPerDay: 1,
-    icon: '👕',
-    description: 'Alto consumo. Uso em CC requer sistema robusto.',
-    conversionLoss: 0.18,
+    consumption110V: 1200,
+    consumption12V: 800,
+    icon: '👔',
+    averageHoursPerDay: 1,
   },
   {
     id: generateId(),
-    name: 'Aquecedor de Água 12V (Chuveiro)',
+    name: 'Aspirador de Pó',
+    description: 'Aspirador de pó residencial',
     category: 'outros',
-    consumption110V: 5500, // Watts (padrão 110V)
-    consumption12V: 4800, // Watts (necessita adaptação e bateria robusta)
-    defaultHoursPerDay: 0.5,
+    consumption110V: 1400,
+    consumption12V: 900,
+    icon: '🧹',
+    averageHoursPerDay: 0.5,
+  },
+  {
+    id: generateId(),
+    name: 'Chuveiro Elétrico',
+    description: 'Chuveiro elétrico 5500W (banho morno)',
+    category: 'outros',
+    consumption110V: 5500,
+    consumption12V: 3500,
     icon: '🚿',
-    description: 'Altíssimo consumo. Casa12Volts® geralmente usa aquecimento solar.',
-    conversionLoss: 0.15,
+    averageHoursPerDay: 0.5,
+  },
+  {
+    id: generateId(),
+    name: "Bomba d'Água",
+    description: "Bomba d'água residencial 1/2 CV",
+    category: 'outros',
+    consumption110V: 400,
+    consumption12V: 250,
+    icon: '💧',
+    averageHoursPerDay: 1,
+  },
+  {
+    id: generateId(),
+    name: 'Câmera de Segurança',
+    description: 'Câmera IP de vigilância',
+    category: 'outros',
+    consumption110V: 8,
+    consumption12V: 3,
+    icon: '📹',
+    averageHoursPerDay: 24,
   },
 ];
 
 /**
- * Dicas educativas sobre economia de energia
+ * Perfis de uso pré-definidos
  */
-export const educationalTips: EducationalTip[] = [
+export const usageProfiles: UsageProfile[] = [
   {
-    id: generateId(),
-    title: 'Eliminação de Perdas de Conversão',
-    description:
-      'Sistemas convencionais perdem 15-25% de energia nas conversões AC/DC. O sistema multivolts elimina essas perdas, operando direto em corrente contínua.',
-    category: 'eficiencia',
-    icon: '⚡',
+    id: 'basico',
+    name: 'Uso Básico',
+    description: 'Iluminação, geladeira e alguns eletrônicos essenciais',
+    applianceIds: [], // Será preenchido dinamicamente
   },
   {
-    id: generateId(),
-    title: 'Maior Durabilidade dos Equipamentos',
-    description:
-      'Equipamentos em CC duram até 40% mais que equivalentes em CA, pois não sofrem com picos de tensão e variações da rede elétrica.',
-    category: 'economia',
-    icon: '♻️',
+    id: 'padrao',
+    name: 'Uso Padrão',
+    description: 'Casa média com aparelhos comuns do dia a dia',
+    applianceIds: [], // Será preenchido dinamicamente
   },
   {
-    id: generateId(),
-    title: 'Redução de Emissões de CO₂',
-    description:
-      'Cada kWh economizado evita a emissão de 0,24kg de CO₂ na atmosfera. Ao longo de um ano, essa economia equivale ao plantio de árvores.',
-    category: 'sustentabilidade',
-    icon: '🌱',
-  },
-  {
-    id: generateId(),
-    title: 'Compatibilidade com Energia Solar',
-    description:
-      'Painéis solares geram energia em CC. Usar diretamente em 12V elimina a necessidade de inversores caros e com perdas de 10-15%.',
-    category: 'eficiencia',
-    icon: '☀️',
-  },
-  {
-    id: generateId(),
-    title: 'Iluminação LED em 12V',
-    description:
-      'LEDs operam nativamente em corrente contínua. Usar em 12V direto é mais eficiente que converter de 110V.',
-    category: 'economia',
-    icon: '💡',
-  },
-  {
-    id: generateId(),
-    title: 'Menor Risco Elétrico',
-    description:
-      '12V CC é considerado extra-baixa tensão, oferecendo muito mais segurança que 110V ou 220V, especialmente em ambientes úmidos.',
-    category: 'curiosidade',
-    icon: '🛡️',
-  },
-  {
-    id: generateId(),
-    title: 'Baterias Estacionárias',
-    description:
-      'Sistemas 12V permitem armazenamento direto em baterias sem conversões, ideal para autonomia energética total (off-grid).',
-    category: 'eficiencia',
-    icon: '🔋',
-  },
-  {
-    id: generateId(),
-    title: 'Replicabilidade em Áreas Rurais',
-    description:
-      'Sistema multivolts é perfeito para comunidades sem acesso à rede elétrica, sendo replicável e de baixo custo de manutenção.',
-    category: 'sustentabilidade',
-    icon: '🏘️',
+    id: 'completo',
+    name: 'Uso Completo',
+    description: 'Casa com diversos aparelhos e eletrodomésticos',
+    applianceIds: [], // Será preenchido dinamicamente
   },
 ];
-
-/**
- * Categorias de aparelhos com ícones
- */
-export const applianceCategories = [
-  { value: 'iluminacao', label: 'Iluminação', icon: '💡' },
-  { value: 'refrigeracao', label: 'Refrigeração', icon: '🧊' },
-  { value: 'eletroportateis', label: 'Eletroportáteis', icon: '🔌' },
-  { value: 'eletronicos', label: 'Eletrônicos', icon: '📱' },
-  { value: 'climatizacao', label: 'Climatização', icon: '🌀' },
-  { value: 'outros', label: 'Outros', icon: '🏠' },
-] as const;

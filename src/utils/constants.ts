@@ -1,75 +1,79 @@
-export const ENERGY_CONSTANTS = {
-  // Custos médios (2025)
-  ELECTRICITY_COST_PER_KWH: 0.85, // R$ por kWh (média Brasil)
+/**
+ * Constantes globais da aplicação
+ */
 
-  // Emissões
-  CO2_PER_KWH: 0.24, // kg de CO2 por kWh (matriz elétrica brasileira)
-
-  // Perdas de conversão
-  CONVERSION_LOSS_AC: 0.15, // 15% perda em conversores AC/DC
-  INVERTER_LOSS: 0.1, // 10% perda em inversores
-  TRANSFORMER_LOSS: 0.05, // 5% perda em transformadores
-
-  // Eficiência multivolts (Casa12V)
-  MULTIVOLTS_EFFICIENCY: 0.92, // 92% eficiência (menos perdas)
-
-  // Voltagens
-  VOLTAGES: {
-    MULTIVOLTS: ['1.5V', '5V', '12V', '19V', '24V'],
-    CONVENTIONAL: ['110V', '220V'],
-  },
-
-  // Fatores de conversão
-  DAYS_PER_MONTH: 30,
-  MONTHS_PER_YEAR: 12,
-} as const;
-
-export const ODS_INFO = {
-  7: {
-    number: 7,
-    title: 'Energia Limpa e Acessível',
-    description:
-      'Garantir acesso à energia confiável, sustentável, moderna e acessível para todos.',
-    color: '#FCC30B',
-    icon: '⚡',
-  },
-  13: {
-    number: 13,
-    title: 'Ação contra a Mudança Global do Clima',
-    description: 'Tomar medidas urgentes para combater a mudança do clima e seus impactos.',
-    color: '#3F7E44',
-    icon: '🌍',
-  },
-} as const;
-
+// Rotas da aplicação
 export const ROUTES = {
   HOME: '/',
   ABOUT: '/sobre',
   DASHBOARD: '/dashboard',
   DASHBOARD_COMPONENTS: '/dashboard/componentes',
   COMPARATOR: '/comparador',
-  COMPARATOR_RESULTS: '/comparador/resultados',
 } as const;
 
-export const ARIA_LABELS = {
-  // Navegação
-  MAIN_NAV: 'Navegação principal',
-  SKIP_LINK: 'Pular para o conteúdo principal',
-
-  // Dashboard
-  ENERGY_FLOW: 'Fluxo de energia da Casa12Volts®',
-  METRICS: 'Métricas de sustentabilidade',
-  COMPARISON: 'Comparação com sistemas convencionais',
-
-  // Comparador
-  APPLIANCE_SELECTOR: 'Seletor de aparelhos',
-  RESULTS: 'Resultados da comparação',
-  SAVINGS_CHART: 'Gráfico de economia',
+// Informações dos ODS
+export const ODS_INFO = {
+  7: {
+    number: 7,
+    title: 'Energia Limpa e Acessível',
+    description:
+      'Assegurar acesso confiável, sustentável, moderno e a preço acessível à energia para todos',
+    color: '#ffc107',
+    icon: '⚡',
+  },
+  13: {
+    number: 13,
+    title: 'Ação Contra a Mudança Global do Clima',
+    description: 'Tomar medidas urgentes para combater a mudança climática e seus impactos',
+    color: '#3f7e44',
+    icon: '🌍',
+  },
 } as const;
 
-export const BREAKPOINTS = {
-  MOBILE: 320,
-  TABLET: 768,
-  DESKTOP: 1024,
-  WIDE: 1440,
+// Voltagens suportadas pela Casa12Volts®
+export const VOLTAGES = ['1,5V', '3V', '5V', '12V', '19V', '24V'] as const;
+
+// Informações do CEA Mandembo
+export const CEA_INFO = {
+  name: 'Centro de Educação Ambiental Mandembo',
+  shortName: 'CEA Mandembo',
+  location: 'Rio Manso/MG',
+  area: '8 hectares (80.000 m²)',
+  usedArea: '6% para atividades socioambientais',
+  preservedArea: '94% dedicados à preservação ambiental e nascente',
+  foundedYear: 2010,
+  website: 'https://www.mandembo.org',
+  ongWebsite: 'https://www.ongverde.org',
+  casa12VoltsWebsite: 'https://casa12volts.com',
+} as const;
+
+// Cores do tema (baseado na identidade visual)
+export const THEME_COLORS = {
+  primary: '#2d8b3c', // Verde principal
+  secondary: '#d85a28', // Laranja/Terracota
+  accent: '#ffc107', // Amarelo (ODS 7)
+  blue: '#0066cc', // Azul tecnologia
+  green: '#3f7e44', // Verde escuro (ODS 13)
+  white: '#ffffff',
+  black: '#1a1a1a',
+  gray: '#666666',
+  lightGray: '#f9f9f9',
+} as const;
+
+// Taxa de conversão de CO₂ (kg CO₂ por kWh) - Média Brasil
+export const CO2_PER_KWH = 0.24; // kg
+
+// Tarifa média de energia elétrica em MG (CEMIG) - R$/kWh
+export const ENERGY_RATE_MG = 0.85; // R$ por kWh (valor aproximado 2025)
+
+// Eficiência dos sistemas
+export const SYSTEM_EFFICIENCY = {
+  CONVENTIONAL: 0.75, // 75-80% (sistemas AC convencionais)
+  CASA12VOLTS: 0.92, // 92% (sistema multivolts CC)
+} as const;
+
+// Perdas de conversão
+export const CONVERSION_LOSSES = {
+  AC_TO_DC: 0.2, // 20% de perda média em conversores AC/DC
+  DC_DIRECT: 0.08, // 8% de perda no sistema direto CC
 } as const;

@@ -1,205 +1,155 @@
 import { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import ApplianceSelector from '../components/ApplianceSelector';
 import ResultsDisplay from '../components/ResultsDisplay';
-import Button from '@/components/common/Button';
 import { appliancesDatabase } from '../data/appliancesData';
-import { toSelectedAppliance, calculateComparison, generateRecommendations } from '../data/helpers';
-import { loadProfile, usageProfiles } from '../data/presetProfiles';
-import type { Appliance, SelectedAppliance, CalculationResult } from '@/types/pex-v.types';
-import { ROUTES } from '@/utils/constants';
+import { toSelectedAppliance } from '../data/helpers';
+import { calculateComparison } from '../data/helpers';
+import { loadProfile } from '../data/presetProfiles';
+import type { Appliance, SelectedAppliance } from '@/types/pex-v.types';
 import './ComparatorHome.css';
 
 export default function ComparatorHome() {
-  const navigate = useNavigate();
-  const [selectedAppliances, setSelectedAppliances] = useState<SelectedAppliance[]>([]);
-  const [result, setResult] = useState<CalculationResult | null>(null);
+  const [selectedAppliances, setSelectedAppliances] = useState<SelectedAppliance[]>(
+    appliancesDatabase.map(toSelectedAppliance)
+  );
+
   const [showResults, setShowResults] = useState(false);
 
   // Toggle seleção de aparelho
   const handleToggleAppliance = useCallback((appliance: Appliance) => {
-    setSelectedAppliances((prev) => {
-      const existingIndex = prev.findIndex((a) => a.id === appliance.id);
-
-      if (existingIndex >= 0) {
-        // Remove se já existe
-        const updated = [...prev];
-        updated[existingIndex] = { ...updated[existingIndex], isSelected: false };
-        return updated.filter((a) => a.isSelected);
-      } else {
-        // Adiciona novo
-        const newAppliance = toSelectedAppliance(appliance);
-        newAppliance.isSelected = true;
-        return [...prev, newAppliance];
-      }
-    });
+    setSelectedAppliances((prev) =>
+      prev.map((item) =>
+        item.id === appliance.id ? { ...item, isSelected: !item.isSelected } : item
+      )
+    );
+    setShowResults(false); // ✅ Reseta resultados ao mudar seleção
   }, []);
 
   // Atualizar quantidade
   const handleUpdateQuantity = useCallback((applianceId: string, quantity: number) => {
     setSelectedAppliances((prev) =>
-      prev.map((app) =>
-        app.id === applianceId ? { ...app, quantity: Math.max(1, Math.min(20, quantity)) } : app
-      )
+      prev.map((item) => (item.id === applianceId ? { ...item, quantity } : item))
     );
+    setShowResults(false); // ✅ Reseta resultados ao mudar quantidade
   }, []);
 
-  // Atualizar horas
+  // Atualizar horas de uso
   const handleUpdateHours = useCallback((applianceId: string, hours: number) => {
     setSelectedAppliances((prev) =>
-      prev.map((app) =>
-        app.id === applianceId ? { ...app, hoursPerDay: Math.max(0, Math.min(24, hours)) } : app
-      )
+      prev.map((item) => (item.id === applianceId ? { ...item, hoursPerDay: hours } : item))
     );
-  }, []);
-
-  // Calcular resultados
-  const handleCalculate = useCallback(() => {
-    if (selectedAppliances.length === 0) {
-      alert('Selecione pelo menos um aparelho para calcular.');
-      return;
-    }
-
-    const calculatedResult = calculateComparison(selectedAppliances);
-    setResult(calculatedResult);
-    setShowResults(true);
-
-    // Scroll suave para resultados
-    setTimeout(() => {
-      document.getElementById('results-section')?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }, 100);
-  }, [selectedAppliances]);
-
-  // Limpar seleção
-  const handleClear = useCallback(() => {
-    setSelectedAppliances([]);
-    setResult(null);
-    setShowResults(false);
+    setShowResults(false); // ✅ Reseta resultados ao mudar horas
   }, []);
 
   // Carregar perfil pré-definido
-  const handleLoadProfile = useCallback((profileId: string) => {
+  const handleLoadProfile = (profileId: string) => {
     const profileAppliances = loadProfile(profileId);
-    setSelectedAppliances(profileAppliances);
-    setShowResults(false);
-    setResult(null);
-  }, []);
 
-  const recommendations = result ? generateRecommendations(result) : [];
+    setSelectedAppliances((prev) =>
+      prev.map((item) => {
+        const profileItem = profileAppliances.find((p) => p.id === item.id);
+        return profileItem || { ...item, isSelected: false };
+      })
+    );
+
+    setShowResults(false);
+  };
+
+  // Limpar seleção
+  const handleClearSelection = () => {
+    setSelectedAppliances((prev) =>
+      prev.map((item) => ({
+        ...item,
+        isSelected: false,
+        quantity: 1,
+        hoursPerDay: item.averageHoursPerDay || 1,
+      }))
+    );
+    setShowResults(false);
+  };
+
+  // Calcular comparação
+  const handleCalculate = () => {
+    setShowResults(true);
+  };
+
+  // Calcular resultado
+  const result = showResults ? calculateComparison(selectedAppliances) : null;
+  const hasSelection = selectedAppliances.some((a) => a.isSelected);
 
   return (
     <div className="comparator-home">
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="comparator-hero">
         <div className="container">
           <h1 className="comparator-hero__title">
-            Comparador Educativo
-            <span className="comparator-hero__subtitle">Sistema 12V vs 110V/220V</span>
+            Comparador Energético
+            <span className="comparator-hero__subtitle">12V CC vs 110V/220V CA</span>
           </h1>
           <p className="comparator-hero__description">
-            Compare o consumo, custo e impacto ambiental entre sistemas multivolts em corrente
-            contínua (12V) e sistemas convencionais em corrente alternada (110V/220V). Descubra
-            quanto você pode economizar!
+            Compare o consumo, custos (CEMIG) e impacto ambiental entre sistemas de 12V em corrente
+            contínua e sistemas convencionais de 110V/220V em corrente alternada.
           </p>
         </div>
       </section>
 
       <div className="container">
-        {/* Perfis Pré-definidos */}
-        <section className="preset-profiles">
-          <h2 className="section-title">Perfis Rápidos</h2>
-          <p className="section-description">
-            Escolha um perfil pré-definido para começar rapidamente:
-          </p>
-          <div className="profiles-grid">
-            {usageProfiles.map((profile) => (
-              <button
-                key={profile.id}
-                type="button"
-                className="profile-card"
-                onClick={() => handleLoadProfile(profile.id)}
-              >
-                <h3 className="profile-card__title">{profile.name}</h3>
-                <p className="profile-card__description">{profile.description}</p>
-              </button>
-            ))}
+        {/* Profile Presets */}
+        <section className="profile-presets">
+          <h2 className="section-title">Perfis Pré-Definidos</h2>
+          <div className="presets-grid">
+            <button className="preset-card" onClick={() => handleLoadProfile('basico')}>
+              <span className="preset-icon">🏠</span>
+              <h3 className="preset-title">Básico</h3>
+              <p className="preset-description">Iluminação e aparelhos essenciais</p>
+            </button>
+            <button className="preset-card" onClick={() => handleLoadProfile('padrao')}>
+              <span className="preset-icon">🏡</span>
+              <h3 className="preset-title">Padrão</h3>
+              <p className="preset-description">Casa média com aparelhos comuns</p>
+            </button>
+            <button className="preset-card" onClick={() => handleLoadProfile('completo')}>
+              <span className="preset-icon">🏘️</span>
+              <h3 className="preset-title">Completo</h3>
+              <p className="preset-description">Casa com diversos aparelhos</p>
+            </button>
           </div>
         </section>
 
-        {/* Seletor de Aparelhos */}
-        <ApplianceSelector
-          appliances={appliancesDatabase}
-          selectedAppliances={selectedAppliances}
-          onToggleAppliance={handleToggleAppliance}
-          onUpdateQuantity={handleUpdateQuantity}
-          onUpdateHours={handleUpdateHours}
-        />
-
-        {/* Ações */}
-        <div className="comparator-actions">
-          <div className="actions-info">
-            <span className="actions-count">
-              {selectedAppliances.filter((a) => a.isSelected).length} aparelho(s) selecionado(s)
-            </span>
-          </div>
-          <div className="actions-buttons">
-            <Button
-              variant="outline"
-              size="large"
-              onClick={handleClear}
-              disabled={selectedAppliances.length === 0}
-            >
-              Limpar Seleção
-            </Button>
-            <Button
-              variant="primary"
-              size="large"
-              onClick={handleCalculate}
-              disabled={selectedAppliances.length === 0}
-            >
-              Calcular Economia
-            </Button>
-          </div>
-        </div>
-
-        {/* Resultados */}
-        {showResults && result && (
-          <div id="results-section">
-            <ResultsDisplay result={result} />
-
-            {/* Recomendações */}
-            {recommendations.length > 0 && (
-              <section className="recommendations">
-                <h2 className="section-title">Recomendações Personalizadas</h2>
-                <div className="recommendations-list">
-                  {recommendations.map((rec, index) => (
-                    <div key={index} className="recommendation-card">
-                      <span className="recommendation-icon" aria-hidden="true">
-                        💡
-                      </span>
-                      <p className="recommendation-text">{rec}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
+        {/* Appliance Selector */}
+        <section className="comparator-section">
+          <div className="section-header">
+            <h2 className="section-title">Selecione os Aparelhos</h2>
+            {hasSelection && (
+              <button className="clear-btn" onClick={handleClearSelection}>
+                Limpar Seleção
+              </button>
             )}
-
-            {/* CTA */}
-            <section className="cta-section">
-              <div className="cta-card">
-                <h2 className="cta-card__title">Quer Saber Mais?</h2>
-                <p className="cta-card__description">
-                  Explore o Dashboard da Casa12Volts® e veja como o sistema funciona na prática.
-                </p>
-                <Button variant="secondary" size="large" onClick={() => navigate(ROUTES.DASHBOARD)}>
-                  Ver Dashboard Casa12Volts®
-                </Button>
-              </div>
-            </section>
           </div>
+          <ApplianceSelector
+            appliances={appliancesDatabase}
+            selectedAppliances={selectedAppliances}
+            onToggleAppliance={handleToggleAppliance}
+            onUpdateQuantity={handleUpdateQuantity}
+            onUpdateHours={handleUpdateHours}
+          />
+        </section>
+
+        {/* Calculate Button */}
+        <section className="comparator-actions">
+          <button className="calculate-btn" onClick={handleCalculate} disabled={!hasSelection}>
+            Calcular Comparação
+          </button>
+          {!hasSelection && (
+            <p className="action-hint">Selecione ao menos um aparelho para começar</p>
+          )}
+        </section>
+
+        {/* Results */}
+        {showResults && result && (
+          <section className="comparator-results">
+            <ResultsDisplay result={result} />
+          </section>
         )}
       </div>
     </div>

@@ -1,87 +1,126 @@
-import type { Appliance, SelectedAppliance, CalculationResult } from '@/types/pex-v.types';
-import {
-  calculateConsumptionBreakdown,
-  calculateMonthlyCost,
-  calculateYearlyCO2Emissions,
-  calculateSavingsPercentage,
-  calculateTreeEquivalent,
-} from '@/utils/energyCalculations';
+import type {
+  Appliance,
+  SelectedAppliance,
+  CalculationResult,
+  ApplianceCategory,
+} from '@/types/pex-v.types';
+import { CO2_PER_KWH, ENERGY_RATE_MG } from '@/utils/constants';
 
 /**
- * Converte Appliance para SelectedAppliance
+ * Converte Appliance para SelectedAppliance com valores padrão
  */
 export const toSelectedAppliance = (appliance: Appliance): SelectedAppliance => {
   return {
     ...appliance,
     quantity: 1,
-    hoursPerDay: appliance.defaultHoursPerDay,
+    hoursPerDay: appliance.averageHoursPerDay || 1,
     isSelected: false,
   };
 };
 
 /**
- * Calcula consumo total de um aparelho (considerando quantidade)
+ * Calcula consumo diário de um aparelho em kWh
  */
-export const calculateApplianceTotalConsumption = (
-  appliance: SelectedAppliance,
-  voltage: '110V' | '12V'
+export const calculateDailyConsumption = (
+  powerWatts: number,
+  hoursPerDay: number,
+  quantity: number = 1
 ): number => {
-  const wattage = voltage === '110V' ? appliance.consumption110V : appliance.consumption12V;
-  const breakdown = calculateConsumptionBreakdown(
-    wattage * appliance.quantity,
-    appliance.hoursPerDay
-  );
-  return breakdown.monthly;
+  return (powerWatts * hoursPerDay * quantity) / 1000; // Converte W para kWh
 };
 
 /**
- * Calcula resultado completo da comparação
+ * Calcula consumo mensal em kWh
+ */
+export const calculateMonthlyConsumption = (dailyKwh: number): number => {
+  return dailyKwh * 30;
+};
+
+/**
+ * Calcula consumo anual em kWh
+ */
+export const calculateYearlyConsumption = (dailyKwh: number): number => {
+  return dailyKwh * 365;
+};
+
+/**
+ * Calcula custo mensal baseado no consumo (CEMIG)
+ */
+export const calculateMonthlyCost = (monthlyKwh: number): number => {
+  return monthlyKwh * ENERGY_RATE_MG;
+};
+
+/**
+ * Calcula CO₂ evitado anualmente em kg
+ */
+export const calculateCO2Avoided = (yearlyKwh: number): number => {
+  return yearlyKwh * CO2_PER_KWH;
+};
+
+/**
+ * Calcula a comparação completa entre sistemas 110V e 12V
  */
 export const calculateComparison = (selectedAppliances: SelectedAppliance[]): CalculationResult => {
-  // Consumo total em 110V
-  const totalConsumption110V = selectedAppliances.reduce((acc, app) => {
-    return acc + calculateApplianceTotalConsumption(app, '110V');
+  // Filtra apenas aparelhos selecionados
+  const activeAppliances = selectedAppliances.filter((a) => a.isSelected);
+
+  // Calcula consumo total diário em 110V
+  const dailyConsumption110V = activeAppliances.reduce((total, appliance) => {
+    return (
+      total +
+      calculateDailyConsumption(
+        appliance.consumption110V,
+        appliance.hoursPerDay,
+        appliance.quantity
+      )
+    );
   }, 0);
 
-  // Consumo total em 12V
-  const totalConsumption12V = selectedAppliances.reduce((acc, app) => {
-    return acc + calculateApplianceTotalConsumption(app, '12V');
+  // Calcula consumo total diário em 12V
+  const dailyConsumption12V = activeAppliances.reduce((total, appliance) => {
+    return (
+      total +
+      calculateDailyConsumption(appliance.consumption12V, appliance.hoursPerDay, appliance.quantity)
+    );
   }, 0);
 
-  // Breakdowns
-  const consumption110V = {
-    daily: totalConsumption110V / 30,
-    monthly: totalConsumption110V,
-    yearly: totalConsumption110V * 12,
-  };
+  // Calcula consumos mensais e anuais
+  const monthlyConsumption110V = calculateMonthlyConsumption(dailyConsumption110V);
+  const yearlyConsumption110V = calculateYearlyConsumption(dailyConsumption110V);
 
-  const consumption12V = {
-    daily: totalConsumption12V / 30,
-    monthly: totalConsumption12V,
-    yearly: totalConsumption12V * 12,
-  };
+  const monthlyConsumption12V = calculateMonthlyConsumption(dailyConsumption12V);
+  const yearlyConsumption12V = calculateYearlyConsumption(dailyConsumption12V);
 
-  // Custos
-  const monthlyCost110V = calculateMonthlyCost(totalConsumption110V);
-  const monthlyCost12V = calculateMonthlyCost(totalConsumption12V);
+  // Calcula custos mensais (CEMIG)
+  const monthlyCost110V = calculateMonthlyCost(monthlyConsumption110V);
+  const monthlyCost12V = calculateMonthlyCost(monthlyConsumption12V);
+
+  // Calcula economia
   const monthlySavings = monthlyCost110V - monthlyCost12V;
-  const savingsPercentage = calculateSavingsPercentage(monthlyCost110V, monthlyCost12V);
+  const savingsPercentage = monthlyCost110V > 0 ? (monthlySavings / monthlyCost110V) * 100 : 0;
 
-  // CO2
-  const yearlyCO2_110V = calculateYearlyCO2Emissions(totalConsumption110V);
-  const yearlyCO2_12V = calculateYearlyCO2Emissions(totalConsumption12V);
-  const yearlyCO2Avoided = yearlyCO2_110V - yearlyCO2_12V;
+  // Calcula CO₂ evitado (diferença anual)
+  const co2_110V = calculateCO2Avoided(yearlyConsumption110V);
+  const co2_12V = calculateCO2Avoided(yearlyConsumption12V);
+  const yearlyCO2Avoided = co2_110V - co2_12V;
 
   return {
-    appliances: selectedAppliances,
-    consumption110V,
-    consumption12V,
+    consumption110V: {
+      daily: dailyConsumption110V,
+      monthly: monthlyConsumption110V,
+      yearly: yearlyConsumption110V,
+    },
+    consumption12V: {
+      daily: dailyConsumption12V,
+      monthly: monthlyConsumption12V,
+      yearly: yearlyConsumption12V,
+    },
     monthlyCost110V,
     monthlyCost12V,
     monthlySavings,
     savingsPercentage,
     yearlyCO2Avoided,
-    yearlyCO2Saved: yearlyCO2Avoided,
+    appliances: activeAppliances,
   };
 };
 
@@ -90,10 +129,9 @@ export const calculateComparison = (selectedAppliances: SelectedAppliance[]): Ca
  */
 export const filterAppliancesByCategory = (
   appliances: Appliance[],
-  category: string
+  category: ApplianceCategory
 ): Appliance[] => {
-  if (category === 'all') return appliances;
-  return appliances.filter((app) => app.category === category);
+  return appliances.filter((a) => a.category === category);
 };
 
 /**
@@ -104,75 +142,69 @@ export const searchAppliances = (appliances: Appliance[], query: string): Applia
   if (!lowerQuery) return appliances;
 
   return appliances.filter(
-    (app) =>
-      app.name.toLowerCase().includes(lowerQuery) ||
-      app.description?.toLowerCase().includes(lowerQuery)
+    (a) =>
+      a.name.toLowerCase().includes(lowerQuery) || a.description?.toLowerCase().includes(lowerQuery)
   );
 };
 
 /**
- * Ordena aparelhos por consumo
- */
-export const sortAppliancesByConsumption = (
-  appliances: Appliance[],
-  order: 'asc' | 'desc' = 'desc'
-): Appliance[] => {
-  return [...appliances].sort((a, b) => {
-    const diff = a.consumption110V - b.consumption110V;
-    return order === 'asc' ? diff : -diff;
-  });
-};
-
-/**
- * Calcula equivalência em árvores
- */
-export const calculateTreeEquivalence = (co2Kg: number): number => {
-  return calculateTreeEquivalent(co2Kg);
-};
-
-/**
- * Gera recomendações personalizadas
+ * Gera recomendações baseadas nos resultados
  */
 export const generateRecommendations = (result: CalculationResult): string[] => {
   const recommendations: string[] = [];
 
-  // Economia alta
-  if (result.monthlySavings > 200) {
+  // Recomendação de economia
+  if (result.savingsPercentage > 30) {
     recommendations.push(
-      'Excelente economia! Com esse perfil de consumo, um sistema Casa12Volts® se pagaria em 5-7 anos.'
+      `Você pode economizar ${result.savingsPercentage.toFixed(0)}% na conta de luz (CEMIG) usando sistema 12V CC!`
     );
   }
 
-  // Alto consumo
-  if (result.consumption110V.monthly > 300) {
+  // Recomendação de sustentabilidade
+  if (result.yearlyCO2Avoided > 50) {
     recommendations.push(
-      'Seu consumo é alto. Considere priorizar a conversão dos aparelhos que mais consomem para versões 12V CC.'
+      `Ao adotar o sistema 12V, você evitaria ${result.yearlyCO2Avoided.toFixed(0)}kg de CO₂ por ano, equivalente a plantar aproximadamente ${Math.round(result.yearlyCO2Avoided / 22)} árvores.`
     );
   }
 
-  // Iluminação
-  const hasLighting = result.appliances.some((a) => a.category === 'iluminacao');
-  if (hasLighting) {
+  // Recomendação técnica
+  const hasHighPowerAppliances = result.appliances.some((a) => a.consumption110V > 1000);
+  if (hasHighPowerAppliances) {
     recommendations.push(
-      'Iluminação LED em 12V é a conversão mais fácil e eficiente. Comece por ela!'
+      'Aparelhos de alta potência (como chuveiro e micro-ondas) têm maior economia em sistemas 12V devido à eliminação de perdas de conversão.'
     );
   }
 
-  // Eletrônicos
-  const hasElectronics = result.appliances.some((a) => a.category === 'eletronicos');
-  if (hasElectronics) {
+  // Recomendação de economia mensal
+  if (result.monthlySavings > 100) {
     recommendations.push(
-      'Eletrônicos já operam internamente em CC. Usar adaptadores 12V elimina perdas dos carregadores AC.'
-    );
-  }
-
-  // CO2 significativo
-  if (result.yearlyCO2Avoided > 100) {
-    const trees = calculateTreeEquivalent(result.yearlyCO2Avoided);
-    recommendations.push(
-      `Você evitaria ${result.yearlyCO2Avoided.toFixed(0)}kg de CO₂ por ano, equivalente a plantar ${trees.toFixed(0)} árvores!`
+      `Com uma economia mensal de R$ ${result.monthlySavings.toFixed(2)}, o investimento em sistema 12V pode se pagar em poucos anos.`
     );
   }
 
   return recommendations;
+};
+
+/**
+ * Formata número de consumo para exibição
+ */
+export const formatConsumption = (kwh: number): string => {
+  return `${kwh.toFixed(2)} kWh`;
+};
+
+/**
+ * Formata valor monetário para exibição
+ */
+export const formatCurrency = (value: number): string => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(value);
+};
+
+/**
+ * Formata porcentagem para exibição
+ */
+export const formatPercentage = (value: number): string => {
+  return `${value.toFixed(1)}%`;
 };

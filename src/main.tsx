@@ -1,17 +1,14 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import './styles/global.css';
-import './styles/accessibility.css';
+import './index.css';
 
-// Verificar se o elemento root existe
 const rootElement = document.getElementById('root');
 
 if (!rootElement) {
-  throw new Error('Failed to find the root element');
+  throw new Error('Root element not found. Make sure index.html has a div with id="root"');
 }
 
-// Criar e renderizar a aplicação
 createRoot(rootElement).render(
   <StrictMode>
     <App />

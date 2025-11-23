@@ -1,101 +1,85 @@
-import { Link, NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import { ROUTES, ARIA_LABELS } from '@/utils/constants';
+import { Link, useLocation } from 'react-router-dom';
+import { ROUTES } from '@/utils/constants';
 import './Header.css';
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
+  const isActive = (path: string) => {
+    return location.pathname === path;
   };
 
   return (
-    <header className="header" role="banner">
-      <div className="header__container">
-        {/* Logo */}
-        <div className="header__logo">
-          <Link to={ROUTES.HOME} className="logo-link" onClick={closeMobileMenu}>
+    <header className="header">
+      <div className="container">
+        <div className="header__content">
+          {/* Logo e Nome */}
+          <Link to={ROUTES.HOME} className="header__logo" style={{ textDecoration: 'none' }}>
+            {/* <div className="logo-icon">🏡⚡</div> */}
             <img
-              src="/assets/logo-cea-mandembo.svg"
-              alt="Centro de Educação Ambiental Mandembo"
-              className="logo-image"
-              width="180"
-              height="60"
+              src="src/assets/logo_tab_mandembo.svg"
+              alt="Logo CEA Mandembo"
+              className="logo-icon"
             />
+
+            <div className="logo-text">
+              <span className="logo-title">CEA Mandembo</span>
+              <span className="logo-subtitle">Casa12Volts®</span>
+            </div>
           </Link>
+
+          {/* Navegação */}
+          <nav className="header__nav" aria-label="Navegação principal">
+            <Link
+              to={ROUTES.HOME}
+              className={`nav-link ${isActive(ROUTES.HOME) ? 'nav-link--active' : ''}`}
+              style={{ textDecoration: 'none' }}
+            >
+              Início
+            </Link>
+            <Link
+              to={ROUTES.DASHBOARD}
+              className={`nav-link ${isActive(ROUTES.DASHBOARD) ? 'nav-link--active' : ''}`}
+              style={{ textDecoration: 'none' }}
+            >
+              Dashboard
+            </Link>
+            <Link
+              to={ROUTES.COMPARATOR}
+              className={`nav-link ${isActive(ROUTES.COMPARATOR) ? 'nav-link--active' : ''}`}
+              style={{ textDecoration: 'none' }}
+            >
+              Comparador
+            </Link>
+            <Link
+              to={ROUTES.ABOUT}
+              className={`nav-link ${isActive(ROUTES.ABOUT) ? 'nav-link--active' : ''}`}
+              style={{ textDecoration: 'none' }}
+            >
+              Sobre
+            </Link>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="mobile-menu-btn"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+            onClick={(e) => {
+              const nav = document.querySelector('.header__nav');
+              const btn = e.currentTarget;
+              nav?.classList.toggle('header__nav--open');
+              const isOpen = nav?.classList.contains('header__nav--open');
+              btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+              btn.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+            }}
+          >
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+          </button>
         </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="mobile-menu-toggle"
-          onClick={toggleMobileMenu}
-          aria-expanded={mobileMenuOpen}
-          aria-controls="main-navigation"
-          aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
-        >
-          <span className="hamburger-icon" aria-hidden="true">
-            <span className="hamburger-line"></span>
-            <span className="hamburger-line"></span>
-            <span className="hamburger-line"></span>
-          </span>
-        </button>
-
-        {/* Navigation */}
-        <nav
-          id="main-navigation"
-          className={`nav ${mobileMenuOpen ? 'nav--open' : ''}`}
-          aria-label={ARIA_LABELS.MAIN_NAV}
-        >
-          <ul className="nav__list" role="list">
-            <li className="nav__item">
-              <NavLink
-                to={ROUTES.HOME}
-                className={({ isActive }) => `nav__link ${isActive ? 'nav__link--active' : ''}`}
-                onClick={closeMobileMenu}
-              >
-                Início
-              </NavLink>
-            </li>
-            <li className="nav__item">
-              <NavLink
-                to={ROUTES.DASHBOARD}
-                className={({ isActive }) => `nav__link ${isActive ? 'nav__link--active' : ''}`}
-                onClick={closeMobileMenu}
-              >
-                Dashboard Casa12Volts®
-              </NavLink>
-            </li>
-            <li className="nav__item">
-              <NavLink
-                to={ROUTES.COMPARATOR}
-                className={({ isActive }) => `nav__link ${isActive ? 'nav__link--active' : ''}`}
-                onClick={closeMobileMenu}
-              >
-                Comparador
-              </NavLink>
-            </li>
-            <li className="nav__item">
-              <NavLink
-                to={ROUTES.ABOUT}
-                className={({ isActive }) => `nav__link ${isActive ? 'nav__link--active' : ''}`}
-                onClick={closeMobileMenu}
-              >
-                Sobre
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
       </div>
-
-      {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div className="mobile-menu-overlay" onClick={closeMobileMenu} aria-hidden="true" />
-      )}
     </header>
   );
 }

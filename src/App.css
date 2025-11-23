@@ -1,4 +1,4 @@
-/* Reset & Base Styles */
+/* Reset e estilos globais */
 *,
 *::before,
 *::after {
@@ -7,94 +7,106 @@
   padding: 0;
 }
 
+:root {
+  /* Cores principais */
+  --color-primary: #2d8b3c;
+  --color-secondary: #d85a28;
+  --color-accent: #ffc107;
+  --color-blue: #0066cc;
+  --color-green-dark: #3f7e44;
+
+  /* Cores neutras */
+  --color-white: #ffffff;
+  --color-black: #1a1a1a;
+  --color-gray: #666666;
+  --color-gray-light: #f9f9f9;
+
+  /* Tipografia */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family-mono: 'Courier New', Courier, monospace;
+
+  /* Espaçamentos */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Transições */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+}
+
 html {
-  font-size: 16px;
   scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #fff;
+  font-family: var(--font-family);
+  line-height: 1.5;
+  color: var(--color-black);
+  background-color: var(--color-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Typography */
+/* Tipografia */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  line-height: 1.2;
   font-weight: 700;
-  margin-bottom: 0.5em;
-}
-
-h1 {
-  font-size: 2.5rem;
-}
-
-h2 {
-  font-size: 2rem;
-}
-
-h3 {
-  font-size: 1.75rem;
-}
-
-h4 {
-  font-size: 1.5rem;
-}
-
-h5 {
-  font-size: 1.25rem;
-}
-
-h6 {
-  font-size: 1rem;
+  line-height: 1.2;
+  color: inherit;
 }
 
 p {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 a {
-  color: #0066cc;
-  text-decoration: underline;
+  color: var(--color-primary);
+  text-decoration: none;
 }
 
 a:hover {
-  color: #004c99;
+  text-decoration: underline;
 }
 
-/* Images */
+/* Imagens responsivas */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* Buttons */
-button {
-  font-family: inherit;
-  cursor: pointer;
+/* Listas */
+ul,
+ol {
+  list-style: none;
 }
 
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* Forms */
+/* Botões e inputs */
+button,
 input,
 select,
 textarea {
@@ -102,104 +114,82 @@ textarea {
   font-size: inherit;
 }
 
-/* Accessibility - Screen Reader Only */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+button {
+  cursor: pointer;
 }
 
-/* Focus Styles */
-*:focus-visible {
-  outline: 3px solid #0066cc;
+/* Foco visível para acessibilidade */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
-/* Container Utilities */
-.container {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-.container--narrow {
-  max-width: 1024px;
+::-webkit-scrollbar-track {
+  background: var(--color-gray-light);
 }
 
-.container--wide {
-  max-width: 1600px;
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
 }
 
-/* Section Spacing */
-.section {
-  padding: 4rem 0;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-green-dark);
 }
 
-.section--small {
-  padding: 2rem 0;
-}
-
-.section--large {
-  padding: 6rem 0;
+/* Seleção de texto */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-white);
 }
 
 /* Dark Mode */
-.dark-mode body {
-  background-color: #1a1a1a;
-  color: #f0f0f0;
-}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #5cb85c;
+    --color-secondary: #ff8a50;
+    --color-black: #f0f0f0;
+    --color-white: #1a1a1a;
+    --color-gray: #ccc;
+    --color-gray-light: #2a2a2a;
+  }
 
-.dark-mode a {
-  color: #5ca3ff;
-}
+  body {
+    background-color: #0f0f0f;
+  }
 
-.dark-mode a:hover {
-  color: #8ac2ff;
-}
+  ::-webkit-scrollbar-track {
+    background: #2a2a2a;
+  }
 
-/* High Contrast Mode */
-.high-contrast * {
-  border-color: currentColor !important;
-}
+  ::-webkit-scrollbar-thumb {
+    background: #5cb85c;
+  }
 
-.high-contrast button,
-.high-contrast a {
-  border: 2px solid currentColor;
+  ::-webkit-scrollbar-thumb:hover {
+    background: #7ac77a;
+  }
 }
 
 /* Reduced Motion */
-.reduce-motion *,
-.reduce-motion *::before,
-.reduce-motion *::after {
-  animation-duration: 0.01ms !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0.01ms !important;
-  scroll-behavior: auto !important;
-}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 
-/* Responsive Typography */
-@media (max-width: 768px) {
   html {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.75rem;
-  }
-
-  h3 {
-    font-size: 1.5rem;
+    scroll-behavior: auto;
   }
 }
 
@@ -212,14 +202,10 @@ textarea {
 
   a {
     text-decoration: underline;
-    color: black;
   }
 
-  .header,
-  .footer,
-  .skip-link,
   button,
-  nav {
-    display: none;
+  .no-print {
+    display: none !important;
   }
 }

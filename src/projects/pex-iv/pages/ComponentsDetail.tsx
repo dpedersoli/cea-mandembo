@@ -1,197 +1,194 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '@/components/common/Button';
+import { useState, useMemo } from 'react';
 import { systemComponents } from '../data/mockData';
-import { ROUTES } from '@/utils/constants';
-import type { SystemComponent } from '@/types/pex-iv.types';
+import type { ComponentCategory } from '@/types/pex-iv.types';
 import './ComponentsDetail.css';
 
 export default function ComponentsDetail() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<ComponentCategory | 'all'>('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const categories = [
-    { value: 'all', label: 'Todos' },
-    { value: 'geracao', label: 'Geração' },
-    { value: 'armazenamento', label: 'Armazenamento' },
-    { value: 'consumo', label: 'Consumo' },
-    { value: 'outro', label: 'Outros' },
+  // Filtrar componentes
+  const filteredComponents = useMemo(() => {
+    return systemComponents.filter((component) => {
+      const matchesCategory = selectedCategory === 'all' || component.category === selectedCategory;
+      const matchesSearch =
+        component.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        component.description.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
+
+  // Categorias para filtro
+  const categories: Array<{ value: ComponentCategory | 'all'; label: string; icon: string }> = [
+    { value: 'all', label: 'Todos', icon: '🔧' },
+    { value: 'geracao', label: 'Geração', icon: '⚡' },
+    { value: 'armazenamento', label: 'Armazenamento', icon: '🔋' },
+    { value: 'consumo', label: 'Consumo', icon: '💡' },
+    { value: 'outro', label: 'Outros', icon: '🔌' },
   ];
-
-  const filteredComponents =
-    selectedCategory === 'all'
-      ? systemComponents
-      : systemComponents.filter((c) => c.category === selectedCategory);
 
   return (
     <div className="components-detail">
-      {/* Header */}
-      <section className="components-header">
+      {/* Hero */}
+      <section className="components-hero">
         <div className="container">
-          <Link to={ROUTES.DASHBOARD}>
-            <Button variant="outline">← Voltar ao Dashboard</Button>
-          </Link>
-
-          <h1 className="components-header__title">
-            Componentes do Sistema
-            <span className="components-header__subtitle">Casa12Volts®®</span>
+          <h1 className="components-hero__title">
+            Componentes da Casa12Volts®
+            <span className="components-hero__subtitle">Sistema Multivolts Completo</span>
           </h1>
-
-          <p className="components-header__description">
-            Conheça em detalhes cada componente que compõe o sistema multivolts da Casa12Volts®,
-            suas especificações técnicas e funcionamento.
+          <p className="components-hero__description">
+            Explore todos os {systemComponents.length} componentes do sistema: geração,
+            armazenamento, distribuição e consumo de energia renovável em corrente contínua.
           </p>
         </div>
       </section>
 
       <div className="container">
-        {/* Category Filters */}
-        <div className="category-filters" role="group" aria-label="Filtrar por categoria">
-          {categories.map((cat) => (
-            <button
-              key={cat.value}
-              type="button"
-              className={`category-btn ${
-                selectedCategory === cat.value ? 'category-btn--active' : ''
-              }`}
-              onClick={() => setSelectedCategory(cat.value)}
-              aria-pressed={selectedCategory === cat.value}
-            >
-              {cat.label}
-            </button>
-          ))}
+        {/* Filters */}
+        <section className="components-filters">
+          {/* Search */}
+          <div className="search-box">
+            <span className="search-icon">🔍</span>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Buscar componentes..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Buscar componentes"
+            />
+            {searchQuery && (
+              <button
+                className="search-clear"
+                onClick={() => setSearchQuery('')}
+                aria-label="Limpar busca"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
+          {/* Category Filters */}
+          <div className="category-filters">
+            {categories.map((category) => (
+              <button
+                key={category.value}
+                className={`category-btn ${
+                  selectedCategory === category.value ? 'category-btn--active' : ''
+                }`}
+                onClick={() => setSelectedCategory(category.value)}
+              >
+                <span className="category-btn__icon">{category.icon}</span>
+                <span className="category-btn__label">{category.label}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Results Count */}
+        <div className="results-count">
+          <p>
+            {filteredComponents.length}{' '}
+            {filteredComponents.length === 1 ? 'componente encontrado' : 'componentes encontrados'}
+          </p>
         </div>
 
         {/* Components Grid */}
-        <div className="components-grid">
-          {filteredComponents.map((component) => (
-            <ComponentCard key={component.id} component={component} />
-          ))}
-        </div>
+        {filteredComponents.length > 0 ? (
+          <section className="components-grid">
+            {filteredComponents.map((component) => (
+              <article key={component.id} className="component-card">
+                {/* Image Placeholder */}
+                <div className="component-card__image">
+                  <span className="image-placeholder">{getCategoryIcon(component.category)}</span>
+                </div>
 
-        {filteredComponents.length === 0 && (
-          <p className="empty-state">Nenhum componente encontrado nesta categoria.</p>
+                {/* Content */}
+                <div className="component-card__content">
+                  <div className="component-card__header">
+                    <span className={`category-badge category-badge--${component.category}`}>
+                      {getCategoryLabel(component.category)}
+                    </span>
+                    <span className="voltage-badge">{component.voltage}</span>
+                  </div>
+
+                  <h3 className="component-card__title">{component.name}</h3>
+                  <p className="component-card__description">{component.description}</p>
+
+                  {/* Technical Specs */}
+                  {component.technicalSpecs && (
+                    <div className="component-card__specs">
+                      <h4 className="specs-title">Especificações Técnicas:</h4>
+                      <ul className="specs-list">
+                        {component.technicalSpecs.power && (
+                          <li className="spec-item">
+                            <strong>Potência:</strong> {component.technicalSpecs.power}
+                          </li>
+                        )}
+                        {component.technicalSpecs.capacity && (
+                          <li className="spec-item">
+                            <strong>Capacidade:</strong> {component.technicalSpecs.capacity}
+                          </li>
+                        )}
+                        {component.technicalSpecs.efficiency && (
+                          <li className="spec-item">
+                            <strong>Eficiência:</strong> {component.technicalSpecs.efficiency}
+                          </li>
+                        )}
+                        {component.technicalSpecs.lifespan && (
+                          <li className="spec-item">
+                            <strong>Vida Útil:</strong> {component.technicalSpecs.lifespan}
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </section>
+        ) : (
+          <div className="components-empty">
+            <span className="empty-icon">🔍</span>
+            <p className="empty-text">Nenhum componente encontrado com os filtros selecionados.</p>
+            <button
+              className="empty-btn"
+              onClick={() => {
+                setSearchQuery('');
+                setSelectedCategory('all');
+              }}
+            >
+              Limpar Filtros
+            </button>
+          </div>
         )}
       </div>
     </div>
   );
 }
 
-interface ComponentCardProps {
-  component: SystemComponent;
+/**
+ * Retorna ícone baseado na categoria
+ */
+function getCategoryIcon(category: ComponentCategory): string {
+  const icons: Record<ComponentCategory, string> = {
+    geracao: '⚡',
+    armazenamento: '🔋',
+    consumo: '💡',
+    outro: '🔌',
+  };
+  return icons[category];
 }
 
-function ComponentCard({ component }: ComponentCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const categoryLabels: Record<string, string> = {
-    geracao: 'Geração de Energia',
+/**
+ * Retorna label baseado na categoria
+ */
+function getCategoryLabel(category: ComponentCategory): string {
+  const labels: Record<ComponentCategory, string> = {
+    geracao: 'Geração',
     armazenamento: 'Armazenamento',
     consumo: 'Consumo',
     outro: 'Outros',
   };
-
-  const categoryColors: Record<string, string> = {
-    geracao: '#ffc107',
-    armazenamento: '#0066cc',
-    consumo: '#28a745',
-    outro: '#6c757d',
-  };
-
-  return (
-    <article className="component-card">
-      {/* Image Placeholder */}
-      <div className="component-card__image">
-        {component.image ? (
-          <img src={component.image.url} alt={component.image.alt} loading="lazy" />
-        ) : (
-          <div className="image-placeholder">
-            <span className="placeholder-icon" aria-hidden="true">
-              📷
-            </span>
-            <span className="placeholder-text">{component.name}</span>
-          </div>
-        )}
-
-        <span
-          className="category-badge"
-          style={{ backgroundColor: categoryColors[component.category] }}
-        >
-          {categoryLabels[component.category]}
-        </span>
-      </div>
-
-      {/* Content */}
-      <div className="component-card__content">
-        <h2 className="component-card__title">{component.name}</h2>
-
-        <div className="component-card__voltage">
-          <span className="voltage-label">Voltagem:</span>
-          <span className="voltage-value">{component.voltage}</span>
-        </div>
-
-        <p className="component-card__description">{component.description}</p>
-
-        {/* Technical Specs */}
-        {component.technicalSpecs && (
-          <div className="technical-specs">
-            <h3 className="specs-title">Especificações Técnicas</h3>
-            <dl className="specs-list">
-              {component.technicalSpecs.power && (
-                <>
-                  <dt>Potência:</dt>
-                  <dd>{component.technicalSpecs.power}</dd>
-                </>
-              )}
-              {component.technicalSpecs.capacity && (
-                <>
-                  <dt>Capacidade:</dt>
-                  <dd>{component.technicalSpecs.capacity}</dd>
-                </>
-              )}
-              {component.technicalSpecs.lifespan && (
-                <>
-                  <dt>Vida Útil:</dt>
-                  <dd>{component.technicalSpecs.lifespan}</dd>
-                </>
-              )}
-              {component.technicalSpecs.efficiency && (
-                <>
-                  <dt>Eficiência:</dt>
-                  <dd>{component.technicalSpecs.efficiency}</dd>
-                </>
-              )}
-            </dl>
-          </div>
-        )}
-
-        {/* Expand Button */}
-        <button
-          type="button"
-          className="expand-btn"
-          onClick={() => setIsExpanded(!isExpanded)}
-          aria-expanded={isExpanded}
-          aria-label={isExpanded ? 'Mostrar menos' : 'Mostrar mais'}
-        >
-          {isExpanded ? 'Mostrar Menos ↑' : 'Mostrar Mais ↓'}
-        </button>
-
-        {/* Expanded Content */}
-        {isExpanded && (
-          <div className="expanded-content">
-            <h3 className="expanded-title">Detalhes Adicionais</h3>
-            <p className="expanded-text">
-              {component.category === 'geracao' &&
-                'Este componente é responsável pela captação e conversão de energia renovável em eletricidade utilizável. Funciona em corrente contínua, eliminando a necessidade de conversores AC/DC.'}
-              {component.category === 'armazenamento' &&
-                'Sistema de armazenamento que garante autonomia energética, permitindo o uso de energia mesmo durante períodos sem geração (noite ou dias nublados).'}
-              {component.category === 'consumo' &&
-                'Equipamento otimizado para operar diretamente em corrente contínua, proporcionando maior eficiência energética e maior durabilidade comparado aos equivalentes AC.'}
-              {component.category === 'outro' &&
-                'Componente auxiliar do sistema que contribui para a eficiência geral e segurança da instalação elétrica multivolts.'}
-            </p>
-          </div>
-        )}
-      </div>
-    </article>
-  );
+  return labels[category];
 }

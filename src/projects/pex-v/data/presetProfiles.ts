@@ -3,85 +3,141 @@ import { appliancesDatabase } from './appliancesData';
 import { toSelectedAppliance } from './helpers';
 
 /**
- * Perfis pré-definidos de uso
- */
-export interface UsageProfile {
-  id: string;
-  name: string;
-  description: string;
-  applianceIds: string[];
-}
-
-export const usageProfiles: UsageProfile[] = [
-  {
-    id: 'basico',
-    name: 'Uso Básico',
-    description: 'Iluminação, geladeira e eletrônicos essenciais',
-    applianceIds: [
-      'Lâmpada LED 9W',
-      'Lâmpada LED 5W',
-      'Geladeira Compacta 70L',
-      'Notebook',
-      'Roteador Wi-Fi',
-      'Carregador USB (5V)',
-    ],
-  },
-  {
-    id: 'intermediario',
-    name: 'Uso Intermediário',
-    description: 'Adiciona ventilação, TV e mais iluminação',
-    applianceIds: [
-      'Lâmpada LED 9W',
-      'Lâmpada LED 5W',
-      'Fita LED 5m',
-      'Geladeira Compacta 70L',
-      'Ventilador de Mesa',
-      'Notebook',
-      'TV LED 32"',
-      'Roteador Wi-Fi',
-      'Carregador USB (5V)',
-    ],
-  },
-  {
-    id: 'completo',
-    name: 'Uso Completo',
-    description: 'Casa completa com todos os recursos',
-    applianceIds: [
-      'Lâmpada LED 9W',
-      'Lâmpada LED 5W',
-      'Fita LED 5m',
-      'Geladeira Compacta 70L',
-      'Freezer 100L',
-      'Ventilador de Mesa',
-      'Ventilador de Teto',
-      'Liquidificador',
-      "Bomba d'Água 1/4 CV",
-      'Notebook',
-      'TV LED 32"',
-      'Roteador Wi-Fi',
-      'Carregador USB (5V)',
-      'Câmera de Segurança',
-    ],
-  },
-];
-
-/**
- * Carrega perfil pré-definido
+ * Carrega um perfil pré-definido de aparelhos
  */
 export const loadProfile = (profileId: string): SelectedAppliance[] => {
-  const profile = usageProfiles.find((p) => p.id === profileId);
-  if (!profile) return [];
+  const profiles: Record<string, () => SelectedAppliance[]> = {
+    basico: loadBasicProfile,
+    padrao: loadStandardProfile,
+    completo: loadCompleteProfile,
+  };
 
-  const selectedAppliances: SelectedAppliance[] = [];
+  const profileLoader = profiles[profileId];
+  return profileLoader ? profileLoader() : [];
+};
 
-  profile.applianceIds.forEach((name) => {
-    const appliance = appliancesDatabase.find((a) => a.name === name);
-    if (appliance) {
+/**
+ * Perfil Básico: Essenciais para funcionamento de uma residência simples
+ */
+const loadBasicProfile = (): SelectedAppliance[] => {
+  const selectedNames = [
+    'Lâmpada LED 9W (equivalente 60W)',
+    'Geladeira 1 Porta (250L)',
+    'TV LED 32"',
+    'Roteador Wi-Fi',
+    'Ventilador de Mesa',
+  ];
+
+  return appliancesDatabase
+    .filter((a) => selectedNames.includes(a.name))
+    .map((appliance) => {
       const selected = toSelectedAppliance(appliance);
       selected.isSelected = true;
-      selectedAppliances.push(selected);
-    }
-  });
 
-  return selectedAppliances;
+      // Ajusta quantidades específicas
+      if (appliance.name.includes('Lâmpada')) {
+        selected.quantity = 5;
+      } else if (appliance.name.includes('Ventilador')) {
+        selected.quantity = 2;
+      }
+
+      return selected;
+    });
+};
+
+/**
+ * Perfil Padrão: Casa média com aparelhos comuns
+ */
+const loadStandardProfile = (): SelectedAppliance[] => {
+  const selectedNames = [
+    'Lâmpada LED 9W (equivalente 60W)',
+    'Lâmpada LED 15W (equivalente 100W)',
+    'Geladeira 2 Portas (400L)',
+    'Liquidificador',
+    'Micro-ondas',
+    'TV LED 32"',
+    'TV LED 50"',
+    'Notebook',
+    'Roteador Wi-Fi',
+    'Carregador de Celular',
+    'Ventilador de Teto',
+    'Ferro de Passar',
+  ];
+
+  return appliancesDatabase
+    .filter((a) => selectedNames.includes(a.name))
+    .map((appliance) => {
+      const selected = toSelectedAppliance(appliance);
+      selected.isSelected = true;
+
+      // Ajusta quantidades específicas
+      if (appliance.name.includes('Lâmpada LED 9W')) {
+        selected.quantity = 6;
+      } else if (appliance.name.includes('Lâmpada LED 15W')) {
+        selected.quantity = 3;
+      } else if (appliance.name.includes('TV LED 32"')) {
+        selected.quantity = 2;
+      } else if (appliance.name.includes('Carregador')) {
+        selected.quantity = 3;
+      } else if (appliance.name.includes('Ventilador de Teto')) {
+        selected.quantity = 2;
+      }
+
+      return selected;
+    });
+};
+
+/**
+ * Perfil Completo: Casa com diversos aparelhos
+ */
+const loadCompleteProfile = (): SelectedAppliance[] => {
+  const selectedNames = [
+    'Lâmpada LED 9W (equivalente 60W)',
+    'Lâmpada LED 15W (equivalente 100W)',
+    'Geladeira 2 Portas (400L)',
+    'Freezer Horizontal (300L)',
+    'Liquidificador',
+    'Micro-ondas',
+    'Cafeteira Elétrica',
+    'Torradeira',
+    'TV LED 32"',
+    'TV LED 50"',
+    'Computador Desktop',
+    'Notebook',
+    'Roteador Wi-Fi',
+    'Carregador de Celular',
+    'Videogame Console',
+    'Ventilador de Teto',
+    'Ar Condicionado 9000 BTU',
+    'Ferro de Passar',
+    'Aspirador de Pó',
+    "Bomba d'Água",
+    'Câmera de Segurança',
+  ];
+
+  return appliancesDatabase
+    .filter((a) => selectedNames.includes(a.name))
+    .map((appliance) => {
+      const selected = toSelectedAppliance(appliance);
+      selected.isSelected = true;
+
+      // Ajusta quantidades específicas
+      if (appliance.name.includes('Lâmpada LED 9W')) {
+        selected.quantity = 8;
+      } else if (appliance.name.includes('Lâmpada LED 15W')) {
+        selected.quantity = 4;
+      } else if (appliance.name.includes('TV LED 32"')) {
+        selected.quantity = 2;
+      } else if (appliance.name.includes('Carregador')) {
+        selected.quantity = 4;
+      } else if (appliance.name.includes('Ventilador de Teto')) {
+        selected.quantity = 3;
+      } else if (appliance.name.includes('Ar Condicionado')) {
+        selected.quantity = 2;
+      } else if (appliance.name.includes('Câmera')) {
+        selected.quantity = 4;
+      }
+
+      return selected;
+    });
 };
