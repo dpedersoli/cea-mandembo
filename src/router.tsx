@@ -4,16 +4,13 @@ import MainLayout from '@/components/layout/MainLayout';
 import SuspenseWrapper from '@/components/common/SuspenseWrapper';
 import { ROUTES } from '@/utils/constants';
 
-// Lazy loading das páginas principais
 const Home = lazy(() => import('@/pages/Home'));
 const About = lazy(() => import('@/pages/About'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
-// PEX IV - Dashboard Educativo
 const DashboardHome = lazy(() => import('@/projects/pex-iv/pages/DashboardHome'));
 const ComponentsDetail = lazy(() => import('@/projects/pex-iv/pages/ComponentsDetail'));
 
-// PEX V - Comparador Educativo
 const ComparatorHome = lazy(() => import('@/projects/pex-v/pages/ComparatorHome'));
 
 /**
@@ -25,7 +22,6 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <NotFound />,
     children: [
-      // Página Inicial
       {
         index: true,
         element: (
@@ -35,7 +31,6 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // Sobre
       {
         path: 'sobre',
         element: (
@@ -45,7 +40,6 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // PEX IV - Dashboard Educativo Casa12Volts®
       {
         path: 'dashboard',
         children: [
@@ -68,7 +62,6 @@ export const router = createBrowserRouter([
         ],
       },
 
-      // PEX V - Comparador Educativo
       {
         path: 'comparador',
         element: (
@@ -78,7 +71,6 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // Redirect para 404 se rota não encontrada
       {
         path: '*',
         element: <Navigate to="/404" replace />,
@@ -86,14 +78,12 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // Página 404
   {
     path: '/404',
     element: <NotFound />,
   },
 ]);
 
-// Type-safe navigation helper
 export const navigate = {
   home: () => ROUTES.HOME,
   about: () => ROUTES.ABOUT,
