@@ -6,10 +6,8 @@ import './App.css';
 
 function App() {
   useEffect(() => {
-    // Detectar preferências de acessibilidade do sistema
     const preferences = getAccessibilityPreferences();
 
-    // Aplicar classe no documento para acessibilidade
     if (preferences.reducedMotion) {
       document.documentElement.classList.add('reduce-motion');
     }
@@ -22,7 +20,6 @@ function App() {
       document.documentElement.classList.add('dark-mode');
     }
 
-    // Listener para mudanças de preferências
     const mediaQueries = {
       motion: window.matchMedia('(prefers-reduced-motion: reduce)'),
       contrast: window.matchMedia('(prefers-contrast: high)'),
@@ -45,7 +42,6 @@ function App() {
     mediaQueries.contrast.addEventListener('change', handleContrastChange);
     mediaQueries.theme.addEventListener('change', handleThemeChange);
 
-    // Cleanup
     return () => {
       mediaQueries.motion.removeEventListener('change', handleMotionChange);
       mediaQueries.contrast.removeEventListener('change', handleContrastChange);

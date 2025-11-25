@@ -1,7 +1,5 @@
-/* Importações de fontes (se necessário) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
 
-/* Reset CSS adicional */
 html,
 body {
   margin: 0;
@@ -16,7 +14,6 @@ body {
   flex-direction: column;
 }
 
-/* Utilities */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -125,7 +122,6 @@ body {
   display: none !important;
 }
 
-/* Animações úteis */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -213,7 +209,6 @@ body {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Desabilita animações em reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-fadeIn,
   .animate-fadeInUp,
