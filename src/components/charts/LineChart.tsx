@@ -58,7 +58,6 @@ export default function LineChart({
           className="line-chart__svg"
           aria-hidden="true"
         >
-          {/* Grid Lines */}
           <g className="line-chart__grid">
             {[0, 25, 50, 75, 100].map((y) => (
               <line
@@ -73,10 +72,8 @@ export default function LineChart({
             ))}
           </g>
 
-          {/* Area under line */}
           <path d={`${pathD} L 100 100 L 0 100 Z`} fill={color} fillOpacity="0.1" />
 
-          {/* Line */}
           <path
             d={pathD}
             fill="none"
@@ -86,7 +83,6 @@ export default function LineChart({
             strokeLinejoin="round"
           />
 
-          {/* Points */}
           {points.map((point, index) => (
             <circle
               key={index}
@@ -99,7 +95,6 @@ export default function LineChart({
           ))}
         </svg>
 
-        {/* Labels */}
         <div className="line-chart__labels">
           {data.map((item, index) => (
             <span key={index} className="line-chart__label">
@@ -109,7 +104,6 @@ export default function LineChart({
         </div>
       </div>
 
-      {/* Values */}
       <div className="line-chart__values">
         <span className="line-chart__value-label">
           Mínimo: <strong>{minValue.toFixed(2)}</strong>
@@ -119,7 +113,6 @@ export default function LineChart({
         </span>
       </div>
 
-      {/* Screen Reader Table */}
       <table className="sr-only" aria-label={ariaLabel}>
         <thead>
           <tr>

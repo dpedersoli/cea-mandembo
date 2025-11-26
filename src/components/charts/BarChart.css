@@ -77,7 +77,6 @@
   max-width: 100%;
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .bar-chart {
     background: #2a2a2a;
@@ -92,7 +91,6 @@
   }
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .bar-chart__bar {
     transition: none;

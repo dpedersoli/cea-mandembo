@@ -52,7 +52,6 @@ export default function BarChart({
         </div>
       </div>
 
-      {/* Screen Reader Table */}
       <table className="sr-only" aria-label={ariaLabel}>
         <thead>
           <tr>
