@@ -24,7 +24,6 @@
   outline-offset: 2px;
 }
 
-/* Sizes */
 .button--small {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
@@ -40,7 +39,6 @@
   font-size: 1.125rem;
 }
 
-/* Variants */
 .button--primary {
   background: linear-gradient(135deg, #2d8b3c 0%, #1a5e28 100%);
   color: #fff;
@@ -90,12 +88,10 @@
   background: rgba(45, 139, 60, 0.1);
 }
 
-/* Full Width */
 .button--full-width {
   width: 100%;
 }
 
-/* Loading State */
 .button--loading {
   pointer-events: none;
   opacity: 0.8;
@@ -136,7 +132,6 @@
   gap: 0.5rem;
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .button--primary {
     background: linear-gradient(135deg, #5cb85c 0%, #3d9e3d 100%);
@@ -176,7 +171,6 @@
   }
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .button {
     transition: none;

@@ -10,7 +10,6 @@ export default function Header() {
     return location.pathname === path;
   };
 
-  // ✅ Fechar menu ao navegar
   useEffect(() => {
     const nav = document.querySelector('.header__nav');
     const btn = document.querySelector('.mobile-menu-btn');
@@ -22,7 +21,6 @@ export default function Header() {
     }
   }, [location.pathname]);
 
-  // ✅ Toggle menu com função separada
   const toggleMenu = () => {
     const nav = document.querySelector('.header__nav');
     const btn = document.querySelector('.mobile-menu-btn');

@@ -84,7 +84,6 @@
   margin-top: 2rem;
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .loading__message {
     color: #ccc;
@@ -95,7 +94,6 @@
   }
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .spinner-ring {
     animation: spinner-rotate 3s linear infinite;
