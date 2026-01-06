@@ -57,7 +57,6 @@
   flex-wrap: wrap;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .not-found__icon {
     font-size: 4rem;
@@ -84,7 +83,6 @@
   }
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .not-found__title {
     color: #5cb85c;
@@ -100,7 +98,6 @@
   }
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .not-found__icon {
     animation: none;

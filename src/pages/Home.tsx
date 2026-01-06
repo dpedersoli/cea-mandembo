@@ -6,7 +6,6 @@ import './Home.css';
 export default function Home() {
   return (
     <div className="home">
-      {/* Hero Section */}
       <section className="hero">
         <div className="container">
           <div className="hero__content">
@@ -45,15 +44,10 @@ export default function Home() {
               className="hero__image-real"
               loading="lazy"
             />
-            {/* <span className="placeholder-icon" aria-hidden="true">
-                🏡⚡
-              </span>
-              <span className="placeholder-text">Casa12Volts®</span> */}
           </div>
         </div>
       </section>
 
-      {/* Features */}
       <section className="features">
         <div className="container">
           <h2 className="section-title">Projetos Interativos</h2>
@@ -110,7 +104,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ODS Section */}
       <section className="ods-section">
         <div className="container">
           <h2 className="section-title">
@@ -142,7 +135,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
       <section className="stats-section">
         <div className="container">
           <div className="stats-grid">
@@ -166,7 +158,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CEA Info */}
       <section className="cea-info">
         <div className="container">
           <h2 className="section-title">Sobre o CEA Mandembo</h2>

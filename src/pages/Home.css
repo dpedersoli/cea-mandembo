@@ -2,7 +2,6 @@
   min-height: 100vh;
 }
 
-/* Hero Section */
 .hero {
   background: linear-gradient(135deg, #2d8b3c 0%, #1a5e28 100%);
   color: #fff;
@@ -102,7 +101,6 @@
   font-weight: 700;
 }
 
-/* Badge sobre a imagem */
 .hero__image-badge {
   position: absolute;
   bottom: 20px;
@@ -129,7 +127,6 @@
   color: #2d8b3c;
 }
 
-/* Section Title */
 .section-title {
   font-size: 2.5rem;
   font-weight: 700;
@@ -138,7 +135,6 @@
   color: #1a1a1a;
 }
 
-/* Features */
 .features {
   padding: 5rem 0;
   background: #fff;
@@ -196,13 +192,11 @@
   text-decoration: underline;
 }
 
-/* ODS Section */
 .ods-section {
   background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e5 100%);
   padding: 5rem 0;
 }
 
-/* Melhor contraste para o título da seção ODS */
 .ods-section .section-title {
   color: #0f3d18;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
@@ -261,7 +255,6 @@
   margin: 0;
 }
 
-/* Stats Section */
 .stats-section {
   padding: 5rem 0;
   background: #1a1a1a;
@@ -298,7 +291,6 @@
   letter-spacing: 0.5px;
 }
 
-/* CEA Info */
 .cea-info {
   padding: 5rem 0;
   background: #fff;
@@ -316,7 +308,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* Responsive - Tablet/Desktop */
 @media (max-width: 1024px) {
   .hero .container {
     grid-template-columns: 1fr;
@@ -347,7 +338,6 @@
   }
 }
 
-/* Responsive - Mobile */
 @media (max-width: 768px) {
   .hero {
     padding: 3rem 0;
@@ -387,7 +377,6 @@
   }
 }
 
-/* Responsive - Mobile Pequeno */
 @media (max-width: 480px) {
   .hero {
     padding: 2rem 0;
@@ -425,7 +414,6 @@
   }
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .features {
     background: #1a1a1a;
@@ -490,7 +478,6 @@
   }
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .feature-card,
   .ods-card,

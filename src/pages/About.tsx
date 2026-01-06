@@ -6,7 +6,6 @@ import './About.css';
 export default function About() {
   return (
     <div className="about">
-      {/* Hero Section */}
       <section className="about-hero">
         <div className="container">
           <h1 className="about-hero__title">Sobre o Projeto</h1>
@@ -17,7 +16,6 @@ export default function About() {
       </section>
 
       <div className="container">
-        {/* Introdução */}
         <section className="about-intro">
           <div className="intro-content">
             <h2 className="section-title">Centro de Educação Ambiental Mandembo</h2>
@@ -41,7 +39,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Casa12Volts® */}
         <section className="casa12v-section">
           <h2 className="section-title">O que é a Casa12Volts®?</h2>
 
@@ -85,7 +82,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Como Funciona */}
         <section className="how-it-works">
           <h2 className="section-title">Como Funciona?</h2>
 
@@ -162,7 +158,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Inovações e Adaptações */}
         <section className="innovations">
           <h2 className="section-title">Inovações e Adaptações Tecnológicas</h2>
 
@@ -223,7 +218,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Diferenciais */}
         <section className="differentials">
           <h2 className="section-title">Diferenciais Tecnológicos</h2>
 
@@ -263,7 +257,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Reconhecimento */}
         <section className="recognition">
           <h2 className="section-title">Reconhecimento e Visitas Técnicas</h2>
           <div className="recognition-content">
@@ -292,7 +285,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* ODS */}
         <section className="ods-alignment">
           <h2 className="section-title">Alinhamento com os ODS</h2>
           <p className="section-description">
@@ -364,7 +356,6 @@ export default function About() {
           </div>
         </section> */}
 
-        {/* Links Úteis */}
         <section className="useful-links">
           <h2 className="section-title">Links Úteis</h2>
           <div className="links-grid">
@@ -394,7 +385,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* CTA */}
         <section className="about-cta">
           <div className="cta-box">
             <h2 className="cta-title">Explore os Projetos Interativos</h2>
