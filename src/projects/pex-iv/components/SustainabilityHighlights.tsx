@@ -16,7 +16,6 @@ export default function SustainabilityHighlights({ metrics }: SustainabilityHigh
               </p>
               <p className="metric-card__description">{metric.description}</p>
 
-              {/* ODS Badges */}
               {metric.odsAlignment && metric.odsAlignment.length > 0 && (
                 <div className="metric-card__ods">
                   <span className="ods-label">Alinhado com ODS:</span>

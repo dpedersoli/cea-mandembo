@@ -11,7 +11,6 @@ export default function EnergyFlowPanel({
 
   return (
     <div className="energy-flow-panel">
-      {/* Sources Grid */}
       <div className="sources-grid">
         {sources.map((source) => {
           const utilizationPercentage = (source.currentGeneration / source.capacity) * 100;
@@ -38,7 +37,6 @@ export default function EnergyFlowPanel({
                 </div>
               </div>
 
-              {/* Progress Bar */}
               <div className="progress-bar">
                 <div
                   className="progress-bar__fill"
@@ -61,7 +59,6 @@ export default function EnergyFlowPanel({
         })}
       </div>
 
-      {/* Summary Panel */}
       <div className="energy-summary">
         <div className="summary-card summary-card--generation">
           <div className="summary-card__icon">⚡</div>
@@ -99,7 +96,6 @@ export default function EnergyFlowPanel({
         </div>
       </div>
 
-      {/* Status Message */}
       <div className="energy-status">
         {energyBalance >= 0 ? (
           <p className="status-message status-message--success">
@@ -115,9 +111,6 @@ export default function EnergyFlowPanel({
   );
 }
 
-/**
- * Retorna cor baseada no tipo de fonte de energia
- */
 function getColorByType(type: string): string {
   const colors: Record<string, string> = {
     solar: '#ffc107',

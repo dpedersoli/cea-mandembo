@@ -51,7 +51,6 @@ export default function ComparisonTable({ data }: ComparisonTableProps) {
         </table>
       </div>
 
-      {/* Legend */}
       <div className="comparison-legend">
         <div className="legend-item">
           <span className="legend-icon legend-icon--positive">✓</span>
@@ -66,9 +65,6 @@ export default function ComparisonTable({ data }: ComparisonTableProps) {
   );
 }
 
-/**
- * Calcula diferença entre valores Casa12V e Convencional
- */
 function calculateDifference(
   casa12V: string,
   convencional: string
@@ -77,20 +73,16 @@ function calculateDifference(
   type: string;
   icon: string;
 } | null {
-  // Remove caracteres não numéricos para comparação
   const casa12VNum = parseFloat(casa12V.replace(/[^\d.-]/g, ''));
   const convencionalNum = parseFloat(convencional.replace(/[^\d.-]/g, ''));
 
-  // Se não conseguir converter, retorna null
   if (isNaN(casa12VNum) || isNaN(convencionalNum)) {
     return null;
   }
 
-  // Calcula diferença
   const diff = convencionalNum - casa12VNum;
   const diffPercentage = convencionalNum !== 0 ? (diff / convencionalNum) * 100 : 0;
 
-  // Se diferença for muito pequena, considera neutro
   if (Math.abs(diffPercentage) < 1) {
     return {
       value: 'Similar',
@@ -99,7 +91,6 @@ function calculateDifference(
     };
   }
 
-  // Se Casa12V for melhor (menor consumo, menor custo)
   if (diff > 0) {
     return {
       value: `${diffPercentage.toFixed(0)}% menor`,
@@ -108,7 +99,6 @@ function calculateDifference(
     };
   }
 
-  // Se Convencional for melhor
   return {
     value: `${Math.abs(diffPercentage).toFixed(0)}% maior`,
     type: 'difference-badge--negative',

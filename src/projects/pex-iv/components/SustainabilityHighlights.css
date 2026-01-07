@@ -65,7 +65,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* ODS Badges */
 .metric-card__ods {
   display: flex;
   flex-direction: column;
@@ -107,7 +106,6 @@
 .ods-badge:hover {
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .metrics-grid {
     grid-template-columns: 1fr;
@@ -122,7 +120,6 @@
   }
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .metric-card {
     background: #2a2a2a;
@@ -155,7 +152,6 @@
   }
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .metric-card,
   .ods-badge {
