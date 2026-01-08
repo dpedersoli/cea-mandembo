@@ -10,17 +10,14 @@ import type {
 } from '@/types/pex-iv.types';
 import { generateId } from '@/utils/helpers';
 
-/**
- * Fontes de energia da Casa12Volts®
- */
 export const energySources: EnergySource[] = [
   {
     id: generateId(),
     name: 'Energia Solar Fotovoltaica',
     type: 'solar',
-    currentGeneration: 3.8, // kWh atual
-    capacity: 5.2, // kWh capacidade máxima
-    efficiency: 92, // % eficiência
+    currentGeneration: 3.8,
+    capacity: 5.2,
+    efficiency: 92,
     icon: '☀️',
     description:
       'Painéis solares fotovoltaicos captam a luz solar e convertem diretamente em eletricidade em corrente contínua, sem necessidade de conversores.',
@@ -30,9 +27,9 @@ export const energySources: EnergySource[] = [
     id: generateId(),
     name: 'Energia Eólica',
     type: 'eolica',
-    currentGeneration: 1.2, // kWh atual
-    capacity: 2.5, // kWh capacidade máxima
-    efficiency: 85, // % eficiência
+    currentGeneration: 1.2,
+    capacity: 2.5,
+    efficiency: 85,
     icon: '💨',
     description:
       'Turbina eólica de eixo vertical aproveita o vento da região para gerar energia limpa e complementar o sistema solar.',
@@ -42,9 +39,9 @@ export const energySources: EnergySource[] = [
     id: generateId(),
     name: 'Energia por Esforço Físico (Pedal Sustentável)',
     type: 'bicicleta',
-    currentGeneration: 0.15, // kWh atual
-    capacity: 0.3, // kWh capacidade máxima
-    efficiency: 75, // % eficiência
+    currentGeneration: 0.15,
+    capacity: 0.3,
+    efficiency: 75,
     icon: '🚴',
     description:
       'Bicicleta ergométrica localizada no espaço "Pedal Sustentável" converte o esforço físico humano em energia elétrica, demonstrando a relação direta entre trabalho e energia.',
@@ -52,11 +49,7 @@ export const energySources: EnergySource[] = [
   },
 ];
 
-/**
- * Componentes do sistema Casa12Volts®
- */
 export const systemComponents: SystemComponent[] = [
-  // GERAÇÃO
   {
     id: generateId(),
     name: 'Painéis Solares Fotovoltaicos',
@@ -118,7 +111,6 @@ export const systemComponents: SystemComponent[] = [
     },
   },
 
-  // ARMAZENAMENTO
   {
     id: generateId(),
     name: 'Banco de Baterias Estacionárias (12V/24V)',
@@ -138,7 +130,6 @@ export const systemComponents: SystemComponent[] = [
     },
   },
 
-  // CONTROLE E MEDIÇÃO
   {
     id: generateId(),
     name: 'Controladores de Carga Solar MPPT (3 unidades)',
@@ -193,7 +184,6 @@ export const systemComponents: SystemComponent[] = [
     },
   },
 
-  // CONSUMO - ILUMINAÇÃO
   {
     id: generateId(),
     name: 'Lâmpadas LED 12V',
@@ -214,7 +204,6 @@ export const systemComponents: SystemComponent[] = [
     },
   },
 
-  // CONSUMO - ELETRODOMÉSTICOS
   {
     id: generateId(),
     name: 'Geladeira Bivolt 12V/24V Elber',
@@ -253,7 +242,6 @@ export const systemComponents: SystemComponent[] = [
     },
   },
 
-  // CONSUMO - ELETRÔNICOS
   {
     id: generateId(),
     name: 'TV LED 32" 12V',
@@ -341,7 +329,6 @@ export const systemComponents: SystemComponent[] = [
     },
   },
 
-  // CONSUMO - INSTRUMENTAÇÃO
   {
     id: generateId(),
     name: 'Balança Digital 3V (adaptada)',
@@ -395,7 +382,6 @@ export const systemComponents: SystemComponent[] = [
     },
   },
 
-  // DISTRIBUIÇÃO
   {
     id: generateId(),
     name: 'Tomadas Multivolts com USB',
@@ -414,7 +400,6 @@ export const systemComponents: SystemComponent[] = [
     },
   },
 
-  // AQUECIMENTO SOLAR
   {
     id: generateId(),
     name: 'Aquecedor Solar à Vácuo (CEFET-BH)',
@@ -434,7 +419,6 @@ export const systemComponents: SystemComponent[] = [
     },
   },
 
-  // INFRAESTRUTURA INTERNET
   {
     id: generateId(),
     name: 'Estação de Recepção de Internet Solar',
@@ -454,9 +438,6 @@ export const systemComponents: SystemComponent[] = [
   },
 ];
 
-/**
- * Métricas de sustentabilidade
- */
 export const sustainabilityMetrics: SustainabilityMetric[] = [
   {
     label: 'Eficiência Energética',
@@ -514,9 +495,6 @@ export const sustainabilityMetrics: SustainabilityMetric[] = [
   },
 ];
 
-/**
- * Dados comparativos: Casa12Volts® vs Convencional (CEMIG)
- */
 export const comparisonData: ComparisonData[] = [
   {
     item: 'Consumo Diário',
@@ -568,9 +546,6 @@ export const comparisonData: ComparisonData[] = [
   },
 ];
 
-/**
- * Histórico de geração de energia (últimos 7 dias)
- */
 export const energyHistoryWeek: EnergyHistory[] = [
   {
     date: '14/11',
@@ -623,9 +598,6 @@ export const energyHistoryWeek: EnergyHistory[] = [
   },
 ];
 
-/**
- * Consumo por categoria
- */
 export const consumptionByCategory: ConsumptionCategory[] = [
   {
     category: 'Iluminação',
@@ -657,9 +629,6 @@ export const consumptionByCategory: ConsumptionCategory[] = [
   },
 ];
 
-/**
- * Perguntas Frequentes (FAQs)
- */
 export const faqs: FAQ[] = [
   {
     id: generateId(),
@@ -719,19 +688,16 @@ export const faqs: FAQ[] = [
   },
 ];
 
-/**
- * Dados consolidados do Dashboard
- */
 export const dashboardData: DashboardData = {
-  totalGeneration: 5.15, // kWh (soma das fontes atuais)
-  totalConsumption: 4.8, // kWh
-  savings: 380, // R$ economia mensal (CEMIG)
-  co2Avoided: 156, // kg CO2 evitado anualmente
+  totalGeneration: 5.15,
+  totalConsumption: 4.8,
+  savings: 380,
+  co2Avoided: 156,
   sources: energySources,
   components: systemComponents,
   metrics: sustainabilityMetrics,
-  comparisonData: comparisonData, // ✅ CORRIGIDO - Adicionado
-  energyHistory: energyHistoryWeek, // ✅ CORRIGIDO - Adicionado
-  consumptionByCategory: consumptionByCategory, // ✅ CORRIGIDO - Adicionado
-  faqs: faqs, // ✅ CORRIGIDO - Adicionado
+  comparisonData: comparisonData,
+  energyHistory: energyHistoryWeek,
+  consumptionByCategory: consumptionByCategory,
+  faqs: faqs,
 };

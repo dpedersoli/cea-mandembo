@@ -1,8 +1,5 @@
 import type { EnergySource, SystemComponent, ComparisonData } from '@/types/pex-iv.types';
 
-/**
- * Filtra componentes por categoria
- */
 export const filterComponentsByCategory = (
   components: SystemComponent[],
   category: string
@@ -11,9 +8,6 @@ export const filterComponentsByCategory = (
   return components.filter((c) => c.category === category);
 };
 
-/**
- * Busca componentes por texto
- */
 export const searchComponents = (
   components: SystemComponent[],
   query: string
@@ -29,23 +23,14 @@ export const searchComponents = (
   );
 };
 
-/**
- * Calcula total de geração de todas as fontes
- */
 export const calculateTotalGeneration = (sources: EnergySource[]): number => {
   return sources.reduce((total, source) => total + source.currentGeneration, 0);
 };
 
-/**
- * Calcula capacidade total de todas as fontes
- */
 export const calculateTotalCapacity = (sources: EnergySource[]): number => {
   return sources.reduce((total, source) => total + source.capacity, 0);
 };
 
-/**
- * Calcula eficiência média ponderada
- */
 export const calculateAverageEfficiency = (sources: EnergySource[]): number => {
   if (sources.length === 0) return 0;
 
@@ -57,16 +42,10 @@ export const calculateAverageEfficiency = (sources: EnergySource[]): number => {
   return weightedSum / totalCapacity;
 };
 
-/**
- * Ordena componentes por nome
- */
 export const sortComponentsByName = (components: SystemComponent[]): SystemComponent[] => {
   return [...components].sort((a, b) => a.name.localeCompare(b.name));
 };
 
-/**
- * Agrupa componentes por categoria
- */
 export const groupComponentsByCategory = (
   components: SystemComponent[]
 ): Record<string, SystemComponent[]> => {
@@ -83,32 +62,20 @@ export const groupComponentsByCategory = (
   );
 };
 
-/**
- * Calcula diferença percentual entre dois valores
- */
 export const calculatePercentageDifference = (value1: number, value2: number): number => {
   if (value2 === 0) return 0;
   return ((value1 - value2) / value2) * 100;
 };
 
-/**
- * Formata voltagem para exibição
- */
 export const formatVoltage = (voltage: string): string => {
   return voltage.replace('CC', 'CC').replace('CA', 'CA');
 };
 
-/**
- * Extrai valor numérico de string de comparação
- */
 export const extractNumericValue = (value: string): number => {
   const match = value.match(/[\d.]+/);
   return match ? parseFloat(match[0]) : 0;
 };
 
-/**
- * Gera descrição de comparação
- */
 export const generateComparisonDescription = (data: ComparisonData): string => {
   const value12V = extractNumericValue(data.casa12V);
   const valueConv = extractNumericValue(data.convencional);
