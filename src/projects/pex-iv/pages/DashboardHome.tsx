@@ -12,7 +12,6 @@ export default function DashboardHome() {
 
   return (
     <div className="dashboard-home">
-      {/* Hero Section */}
       <section className="dashboard-hero">
         <div className="container">
           <h1 className="dashboard-hero__title">
@@ -27,7 +26,6 @@ export default function DashboardHome() {
       </section>
 
       <div className="container">
-        {/* Energy Flow Panel */}
         <section className="dashboard-section">
           <h2 className="section-title">Fluxo de Energia</h2>
           <EnergyFlowPanel
@@ -37,13 +35,11 @@ export default function DashboardHome() {
           />
         </section>
 
-        {/* Sustainability Highlights */}
         <section className="dashboard-section">
           <h2 className="section-title">Métricas de Sustentabilidade</h2>
           <SustainabilityHighlights metrics={metrics} />
         </section>
 
-        {/* Comparison Table */}
         <section className="dashboard-section">
           <h2 className="section-title">
             Comparação: Casa12Volts® vs Sistema Convencional (CEMIG)
@@ -51,7 +47,6 @@ export default function DashboardHome() {
           <ComparisonTable data={dashboardData.comparisonData || []} />
         </section>
 
-        {/* CTA to Components */}
         <section className="dashboard-cta">
           <div className="cta-card">
             <div className="cta-card__icon">🔧</div>
@@ -70,7 +65,6 @@ export default function DashboardHome() {
           </div>
         </section>
 
-        {/* Info Cards */}
         <section className="dashboard-info">
           <div className="info-cards">
             <div className="info-card info-card--green">

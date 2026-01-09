@@ -7,7 +7,6 @@ export default function ComponentsDetail() {
   const [selectedCategory, setSelectedCategory] = useState<ComponentCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Filtrar componentes
   const filteredComponents = useMemo(() => {
     return systemComponents.filter((component) => {
       const matchesCategory = selectedCategory === 'all' || component.category === selectedCategory;
@@ -18,7 +17,6 @@ export default function ComponentsDetail() {
     });
   }, [selectedCategory, searchQuery]);
 
-  // Categorias para filtro
   const categories: Array<{ value: ComponentCategory | 'all'; label: string; icon: string }> = [
     { value: 'all', label: 'Todos', icon: '🔧' },
     { value: 'geracao', label: 'Geração', icon: '⚡' },
@@ -29,7 +27,6 @@ export default function ComponentsDetail() {
 
   return (
     <div className="components-detail">
-      {/* Hero */}
       <section className="components-hero">
         <div className="container">
           <h1 className="components-hero__title">
@@ -44,9 +41,7 @@ export default function ComponentsDetail() {
       </section>
 
       <div className="container">
-        {/* Filters */}
         <section className="components-filters">
-          {/* Search */}
           <div className="search-box">
             <span className="search-icon">🔍</span>
             <input
@@ -68,7 +63,6 @@ export default function ComponentsDetail() {
             )}
           </div>
 
-          {/* Category Filters */}
           <div className="category-filters">
             {categories.map((category) => (
               <button
@@ -85,7 +79,6 @@ export default function ComponentsDetail() {
           </div>
         </section>
 
-        {/* Results Count */}
         <div className="results-count">
           <p>
             {filteredComponents.length}{' '}
@@ -93,17 +86,14 @@ export default function ComponentsDetail() {
           </p>
         </div>
 
-        {/* Components Grid */}
         {filteredComponents.length > 0 ? (
           <section className="components-grid">
             {filteredComponents.map((component) => (
               <article key={component.id} className="component-card">
-                {/* Image Placeholder */}
                 <div className="component-card__image">
                   <span className="image-placeholder">{getCategoryIcon(component.category)}</span>
                 </div>
 
-                {/* Content */}
                 <div className="component-card__content">
                   <div className="component-card__header">
                     <span className={`category-badge category-badge--${component.category}`}>
@@ -115,7 +105,6 @@ export default function ComponentsDetail() {
                   <h3 className="component-card__title">{component.name}</h3>
                   <p className="component-card__description">{component.description}</p>
 
-                  {/* Technical Specs */}
                   {component.technicalSpecs && (
                     <div className="component-card__specs">
                       <h4 className="specs-title">Especificações Técnicas:</h4>
@@ -167,9 +156,6 @@ export default function ComponentsDetail() {
   );
 }
 
-/**
- * Retorna ícone baseado na categoria
- */
 function getCategoryIcon(category: ComponentCategory): string {
   const icons: Record<ComponentCategory, string> = {
     geracao: '⚡',
@@ -180,9 +166,6 @@ function getCategoryIcon(category: ComponentCategory): string {
   return icons[category];
 }
 
-/**
- * Retorna label baseado na categoria
- */
 function getCategoryLabel(category: ComponentCategory): string {
   const labels: Record<ComponentCategory, string> = {
     geracao: 'Geração',

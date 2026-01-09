@@ -2,7 +2,6 @@
   min-height: 100vh;
 }
 
-/* Hero */
 .dashboard-hero {
   background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
   color: #fff;
@@ -41,7 +40,6 @@
   font-style: italic;
 }
 
-/* Dashboard Sections */
 .dashboard-section {
   margin-bottom: 4rem;
 }
@@ -54,7 +52,6 @@
   text-align: center;
 }
 
-/* CTA Card */
 .dashboard-cta {
   margin: 4rem 0;
 }
@@ -92,7 +89,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* Info Cards */
 .dashboard-info {
   margin: 4rem 0;
 }
@@ -148,7 +144,6 @@
   margin: 0;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .dashboard-hero__title {
     font-size: 2rem;
@@ -173,7 +168,6 @@
   }
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .section-title,
   .cta-card__title,
@@ -204,7 +198,6 @@
   }
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .info-card {
     transition: none;
