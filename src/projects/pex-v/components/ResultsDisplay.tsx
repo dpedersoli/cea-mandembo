@@ -14,7 +14,6 @@ export default function ResultsDisplay({ result }: ResultsDisplayProps) {
     <div className="results-display">
       <h2 className="results-title">Resultados da Comparação</h2>
 
-      {/* Summary Cards */}
       <div className="results-summary">
         <div className="summary-card summary-card--savings">
           <div className="summary-icon">💰</div>
@@ -50,7 +49,6 @@ export default function ResultsDisplay({ result }: ResultsDisplayProps) {
         </div>
       </div>
 
-      {/* Detailed Comparison */}
       <div className="results-comparison">
         <h3 className="comparison-title">Comparação Detalhada</h3>
 
@@ -105,7 +103,6 @@ export default function ResultsDisplay({ result }: ResultsDisplayProps) {
         </div>
       </div>
 
-      {/* Selected Appliances */}
       <div className="results-appliances">
         <h3 className="appliances-title">Aparelhos Selecionados ({result.appliances.length})</h3>
         <div className="appliances-grid">
@@ -121,7 +118,6 @@ export default function ResultsDisplay({ result }: ResultsDisplayProps) {
         </div>
       </div>
 
-      {/* Recommendations */}
       {recommendations.length > 0 && (
         <div className="results-recommendations">
           <h3 className="recommendations-title">💡 Recomendações</h3>
@@ -135,7 +131,6 @@ export default function ResultsDisplay({ result }: ResultsDisplayProps) {
         </div>
       )}
 
-      {/* Info Box */}
       <div className="results-info">
         <p className="info-text">
           <strong>💡 Como interpretar:</strong> O sistema 12V CC elimina perdas de conversão AC/DC,

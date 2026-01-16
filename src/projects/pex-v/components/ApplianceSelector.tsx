@@ -21,7 +21,6 @@ export default function ApplianceSelector({
   const [filterCategory, setFilterCategory] = useState<ApplianceCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Filtrar aparelhos
   const filteredAppliances = useMemo(() => {
     return appliances.filter((appliance) => {
       const matchesCategory = filterCategory === 'all' || appliance.category === filterCategory;
@@ -32,15 +31,12 @@ export default function ApplianceSelector({
     });
   }, [appliances, filterCategory, searchQuery]);
 
-  // Helper para encontrar aparelho selecionado
   const findSelected = (applianceId: string) =>
     selectedAppliances.find((a) => a.id === applianceId);
 
   return (
     <div className="appliance-selector">
-      {/* Filters */}
       <div className="selector-filters">
-        {/* Search */}
         <div className="selector-search">
           <span className="search-icon">🔍</span>
           <input
@@ -52,7 +48,6 @@ export default function ApplianceSelector({
           />
         </div>
 
-        {/* Category Tabs */}
         <div className="category-tabs">
           <button
             className={`category-tab ${filterCategory === 'all' ? 'category-tab--active' : ''}`}
@@ -72,7 +67,6 @@ export default function ApplianceSelector({
         </div>
       </div>
 
-      {/* Appliances List */}
       <div className="appliances-list">
         {filteredAppliances.map((appliance) => {
           const selected = findSelected(appliance.id);
@@ -82,10 +76,9 @@ export default function ApplianceSelector({
             <div
               key={appliance.id}
               className={`appliance-item ${isSelected ? 'appliance-item--selected' : ''}`}
-              onClick={() => onToggleAppliance(appliance)} // ✅ Card inteiro clicável
-              style={{ cursor: 'pointer' }} // ✅ Indica que é clicável
+              onClick={() => onToggleAppliance(appliance)}
+              style={{ cursor: 'pointer' }}
             >
-              {/* Checkbox */}
               <label className="appliance-checkbox" onClick={(e) => e.stopPropagation()}>
                 <input
                   type="checkbox"
@@ -95,7 +88,6 @@ export default function ApplianceSelector({
                 <span className="checkbox-custom"></span>
               </label>
 
-              {/* Info */}
               <div className="appliance-info">
                 <div className="appliance-header">
                   <span className="appliance-icon">{appliance.icon}</span>
@@ -114,12 +106,8 @@ export default function ApplianceSelector({
                 </div>
               </div>
 
-              {/* Controls */}
               {isSelected && selected && (
-                <div
-                  className="appliance-controls"
-                  onClick={(e) => e.stopPropagation()} // ✅ Impede que cliques nos controles selecionem o card
-                >
+                <div className="appliance-controls" onClick={(e) => e.stopPropagation()}>
                   <div className="control-group">
                     <label className="control-label">Quantidade:</label>
                     <div className="number-input">
