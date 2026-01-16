@@ -2,9 +2,6 @@ import type { SelectedAppliance } from '@/types/pex-v.types';
 import { appliancesDatabase } from './appliancesData';
 import { toSelectedAppliance } from './helpers';
 
-/**
- * Carrega um perfil pré-definido de aparelhos
- */
 export const loadProfile = (profileId: string): SelectedAppliance[] => {
   const profiles: Record<string, () => SelectedAppliance[]> = {
     basico: loadBasicProfile,
@@ -16,9 +13,6 @@ export const loadProfile = (profileId: string): SelectedAppliance[] => {
   return profileLoader ? profileLoader() : [];
 };
 
-/**
- * Perfil Básico: Essenciais para funcionamento de uma residência simples
- */
 const loadBasicProfile = (): SelectedAppliance[] => {
   const selectedNames = [
     'Lâmpada LED 9W (equivalente 60W)',
@@ -34,7 +28,6 @@ const loadBasicProfile = (): SelectedAppliance[] => {
       const selected = toSelectedAppliance(appliance);
       selected.isSelected = true;
 
-      // Ajusta quantidades específicas
       if (appliance.name.includes('Lâmpada')) {
         selected.quantity = 5;
       } else if (appliance.name.includes('Ventilador')) {
@@ -45,9 +38,6 @@ const loadBasicProfile = (): SelectedAppliance[] => {
     });
 };
 
-/**
- * Perfil Padrão: Casa média com aparelhos comuns
- */
 const loadStandardProfile = (): SelectedAppliance[] => {
   const selectedNames = [
     'Lâmpada LED 9W (equivalente 60W)',
@@ -70,7 +60,6 @@ const loadStandardProfile = (): SelectedAppliance[] => {
       const selected = toSelectedAppliance(appliance);
       selected.isSelected = true;
 
-      // Ajusta quantidades específicas
       if (appliance.name.includes('Lâmpada LED 9W')) {
         selected.quantity = 6;
       } else if (appliance.name.includes('Lâmpada LED 15W')) {
@@ -87,9 +76,6 @@ const loadStandardProfile = (): SelectedAppliance[] => {
     });
 };
 
-/**
- * Perfil Completo: Casa com diversos aparelhos
- */
 const loadCompleteProfile = (): SelectedAppliance[] => {
   const selectedNames = [
     'Lâmpada LED 9W (equivalente 60W)',
@@ -121,7 +107,6 @@ const loadCompleteProfile = (): SelectedAppliance[] => {
       const selected = toSelectedAppliance(appliance);
       selected.isSelected = true;
 
-      // Ajusta quantidades específicas
       if (appliance.name.includes('Lâmpada LED 9W')) {
         selected.quantity = 8;
       } else if (appliance.name.includes('Lâmpada LED 15W')) {

@@ -1,9 +1,6 @@
 import type { Appliance, ApplianceCategoryInfo, UsageProfile } from '@/types/pex-v.types';
 import { generateId } from '@/utils/helpers';
 
-/**
- * Categorias de aparelhos para filtro
- */
 export const applianceCategories: ApplianceCategoryInfo[] = [
   { value: 'iluminacao', label: 'Iluminação', icon: '💡' },
   { value: 'refrigeracao', label: 'Refrigeração', icon: '🧊' },
@@ -13,11 +10,7 @@ export const applianceCategories: ApplianceCategoryInfo[] = [
   { value: 'outros', label: 'Outros', icon: '🔌' },
 ];
 
-/**
- * Base de dados de aparelhos eletroeletrônicos
- */
 export const appliancesDatabase: Appliance[] = [
-  // ILUMINAÇÃO
   {
     id: generateId(),
     name: 'Lâmpada LED 9W (equivalente 60W)',
@@ -49,7 +42,6 @@ export const appliancesDatabase: Appliance[] = [
     averageHoursPerDay: 5,
   },
 
-  // REFRIGERAÇÃO
   {
     id: generateId(),
     name: 'Geladeira 1 Porta (250L)',
@@ -81,7 +73,6 @@ export const appliancesDatabase: Appliance[] = [
     averageHoursPerDay: 24,
   },
 
-  // COZINHA
   {
     id: generateId(),
     name: 'Liquidificador',
@@ -133,7 +124,6 @@ export const appliancesDatabase: Appliance[] = [
     averageHoursPerDay: 0.5,
   },
 
-  // ELETRÔNICOS
   {
     id: generateId(),
     name: 'TV LED 32"',
@@ -205,7 +195,6 @@ export const appliancesDatabase: Appliance[] = [
     averageHoursPerDay: 3,
   },
 
-  // CLIMATIZAÇÃO
   {
     id: generateId(),
     name: 'Ventilador de Mesa',
@@ -237,7 +226,6 @@ export const appliancesDatabase: Appliance[] = [
     averageHoursPerDay: 8,
   },
 
-  // OUTROS
   {
     id: generateId(),
     name: 'Ferro de Passar',
@@ -290,26 +278,23 @@ export const appliancesDatabase: Appliance[] = [
   },
 ];
 
-/**
- * Perfis de uso pré-definidos
- */
 export const usageProfiles: UsageProfile[] = [
   {
     id: 'basico',
     name: 'Uso Básico',
     description: 'Iluminação, geladeira e alguns eletrônicos essenciais',
-    applianceIds: [], // Será preenchido dinamicamente
+    applianceIds: [],
   },
   {
     id: 'padrao',
     name: 'Uso Padrão',
     description: 'Casa média com aparelhos comuns do dia a dia',
-    applianceIds: [], // Será preenchido dinamicamente
+    applianceIds: [],
   },
   {
     id: 'completo',
     name: 'Uso Completo',
     description: 'Casa com diversos aparelhos e eletrodomésticos',
-    applianceIds: [], // Será preenchido dinamicamente
+    applianceIds: [],
   },
 ];
