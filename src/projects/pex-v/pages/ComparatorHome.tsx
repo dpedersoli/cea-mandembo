@@ -15,33 +15,29 @@ export default function ComparatorHome() {
 
   const [showResults, setShowResults] = useState(false);
 
-  // Toggle seleção de aparelho
   const handleToggleAppliance = useCallback((appliance: Appliance) => {
     setSelectedAppliances((prev) =>
       prev.map((item) =>
         item.id === appliance.id ? { ...item, isSelected: !item.isSelected } : item
       )
     );
-    setShowResults(false); // ✅ Reseta resultados ao mudar seleção
+    setShowResults(false);
   }, []);
 
-  // Atualizar quantidade
   const handleUpdateQuantity = useCallback((applianceId: string, quantity: number) => {
     setSelectedAppliances((prev) =>
       prev.map((item) => (item.id === applianceId ? { ...item, quantity } : item))
     );
-    setShowResults(false); // ✅ Reseta resultados ao mudar quantidade
+    setShowResults(false);
   }, []);
 
-  // Atualizar horas de uso
   const handleUpdateHours = useCallback((applianceId: string, hours: number) => {
     setSelectedAppliances((prev) =>
       prev.map((item) => (item.id === applianceId ? { ...item, hoursPerDay: hours } : item))
     );
-    setShowResults(false); // ✅ Reseta resultados ao mudar horas
+    setShowResults(false);
   }, []);
 
-  // Carregar perfil pré-definido
   const handleLoadProfile = (profileId: string) => {
     const profileAppliances = loadProfile(profileId);
 
@@ -55,7 +51,6 @@ export default function ComparatorHome() {
     setShowResults(false);
   };
 
-  // Limpar seleção
   const handleClearSelection = () => {
     setSelectedAppliances((prev) =>
       prev.map((item) => ({
@@ -68,18 +63,15 @@ export default function ComparatorHome() {
     setShowResults(false);
   };
 
-  // Calcular comparação
   const handleCalculate = () => {
     setShowResults(true);
   };
 
-  // Calcular resultado
   const result = showResults ? calculateComparison(selectedAppliances) : null;
   const hasSelection = selectedAppliances.some((a) => a.isSelected);
 
   return (
     <div className="comparator-home">
-      {/* Hero */}
       <section className="comparator-hero">
         <div className="container">
           <h1 className="comparator-hero__title">
@@ -94,7 +86,6 @@ export default function ComparatorHome() {
       </section>
 
       <div className="container">
-        {/* Profile Presets */}
         <section className="profile-presets">
           <h2 className="section-title">Perfis Pré-Definidos</h2>
           <div className="presets-grid">
@@ -116,7 +107,6 @@ export default function ComparatorHome() {
           </div>
         </section>
 
-        {/* Appliance Selector */}
         <section className="comparator-section">
           <div className="section-header">
             <h2 className="section-title">Selecione os Aparelhos</h2>
@@ -135,7 +125,6 @@ export default function ComparatorHome() {
           />
         </section>
 
-        {/* Calculate Button */}
         <section className="comparator-actions">
           <button className="calculate-btn" onClick={handleCalculate} disabled={!hasSelection}>
             Calcular Comparação
@@ -145,7 +134,6 @@ export default function ComparatorHome() {
           )}
         </section>
 
-        {/* Results */}
         {showResults && result && (
           <section className="comparator-results">
             <ResultsDisplay result={result} />

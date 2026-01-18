@@ -2,7 +2,6 @@
   min-height: 100vh;
 }
 
-/* Hero */
 .comparator-hero {
   background: linear-gradient(135deg, #ffc107 0%, #f57f17 100%);
   color: #1a1a1a;
@@ -34,7 +33,6 @@
   opacity: 0.9;
 }
 
-/* Profile Presets */
 .profile-presets {
   margin-bottom: 3rem;
 }
@@ -89,7 +87,6 @@
   margin: 0;
 }
 
-/* Section */
 .comparator-section {
   margin-bottom: 3rem;
 }
@@ -118,7 +115,6 @@
   color: #fff;
 }
 
-/* Actions */
 .comparator-actions {
   display: flex;
   flex-direction: column;
@@ -157,12 +153,10 @@
   font-style: italic;
 }
 
-/* Results */
 .comparator-results {
   margin-top: 3rem;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .comparator-hero__title {
     font-size: 2rem;
@@ -195,7 +189,6 @@
   }
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .comparator-hero {
     background: linear-gradient(135deg, #f57f17 0%, #e65100 100%);
@@ -237,7 +230,6 @@
   }
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .preset-card,
   .clear-btn,
