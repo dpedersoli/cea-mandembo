@@ -1,4 +1,3 @@
-// Tipos globais compartilhados
 export interface BaseEntity {
   id: string;
   createdAt?: Date;
