@@ -48,7 +48,7 @@ export default function About() {
               <h3 className="content-card__title">Primeira no Brasil</h3>
               <p className="content-card__text">
                 Inaugurada em 2012, é a primeira residência do país a operar integralmente com
-                sistema multivolts em corrente contínua (1,5V, 3V, 5V, 12V, 19V e 24V), sem
+                sistema multivolts em corrente contínua (1V, 5V, 3V, 5V, 12V, 19V e 24V), sem
                 conversão para 110V/220V.
               </p>
             </div>
