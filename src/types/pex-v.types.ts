@@ -1,10 +1,3 @@
-/**
- * Tipos e interfaces para o PEX V - Comparador Educativo
- */
-
-/**
- * Categoria de aparelho
- */
 export type ApplianceCategory =
   | 'iluminacao'
   | 'refrigeracao'
@@ -13,34 +6,24 @@ export type ApplianceCategory =
   | 'climatizacao'
   | 'outros';
 
-/**
- * Interface para aparelho eletroeletrônico
- */
 export interface Appliance {
   id: string;
   name: string;
   description?: string;
   category: ApplianceCategory;
-  consumption110V: number; // Watts em 110V/220V
-  consumption12V: number; // Watts em 12V CC
+  consumption110V: number;
+  consumption12V: number;
   icon: string;
-  averageHoursPerDay?: number; // Horas médias de uso por dia
+  averageHoursPerDay?: number;
 }
 
-/**
- * Interface para aparelho selecionado pelo usuário
- */
 export interface SelectedAppliance extends Appliance {
-  quantity: number; // Quantidade de aparelhos
-  hoursPerDay: number; // Horas de uso por dia
-  isSelected: boolean; // Se está selecionado
+  quantity: number;
+  hoursPerDay: number;
+  isSelected: boolean;
 }
 
-/**
- * Interface para resultado do cálculo
- */
 export interface CalculationResult {
-  // Consumo em kWh
   consumption110V: {
     daily: number;
     monthly: number;
@@ -52,41 +35,29 @@ export interface CalculationResult {
     yearly: number;
   };
 
-  // Custos em R$ (CEMIG)
   monthlyCost110V: number;
   monthlyCost12V: number;
   monthlySavings: number;
   savingsPercentage: number;
 
-  // Impacto ambiental
-  yearlyCO2Avoided: number; // kg CO2 evitado por ano
+  yearlyCO2Avoided: number;
 
-  // Aparelhos utilizados no cálculo
   appliances: SelectedAppliance[];
 }
 
-/**
- * Interface para categoria de aparelhos (filtro)
- */
 export interface ApplianceCategoryInfo {
   value: ApplianceCategory | 'all';
   label: string;
   icon: string;
 }
 
-/**
- * Interface para perfil de uso pré-definido
- */
 export interface UsageProfile {
   id: string;
   name: string;
   description: string;
-  applianceIds: string[]; // IDs dos aparelhos incluídos
+  applianceIds: string[];
 }
 
-/**
- * Interface para recomendação gerada
- */
 export interface Recommendation {
   id: string;
   text: string;
@@ -94,9 +65,6 @@ export interface Recommendation {
   priority: 'high' | 'medium' | 'low';
 }
 
-/**
- * Props para componente ApplianceSelector
- */
 export interface ApplianceSelectorProps {
   appliances: Appliance[];
   selectedAppliances: SelectedAppliance[];
@@ -105,16 +73,10 @@ export interface ApplianceSelectorProps {
   onUpdateHours: (applianceId: string, hours: number) => void;
 }
 
-/**
- * Props para componente ResultsDisplay
- */
 export interface ResultsDisplayProps {
   result: CalculationResult;
 }
 
-/**
- * Interface para dados de gráfico do comparador
- */
 export interface ComparatorChartData {
   label: string;
   value110V: number;
@@ -122,9 +84,6 @@ export interface ComparatorChartData {
   unit: string;
 }
 
-/**
- * Type guard para verificar se é Appliance
- */
 export const isAppliance = (obj: unknown): obj is Appliance => {
   return (
     typeof obj === 'object' &&
@@ -137,16 +96,10 @@ export const isAppliance = (obj: unknown): obj is Appliance => {
   );
 };
 
-/**
- * Type guard para verificar se é SelectedAppliance
- */
 export const isSelectedAppliance = (obj: unknown): obj is SelectedAppliance => {
   return isAppliance(obj) && 'quantity' in obj && 'hoursPerDay' in obj && 'isSelected' in obj;
 };
 
-/**
- * Type guard para verificar se é CalculationResult
- */
 export const isCalculationResult = (obj: unknown): obj is CalculationResult => {
   return (
     typeof obj === 'object' &&
