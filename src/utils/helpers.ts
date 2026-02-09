@@ -1,13 +1,7 @@
-/**
- * Gera ID único
- */
 export const generateId = (): string => {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 };
 
-/**
- * Formata data para exibição
- */
 export const formatDate = (date: Date): string => {
   return new Intl.DateTimeFormat('pt-BR', {
     day: '2-digit',
@@ -18,11 +12,6 @@ export const formatDate = (date: Date): string => {
   }).format(date);
 };
 
-/**
- * Debounce para inputs
- * @param func Função a ser debounced
- * @param wait Tempo de espera em ms
- */
 export const debounce = <T extends (...args: never[]) => unknown>(
   func: T,
   wait: number
@@ -35,9 +24,6 @@ export const debounce = <T extends (...args: never[]) => unknown>(
   };
 };
 
-/**
- * Detecta preferências de acessibilidade do sistema
- */
 export const getAccessibilityPreferences = () => {
   return {
     reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -46,9 +32,6 @@ export const getAccessibilityPreferences = () => {
   };
 };
 
-/**
- * Trata erros de forma consistente
- */
 export const handleError = (error: unknown): string => {
   if (error instanceof Error) {
     return error.message;
@@ -56,9 +39,6 @@ export const handleError = (error: unknown): string => {
   return 'Ocorreu um erro inesperado';
 };
 
-/**
- * Valida se um número está dentro de um intervalo
- */
 export const clamp = (value: number, min: number, max: number): number => {
   return Math.min(Math.max(value, min), max);
 };
