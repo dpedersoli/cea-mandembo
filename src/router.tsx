@@ -13,9 +13,6 @@ const ComponentsDetail = lazy(() => import('@/projects/pex-iv/pages/ComponentsDe
 
 const ComparatorHome = lazy(() => import('@/projects/pex-v/pages/ComparatorHome'));
 
-/**
- * Configuração principal de rotas
- */
 export const router = createBrowserRouter([
   {
     path: '/',
