@@ -71,6 +71,7 @@ Desenvolver um **dashboard web interativo** que permita visualizar, em tempo rea
 }
 
 ### 📂 Estrutura (PEX IV)
+
 ```
 src/projects/pex-iv/
 ├── pages/
@@ -83,6 +84,7 @@ src/projects/pex-iv/
 └── data/
 └── mockData.ts # Dados simulados
 ```
+
 ### 🎓 Aprendizado Proporcionado (PEX IV)
 
 - 📈 **Visualização de Dados**: Gráficos interativos
@@ -135,6 +137,7 @@ Criar uma **ferramenta interativa** que permita ao usuário comparar o consumo e
 }
 
 ### 📂 Estrutura (PEX V)
+
 ```
 src/projects/pex-v/
 ├── pages/
@@ -221,6 +224,7 @@ src/projects/pex-v/
 ---
 
 ## 📁 Estrutura do Projeto
+
 ```
 cea-mandembo/
 ├── public/
@@ -256,6 +260,7 @@ cea-mandembo/
 ├── vercel.json
 └── README.md
 ```
+
 ---
 
 ## 🚀 Como Executar o Projeto
