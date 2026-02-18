@@ -4,7 +4,7 @@
 
 ![Casa12Volts](public/assets/images/casa12volts-hero.jpg)
 
-**Plataforma Web Educativa para Projetos de Extensão PEX IV e PEX V**
+**Plataforma Web Educativa**
 
 Centro de Educação Ambiental Mandembo | Curso de Análise e Desenvolvimento de Sistemas
 
@@ -21,7 +21,7 @@ Centro de Educação Ambiental Mandembo | Curso de Análise e Desenvolvimento de
 
 ## 🌍 Sobre o Projeto
 
-Esta plataforma web educativa foi desenvolvida como parte dos **Projetos de Extensão IV (PEX IV)** e **Projeto de Extensão V (PEX V)** do curso de **Análise e Desenvolvimento de Sistemas**, em parceria com o **Centro de Educação Ambiental Mandembo**.
+Esta plataforma web educativa foi desenvolvida em parceria com o **Centro de Educação Ambiental Mandembo**.
 
 O projeto tem como objetivo **democratizar o conhecimento sobre energias renováveis** através da **Casa12Volts®**, primeira residência multivolts do Brasil operando 100% em corrente contínua (1,5V, 3V, 5V, 12V, 19V e 24V).
 
@@ -35,13 +35,13 @@ O projeto tem como objetivo **democratizar o conhecimento sobre energias renová
 
 ---
 
-## 📊 PEX IV - Dashboard Educativo Casa12Volts®
+## 📊 Dashboard Educativo Casa12Volts®
 
 ### 🎯 Objetivo do Projeto
 
 Desenvolver um **dashboard web interativo** que permita visualizar, em tempo real, os dados de geração e consumo de energia da Casa12Volts®, facilitando a compreensão sobre sistemas de energia renovável.
 
-### 📌 Funcionalidades do PEX IV
+### 📌 Funcionalidades
 
 #### 1️⃣ Visualização de Dados em Tempo Real
 
@@ -62,7 +62,7 @@ Desenvolver um **dashboard web interativo** que permita visualizar, em tempo rea
 - **Eficiência Energética**: 92% de aproveitamento
 - **Autonomia**: 100% off-grid
 
-### 🛠️ Tecnologias Utilizadas (PEX IV)
+### 🛠️ Tecnologias Utilizadas
 
 {
 "frontend": ["React 18", "TypeScript", "CSS Modules"],
@@ -70,7 +70,7 @@ Desenvolver um **dashboard web interativo** que permita visualizar, em tempo rea
 "build": ["Vite", "ESLint"]
 }
 
-### 📂 Estrutura (PEX IV)
+### 📂 Estrutura
 
 ```
 src/projects/pex-iv/
@@ -85,7 +85,7 @@ src/projects/pex-iv/
 └── mockData.ts # Dados simulados
 ```
 
-### 🎓 Aprendizado Proporcionado (PEX IV)
+### 🎓 Aprendizado Proporcionado
 
 - 📈 **Visualização de Dados**: Gráficos interativos
 - ⚡ **Sistemas de Energia**: Compreensão prática
@@ -94,13 +94,13 @@ src/projects/pex-iv/
 
 ---
 
-## ⚖️ PEX V - Comparador Energético Interativo
+## ⚖️ Comparador Energético Interativo
 
 ### 🎯 Objetivo do Projeto
 
 Criar uma **ferramenta interativa** que permita ao usuário comparar o consumo energético, custos (CEMIG) e impacto ambiental entre sistemas de **12V CC (corrente contínua)** e **110V/220V CA (corrente alternada)**.
 
-### 📌 Funcionalidades do PEX V
+### 📌 Funcionalidades
 
 #### 1️⃣ Seleção de Aparelhos
 
@@ -127,7 +127,7 @@ Criar uma **ferramenta interativa** que permita ao usuário comparar o consumo e
 - **Economia Estimada**: Valores em R$ e %
 - **Payback**: Tempo de retorno do investimento
 
-### 🛠️ Tecnologias Utilizadas (PEX V)
+### 🛠️ Tecnologias Utilizadas
 
 {
 "frontend": ["React 18", "TypeScript", "CSS Modules"],
@@ -136,7 +136,7 @@ Criar uma **ferramenta interativa** que permita ao usuário comparar o consumo e
 "build": ["Vite", "ESLint"]
 }
 
-### 📂 Estrutura (PEX V)
+### 📂 Estrutura
 
 ```
 src/projects/pex-v/
@@ -154,7 +154,7 @@ src/projects/pex-v/
 └── pex-v.types.ts # Tipos TypeScript
 ```
 
-### 🎓 Aprendizado Proporcionado (PEX V)
+### 🎓 Aprendizado Proporcionado
 
 - 💡 **Eficiência Energética**: Comparação prática
 - 💰 **Economia Doméstica**: Custos reais
@@ -169,7 +169,7 @@ src/projects/pex-v/
 
 - Apresentação do CEA Mandembo
 - Informações sobre Casa12Volts®
-- Navegação para projetos (PEX IV e PEX V)
+- Navegação para projetos
 - Alinhamento com ODS 7 e 13
 
 ### 📱 Responsividade
@@ -328,12 +328,10 @@ Este projeto contribui para os seguintes ODS da ONU:
 **Daniel Pedersoli Moreira Santos**  
 Desenvolvedor Fullstack | Análise e Desenvolvimento de Sistemas
 
-**Instituição**: Universidade Faculdade Descomplia
-
 **Projetos de Extensão**:
 
-- 📊 **PEX IV**: Dashboard Educativo Casa12Volts®
-- ⚖️ **PEX V**: Comparador Energético Interativo
+- 📊 Dashboard Educativo Casa12Volts®
+- ⚖️ Comparador Energético Interativo
 
 **Contato**:
 
