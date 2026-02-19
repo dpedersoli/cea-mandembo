@@ -6,7 +6,7 @@
 
 **Plataforma Web Educativa**
 
-Centro de Educação Ambiental Mandembo | Curso de Análise e Desenvolvimento de Sistemas
+Centro de Educação Ambiental Mandembo
 
 [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://cea-mandembo.vercel.app)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
@@ -326,7 +326,7 @@ Este projeto contribui para os seguintes ODS da ONU:
 ## 👨‍💻 Autor
 
 **Daniel Pedersoli Moreira Santos**  
-Desenvolvedor Fullstack | Análise e Desenvolvimento de Sistemas
+Desenvolvedor Fullstack
 
 **Projetos de Extensão**:
 
@@ -343,7 +343,7 @@ Desenvolvedor Fullstack | Análise e Desenvolvimento de Sistemas
 
 ## 📄 Licença
 
-Este projeto é de **uso educacional** e foi desenvolvido como parte dos Projetos de Extensão do curso de Análise e Desenvolvimento de Sistemas.
+Este projeto é de **uso educacional**.
 
 **Parceria**: Centro de Educação Ambiental Mandembo  
 **Ano**: 2025
