@@ -192,8 +192,6 @@ src/projects/pex-v/
 - Componentes **reutilizáveis**
 - **Dark mode** automático
 
----
-
 ## 🛠️ Tecnologias Utilizadas
 
 ### Frontend
