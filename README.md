@@ -161,8 +161,6 @@ src/projects/pex-v/
 - 🌍 **Consciência Ambiental**: Impacto quantificado
 - 🔬 **Análise Crítica**: Tomada de decisão informada
 
----
-
 ## ✨ Funcionalidades Gerais da Plataforma
 
 ### 🏠 Página Inicial
