@@ -217,8 +217,6 @@ src/projects/pex-v/
 - **Git**: Controle de versão
 - **GitHub**: Repositório remoto
 
----
-
 ## 📁 Estrutura do Projeto
 
 ```
