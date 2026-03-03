@@ -255,8 +255,6 @@ cea-mandembo/
 └── README.md
 ```
 
----
-
 ## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
