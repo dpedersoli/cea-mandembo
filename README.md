@@ -92,7 +92,6 @@ src/projects/pex-iv/
 - 🌱 **Sustentabilidade**: Impacto ambiental quantificado
 - 💻 **Tecnologia Web**: React e TypeScript
 
----
 
 ## ⚖️ Comparador Energético Interativo
 
