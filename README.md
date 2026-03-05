@@ -33,8 +33,6 @@ O projeto tem como objetivo **democratizar o conhecimento sobre energias renová
 - ✅ Fornecer **ferramentas interativas** de aprendizado
 - ✅ Contribuir para os **ODS 7 e 13** da ONU
 
----
-
 ## 📊 Dashboard Educativo Casa12Volts®
 
 ### 🎯 Objetivo do Projeto
