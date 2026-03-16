@@ -17,8 +17,6 @@ Centro de Educação Ambiental Mandembo
 
 </div>
 
----
-
 ## 🌍 Sobre o Projeto
 
 Esta plataforma web educativa foi desenvolvida em parceria com o **Centro de Educação Ambiental Mandembo**.
